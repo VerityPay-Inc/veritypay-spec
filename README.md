@@ -57,20 +57,22 @@ If a behavior is not specified (or not yet accepted), it is **not part of the pr
 
 ```
 veritypay-spec/
-├── README.md                 ← You are here
-├── docs/                     ← Curated, stable documentation
-│   ├── 00-overview/          ← Vision, principles, whitepaper
-│   ├── 01-architecture/      ← System structure and cross-cutting models
-│   ├── 02-product/           ← User-facing concepts and workflows
-│   ├── 03-development/       ← Contributor and implementer guidance
-│   ├── 04-research/          ← Exploratory and pre-normative work
-│   └── 05-governance/        ← Decision-making and change control
-├── rfcs/                     ← Formal change proposals (Request for Comments)
-├── diagrams/                 ← Architecture and protocol visuals
-└── templates/                ← Reusable document scaffolds
+├── README.md                      ← You are here
+├── docs/                          ← Curated specification corpus
+│   ├── 00-overview/               ← Vision, principles, manifesto, whitepaper
+│   ├── 01-architecture/           ← System structure and cross-cutting models
+│   ├── 02-product/                ← Participant-facing concepts and workflows
+│   ├── 03-development/            ← Implementer and conformance guidance
+│   ├── 04-research/               ← Exploratory and pre-normative work
+│   ├── 05-governance/             ← Decision-making and change control
+│   └── templates/                 ← Stable spec and decision record templates
+├── rfcs/                          ← Formal change proposals (Request for Comments)
+│   └── templates/                 ← RFC proposal template
+├── diagrams/                      ← Architecture and protocol visuals
+└── templates/                     ← Index pointing to template locations
 ```
 
-Each directory includes a `README.md` describing its purpose, boundaries, and intended audience.
+Each documentation directory includes a `README.md` with **Purpose**, **Audience**, **Scope**, and **Related specifications**.
 
 ---
 
@@ -86,7 +88,7 @@ Each directory includes a `README.md` describing its purpose, boundaries, and in
 | Building or integrating an implementation | [`docs/03-development/`](docs/03-development/) + accepted RFCs |
 | Exploring ideas not yet standardized | [`docs/04-research/`](docs/04-research/) |
 | Participating in governance | [`docs/05-governance/`](docs/05-governance/) + [`rfcs/`](rfcs/) |
-| Proposing a protocol change | [`rfcs/README.md`](rfcs/README.md) and [`templates/`](templates/) |
+| Proposing a protocol change | [`rfcs/README.md`](rfcs/README.md) and [`rfcs/templates/RFC_TEMPLATE.md`](rfcs/templates/RFC_TEMPLATE.md) |
 
 **Reading order for a deep understanding:**
 
@@ -126,7 +128,8 @@ Before opening a proposal:
 
 - Search existing RFCs and documentation for prior art
 - Read the relevant folder README to place your contribution correctly
-- Use templates from [`templates/`](templates/) where applicable
+- Use [`rfcs/templates/RFC_TEMPLATE.md`](rfcs/templates/RFC_TEMPLATE.md) for protocol changes
+- Use [`docs/templates/`](docs/templates/) for stable specifications and decision records
 
 Questions, typos, and clarifications to existing accepted text are welcome via issues and pull requests. New protocol behavior requires an RFC.
 
