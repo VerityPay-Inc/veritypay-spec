@@ -59,20 +59,24 @@ If a behavior is not specified (or not yet accepted), it is **not part of the pr
 veritypay-spec/
 ├── README.md                      ← You are here
 ├── docs/                          ← Curated specification corpus
-│   ├── 00-overview/               ← Vision, principles, manifesto, whitepaper
+│   ├── README.md                  ← Documentation pyramid (start here)
+│   ├── 00-overview/               ← Constitutional layer (Manifesto, Vision, Principles, Glossary)
 │   ├── 01-architecture/           ← System structure and cross-cutting models
 │   ├── 02-product/                ← Participant-facing concepts and workflows
 │   ├── 03-development/            ← Implementer and conformance guidance
 │   ├── 04-research/               ← Exploratory and pre-normative work
 │   ├── 05-governance/             ← Decision-making and change control
-│   └── templates/                 ← Stable spec and decision record templates
+│   └── templates/                 ← Spec templates and header snippets
+│       └── snippets/              ← SPEC_HEADER, CONSTITUTIONAL_NAV
 ├── rfcs/                          ← Formal change proposals (Request for Comments)
 │   └── templates/                 ← RFC proposal template
 ├── diagrams/                      ← Architecture and protocol visuals
 └── templates/                     ← Index pointing to template locations
 ```
 
-Each documentation directory includes a `README.md` with **Purpose**, **Audience**, **Scope**, and **Related specifications**.
+Each documentation directory includes a `README.md` with **Documentation hierarchy**, **Purpose**, **Audience**, **Scope**, and **Related specifications`.
+
+See [`docs/README.md`](docs/README.md) for the full **Documentation Pyramid**.
 
 ---
 
@@ -82,7 +86,7 @@ Each documentation directory includes a `README.md` with **Purpose**, **Audience
 
 | Role | Start with |
 |------|------------|
-| New to VerityPay | [`docs/00-overview/`](docs/00-overview/) |
+| New to VerityPay | [`docs/README.md`](docs/README.md) then [`docs/00-overview/`](docs/00-overview/) |
 | Designing or reviewing system structure | [`docs/01-architecture/`](docs/01-architecture/) |
 | Understanding user-facing behavior | [`docs/02-product/`](docs/02-product/) |
 | Building or integrating an implementation | [`docs/03-development/`](docs/03-development/) + accepted RFCs |
@@ -92,11 +96,12 @@ Each documentation directory includes a `README.md` with **Purpose**, **Audience
 
 **Reading order for a deep understanding:**
 
-1. Overview — establish shared vocabulary and intent
-2. Architecture — understand structural boundaries and models
-3. Product — see how concepts map to real-world use
-4. Accepted RFCs — read the normative decisions that bind implementations
-5. Development — learn conformance expectations and contribution paths
+1. [Documentation pyramid](docs/README.md#documentation-pyramid) — understand the hierarchy
+2. Constitutional layer — [Manifesto](docs/00-overview/MANIFESTO.md) → [Vision](docs/00-overview/VISION.md) → [Principles](docs/00-overview/PRINCIPLES.md) → [Glossary](docs/00-overview/GLOSSARY.md)
+3. Architecture — structural boundaries and models
+4. Product — how concepts map to real-world use
+5. Accepted RFCs — normative decisions that bind implementations
+6. Development — conformance expectations and contribution paths
 
 Documents in `docs/04-research/` are informative until promoted through the RFC process.
 
@@ -130,6 +135,7 @@ Before opening a proposal:
 - Read the relevant folder README to place your contribution correctly
 - Use [`rfcs/templates/RFC_TEMPLATE.md`](rfcs/templates/RFC_TEMPLATE.md) for protocol changes
 - Use [`docs/templates/`](docs/templates/) for stable specifications and decision records
+- Prepend [`docs/templates/snippets/SPEC_HEADER.md`](docs/templates/snippets/SPEC_HEADER.md) to every new specification document
 
 Questions, typos, and clarifications to existing accepted text are welcome via issues and pull requests. New protocol behavior requires an RFC.
 

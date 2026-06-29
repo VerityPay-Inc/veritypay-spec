@@ -4,6 +4,31 @@ Foundational documents that establish *why* VerityPay exists, *what* problem it 
 
 ---
 
+## Documentation hierarchy
+
+**You are here: Constitutional layer** — the highest level of the [documentation pyramid](../README.md#documentation-pyramid).
+
+```
+Manifesto → Vision → Principles → Glossary   ← this folder
+         ↓
+    Architecture → Specifications → Implementation
+```
+
+| Position | Document | File | Status |
+|----------|----------|------|--------|
+| 1 | Manifesto | [MANIFESTO.md](MANIFESTO.md) | Placeholder |
+| 2 | Vision | [VISION.md](VISION.md) | Placeholder |
+| 3 | Principles | [PRINCIPLES.md](PRINCIPLES.md) | Placeholder |
+| 4 | Glossary | [GLOSSARY.md](GLOSSARY.md) | Placeholder |
+
+These four documents cross-link to each other and constrain all lower levels. Nothing in architecture, RFCs, or implementations may contradict an adopted constitutional document.
+
+**Next level:** [`../01-architecture/`](../01-architecture/) — structural models and invariants.
+
+See [`../README.md`](../README.md) for the full pyramid and authoring conventions.
+
+---
+
 ## Purpose
 
 This folder is the entry point for anyone encountering VerityPay for the first time. It answers questions of intent and direction before diving into structural or technical detail.
@@ -22,7 +47,7 @@ Documents here set the narrative frame: the problem space, the vision for a veri
 | Implementers | Align engineering priorities with protocol values |
 | Partners and integrators | Evaluate fit before technical deep-dives |
 
-Read this folder first. Then proceed to [`../01-architecture/`](../01-architecture/) for structural detail, or to [`../../rfcs/`](../../rfcs/) for binding protocol decisions.
+Read the constitutional documents in order, then proceed to [`../01-architecture/`](../01-architecture/) or [`../../rfcs/`](../../rfcs/) as needed.
 
 ---
 
@@ -30,11 +55,11 @@ Read this folder first. Then proceed to [`../01-architecture/`](../01-architectu
 
 **In scope**
 
-- Whitepaper — long-form description of goals, approach, and design rationale
 - [MANIFESTO.md](MANIFESTO.md) — mission and public-good philosophy (forthcoming)
-- Vision — desired future state and success criteria
-- Principles — durable values and decision heuristics
-- Glossary — shared terminology used across all specification documents
+- [VISION.md](VISION.md) — desired future state and success criteria (forthcoming)
+- [PRINCIPLES.md](PRINCIPLES.md) — durable values and decision heuristics (forthcoming)
+- [GLOSSARY.md](GLOSSARY.md) — shared terminology (forthcoming)
+- Whitepaper — long-form description of goals, approach, and design rationale
 - FAQ — common conceptual questions (not implementation troubleshooting)
 - Roadmap — high-level, non-binding direction for specification maturity
 
@@ -56,8 +81,10 @@ Overview documents are **informative** unless explicitly cross-referenced as nor
 
 | Document / area | Relationship |
 |-----------------|--------------|
+| [`../README.md`](../README.md) | Documentation pyramid and level definitions |
 | [`../01-architecture/`](../01-architecture/) | Structural detail grounded in principles defined here |
 | [`../02-product/`](../02-product/) | How protocol intent maps to participant-facing outcomes |
-| [`../05-governance/`](../05-governance/) | How values here constrain decision-making |
-| [`../../rfcs/`](../../rfcs/) | Normative decisions that may cite overview documents |
-| [`../templates/SPEC_TEMPLATE.md`](../templates/SPEC_TEMPLATE.md) | Format for future stable specification documents |
+| [`../05-governance/`](../05-governance/) | How constitutional documents are adopted and amended |
+| [`../../rfcs/`](../../rfcs/) | Normative decisions that must align with principles |
+| [`../templates/snippets/SPEC_HEADER.md`](../templates/snippets/SPEC_HEADER.md) | Required metadata block citing constitutional refs |
+| [`../templates/snippets/CONSTITUTIONAL_NAV.md`](../templates/snippets/CONSTITUTIONAL_NAV.md) | Reusable navigation block for constitutional documents |

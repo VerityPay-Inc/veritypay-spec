@@ -4,6 +4,26 @@ Visual artifacts that clarify VerityPay architecture, protocol flows, and govern
 
 ---
 
+## Documentation hierarchy
+
+**You are here: Supporting artifact** — diagrams illustrate pyramid levels but are not a level themselves.
+
+```
+Manifesto → Vision → Principles → Glossary
+         ↓
+    Architecture   ← primary diagram consumer
+         ↓
+    Specifications ← RFCs may require diagram updates at acceptance
+         ↓
+    Implementation
+```
+
+Diagrams must stay consistent with the [constitutional layer](../docs/00-overview/) and must not introduce normative requirements absent from specification text.
+
+See [`../docs/README.md`](../docs/README.md) for the full pyramid.
+
+---
+
 ## Purpose
 
 Well-designed diagrams reduce ambiguity in specification text. They show boundaries, sequences, and state transitions that prose alone makes easy to misread.
@@ -60,6 +80,8 @@ Diagrams are **illustrative unless explicitly cited as normative** by an accepte
 
 | Document / area | Relationship |
 |-----------------|--------------|
+| [`../docs/00-overview/`](../docs/00-overview/) | Constitutional layer context for governance diagrams |
+| [`../docs/README.md`](../docs/README.md) | Documentation pyramid |
 | [`../docs/01-architecture/`](../docs/01-architecture/) | Primary consumer of architecture and model diagrams |
 | [`../docs/05-governance/`](../docs/05-governance/) | Consumer of governance and RFC lifecycle diagrams |
 | [`../rfcs/`](../rfcs/) | RFCs may require new or updated diagrams at acceptance |

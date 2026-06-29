@@ -4,6 +4,26 @@ Structural documentation that describes how the VerityPay protocol is organized�
 
 ---
 
+## Documentation hierarchy
+
+**You are here: Architecture** — the level below the [constitutional layer](../00-overview/) and above detailed specifications.
+
+```
+Manifesto → Vision → Principles → Glossary
+         ↓
+    Architecture   ← this folder
+         ↓
+    Specifications → Implementation
+```
+
+Documents here must align with [MANIFESTO.md](../00-overview/MANIFESTO.md), [VISION.md](../00-overview/VISION.md), [PRINCIPLES.md](../00-overview/PRINCIPLES.md), and terminology in [GLOSSARY.md](../00-overview/GLOSSARY.md). Architecture becomes normative when incorporated by an accepted RFC.
+
+**Adjacent:** [`../02-product/`](../02-product/) (participant view) · **Next level:** [`../../rfcs/`](../../rfcs/) (normative change proposals)
+
+See [`../README.md`](../README.md) for the full pyramid.
+
+---
+
 ## Purpose
 
 Architecture documents explain the *shape* of the system without prescribing a particular codebase layout. They give implementers and reviewers a shared map: what entities exist, how they relate, which invariants must hold, and where responsibilities divide.

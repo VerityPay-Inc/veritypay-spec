@@ -1,10 +1,10 @@
-# VerityPay Manifesto
+# VerityPay Glossary
 
 > **Status:** Placeholder — not yet authored.
 
-This document will define VerityPay's mission and public-good philosophy: why the protocol exists as open infrastructure, who it serves, and which commitments the ecosystem holds beyond any single implementation or vendor.
+This document will define shared terminology used consistently across the VerityPay specification: canonical terms, precise meanings, and relationships between concepts referenced in architecture documents, RFCs, and product documentation.
 
-The manifesto will be written collaboratively and adopted through governance.
+The glossary will be maintained collaboratively and updated through governance when terminology stabilizes or changes.
 
 ---
 
@@ -14,10 +14,10 @@ Part of the VerityPay [documentation pyramid](../README.md#documentation-pyramid
 
 | Document | File | You are here |
 |----------|------|:------------:|
-| Manifesto | [MANIFESTO.md](MANIFESTO.md) | **●** |
+| Manifesto | [MANIFESTO.md](MANIFESTO.md) | |
 | Vision | [VISION.md](VISION.md) | |
 | Principles | [PRINCIPLES.md](PRINCIPLES.md) | |
-| Glossary | [GLOSSARY.md](GLOSSARY.md) | |
+| Glossary | [GLOSSARY.md](GLOSSARY.md) | **●** |
 
 **Suggested reading order:** Manifesto → Vision → Principles → Glossary (reference as needed).
 

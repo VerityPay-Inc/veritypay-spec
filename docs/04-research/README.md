@@ -4,6 +4,26 @@ Exploratory, analytical, and pre-normative work that informs future specificatio
 
 ---
 
+## Documentation hierarchy
+
+**You are here: Adjacent (pre-normative)** — research sits outside the pyramid until promoted. It may inform any level but binds none.
+
+```
+Manifesto → Vision → Principles → Glossary
+         ↓
+    Architecture → Specifications → Implementation
+
+    Research ──→ may feed any level via RFC promotion
+```
+
+Research must cite relevant constitutional documents when proposing alternatives. Promotion path: research → RFC draft → accepted specification.
+
+**Constitutional context:** [`../00-overview/`](../00-overview/) · **Promotion target:** [`../../rfcs/`](../../rfcs/)
+
+See [`../README.md`](../README.md) for the full pyramid.
+
+---
+
 ## Purpose
 
 Not every idea is ready for RFC review. Research documents capture investigations, comparisons, threat analyses, and prototypes-in-prose that help the community decide *whether* and *how* to standardize something.

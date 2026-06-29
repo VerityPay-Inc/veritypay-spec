@@ -3,15 +3,34 @@ id:
 title:
 status: draft | review | accepted | rejected | superseded
 version:
+pyramid_level: specification
 authors: []
 reviewers: []
+constitutional_refs:
+  - ../docs/00-overview/MANIFESTO.md
+  - ../docs/00-overview/VISION.md
+  - ../docs/00-overview/PRINCIPLES.md
+  - ../docs/00-overview/GLOSSARY.md
 related_docs: []
 implementation_status: not_started | in_progress | partial | complete | n/a
 ---
 
+<!--
+  Merge with docs/templates/snippets/SPEC_HEADER.md. RFCs are specification-level
+  documents. Remove this comment block before review.
+-->
+
+**Pyramid level:** specification · **Status:** `{status}` · **Version:** `{version}`
+
+**Constitutional basis:** MANIFESTO, VISION, PRINCIPLES, GLOSSARY (cite sections as applicable)
+
+**Related documents:** {list related_docs or "none"}
+
+---
+
 # RFC {id}: {title}
 
-> Copy this template into [`../`](../). Remove this instruction block before review.
+> Copy this template into [`../`](../). Remove instruction blocks before review.
 
 ## Summary
 
@@ -29,7 +48,7 @@ Requirements should be precise enough that independent implementers produce inte
 
 ## Rationale
 
-Design reasoning, trade-offs, and alignment with VerityPay principles.
+Design reasoning, trade-offs, and alignment with [PRINCIPLES.md](../docs/00-overview/PRINCIPLES.md) and the constitutional layer.
 
 ## Alternatives
 

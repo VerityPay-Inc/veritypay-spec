@@ -4,6 +4,26 @@ Documentation that defines how the VerityPay specification evolves: who decides,
 
 ---
 
+## Documentation hierarchy
+
+**You are here: Adjacent (meta)** — governance defines the rules for changing every pyramid level, including the constitutional layer.
+
+```
+Manifesto → Vision → Principles → Glossary   ← adoption and amendment governed here
+         ↓
+    Architecture → Specifications → Implementation
+         ↑              ↑                ↑
+         └──────── governance applies to all levels ────────┘
+```
+
+Changes to [MANIFESTO.md](../00-overview/MANIFESTO.md), [VISION.md](../00-overview/VISION.md), [PRINCIPLES.md](../00-overview/PRINCIPLES.md), or [GLOSSARY.md](../00-overview/GLOSSARY.md) follow the same public, reviewable process as RFCs.
+
+**Constitutional layer:** [`../00-overview/`](../00-overview/) · **Change proposals:** [`../../rfcs/`](../../rfcs/)
+
+See [`../README.md`](../README.md) for the full pyramid.
+
+---
+
 ## Purpose
 
 Open protocols outlive individual contributors and vendors. Governance documentation ensures that changes to VerityPay are deliberate, reviewable, and fair—that no single party can silently redefine the protocol.

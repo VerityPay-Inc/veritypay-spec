@@ -4,6 +4,28 @@ Guidance for people who write, test, review, or certify software that implements
 
 ---
 
+## Documentation hierarchy
+
+**You are here: Below specifications** — this folder bridges accepted specification text to engineering practice. It does not define protocol behavior.
+
+```
+Manifesto → Vision → Principles → Glossary
+         ↓
+    Architecture → Specifications
+                        ↓
+                   Implementation   ← guidance targets software here (external repos)
+                        ↑
+              Development docs orient implementers at this boundary
+```
+
+Implementers should read the constitutional layer and architecture before relying on conformance guidance here.
+
+**Upstream:** [`../00-overview/`](../00-overview/) · [`../01-architecture/`](../01-architecture/) · [`../../rfcs/`](../../rfcs/)
+
+See [`../README.md`](../README.md) for the full pyramid.
+
+---
+
 ## Purpose
 
 Development documentation connects the abstract specification to engineering practice. It explains how implementers should interpret normative text, demonstrate conformance, and contribute improvements back to the specification.

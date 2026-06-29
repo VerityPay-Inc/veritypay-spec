@@ -4,6 +4,28 @@ Formal proposals that introduce, modify, or retire normative VerityPay protocol 
 
 ---
 
+## Documentation hierarchy
+
+**You are here: Specifications** — RFCs are the primary vehicle for normative protocol change on the [documentation pyramid](../docs/README.md#documentation-pyramid).
+
+```
+Manifesto → Vision → Principles → Glossary
+         ↓
+    Architecture
+         ↓
+    Specifications   ← this folder (RFCs and accepted protocol text)
+         ↓
+    Implementation   (external repositories)
+```
+
+Every RFC must declare alignment with the [constitutional layer](../docs/00-overview/) via `constitutional_refs` in [`templates/RFC_TEMPLATE.md`](templates/RFC_TEMPLATE.md) (see also [`docs/templates/snippets/SPEC_HEADER.md`](../docs/templates/snippets/SPEC_HEADER.md)).
+
+**Upstream:** [`../docs/00-overview/`](../docs/00-overview/) · [`../docs/01-architecture/`](../docs/01-architecture/) · **Downstream:** [`../docs/03-development/`](../docs/03-development/) (conformance)
+
+See [`../docs/README.md`](../docs/README.md) for the full pyramid.
+
+---
+
 ## Purpose
 
 RFCs are the primary mechanism for changing the VerityPay specification. Each RFC is a self-contained document that explains a problem, presents a solution, considers alternatives, and defines what implementations must do if the RFC is accepted.
@@ -99,9 +121,15 @@ Authors and maintainers update `implementation_status` in RFC front matter as kn
 
 | Document / area | Relationship |
 |-----------------|--------------|
+| [`../docs/00-overview/MANIFESTO.md`](../docs/00-overview/MANIFESTO.md) | Mission constraints RFCs must respect |
+| [`../docs/00-overview/VISION.md`](../docs/00-overview/VISION.md) | Strategic direction RFCs must align with |
+| [`../docs/00-overview/PRINCIPLES.md`](../docs/00-overview/PRINCIPLES.md) | Values cited in rationale sections |
+| [`../docs/00-overview/GLOSSARY.md`](../docs/00-overview/GLOSSARY.md) | Canonical terminology for normative text |
+| [`../docs/README.md`](../docs/README.md) | Documentation pyramid |
 | [`../docs/05-governance/`](../docs/05-governance/) | Authority for roles, voting, and acceptance criteria |
-| [`../docs/01-architecture/`](../01-architecture/) | Structural context RFCs must align with or update |
+| [`../docs/01-architecture/`](../docs/01-architecture/) | Structural context RFCs must align with or update |
 | [`../docs/04-research/`](../04-research/) | Source material that may precede an RFC |
+| [`../docs/templates/snippets/SPEC_HEADER.md`](../docs/templates/snippets/SPEC_HEADER.md) | Required metadata block for RFC front matter |
 | [`../docs/templates/SPEC_TEMPLATE.md`](../docs/templates/SPEC_TEMPLATE.md) | Format for stable docs an RFC may create or amend |
 | [`../docs/templates/DECISION_RECORD_TEMPLATE.md`](../docs/templates/DECISION_RECORD_TEMPLATE.md) | Optional companion for decisions not fully captured in RFC prose |
 | [`../docs/03-development/`](../03-development/) | Conformance expectations for implementers of accepted RFCs |

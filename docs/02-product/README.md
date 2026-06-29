@@ -4,6 +4,26 @@ Documentation that describes VerityPay from the perspective of people and organi
 
 ---
 
+## Documentation hierarchy
+
+**You are here: Adjacent (product view)** — not a pyramid level; this folder translates specified behavior into participant-facing language.
+
+```
+Manifesto → Vision → Principles → Glossary
+         ↓
+    Architecture → Specifications → Implementation
+                        ↑
+              Product docs describe outcomes at this boundary
+```
+
+Product documentation must reflect the constitutional layer and must not describe capabilities absent from architecture or accepted specifications.
+
+**Upstream:** [`../00-overview/`](../00-overview/) · [`../01-architecture/`](../01-architecture/) · **Normative source:** [`../../rfcs/`](../../rfcs/)
+
+See [`../README.md`](../README.md) for the full pyramid.
+
+---
+
 ## Purpose
 
 Product documentation bridges abstract protocol concepts and real-world use. It explains who participates in the ecosystem, what they are trying to accomplish, and how specified behavior manifests in observable outcomes.
