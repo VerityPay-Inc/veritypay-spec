@@ -28,6 +28,8 @@ See [`../docs/README.md`](../docs/README.md) for the full pyramid.
 
 ## Purpose
 
+RFC-0000 ([`0000-rfc-process.md`](0000-rfc-process.md), **VP-RFC-0000**) is the **accepted** governing document for how RFCs are written, reviewed, and integrated into the specification. Machine-readable metadata: [`../spec/rfcs/registry.yaml`](../spec/rfcs/registry.yaml). This README orients contributors; RFC-0000 defines the process every other RFC must follow.
+
 RFCs are the primary mechanism for changing the VerityPay specification. Each RFC is a self-contained document that explains a problem, presents a solution, considers alternatives, and defines what implementations must do if the RFC is accepted.
 
 The RFC process exists to:
@@ -63,7 +65,7 @@ This directory operates like a standards body change queue—not a feature backl
 - Accepted RFCs — binding specification text
 - Rejected RFCs — preserved with rationale to prevent re-litigation
 - Superseded RFCs — marked obsolete by later RFCs, retained for history
-- [`templates/RFC_TEMPLATE.md`](templates/RFC_TEMPLATE.md) — required scaffold for new proposals
+- [`templates/RFC_TEMPLATE.md`](templates/RFC_TEMPLATE.md) — **RFC Author Guide** and copy-paste starter (process: [`0000-rfc-process.md`](0000-rfc-process.md))
 
 **Out of scope**
 
@@ -80,7 +82,7 @@ RFC numbers are assigned sequentially and permanently. Do not reuse numbers.
 
 ## RFC process
 
-Detailed governance rules live in [`../docs/05-governance/`](../docs/05-governance/). Summary:
+Detailed governance rules live in [`../docs/05-governance/`](../docs/05-governance/) and [`0000-rfc-process.md`](0000-rfc-process.md). Summary:
 
 ### 1. Preflight
 

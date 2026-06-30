@@ -1,0 +1,27 @@
+# VerityPay RFC Registry (machine-readable)
+# Human-readable process: rfcs/0000-rfc-process.md (VP-RFC-0000)
+# RFCs SHOULD cite VP-RFC-* and keep this file synchronized on status changes
+
+spec: RFC-REGISTRY
+title: VerityPay RFC Registry
+version: 1.0.0
+status: draft
+human_readable: rfcs/
+process_rfc: VP-RFC-0000
+rfcs:
+  - id: VP-RFC-0000
+    rfc: 0000
+    anchor: rfc-process
+    title: RFC Process
+    status: accepted
+    type: meta
+    version: 1.1.0
+    created: 2026-06-29
+    updated: 2026-06-29
+    depends_on: []
+    supersedes: []
+    superseded_by: null
+    related_terms: []
+    related_architecture: []
+    related_conformance: []
+    path: rfcs/0000-rfc-process.md
