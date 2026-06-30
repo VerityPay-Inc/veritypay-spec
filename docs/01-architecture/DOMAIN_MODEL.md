@@ -30,7 +30,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [VISION.md](../00-overview/VISION.md), [PRINCIPLES.md](../00-overview/PRINCIPLES.md)
 
-**Related documents:** [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [GLOSSARY.md](../00-overview/GLOSSARY.md) (forthcoming), `DATA_MODEL.md` (forthcoming)
+**Related documents:** [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md), [GLOSSARY.md](../00-overview/GLOSSARY.md) (forthcoming), `DATA_MODEL.md` (forthcoming)
 
 ---
 
@@ -54,7 +54,7 @@ Manifesto → Vision → Principles → Glossary
 
 **Upstream:** [`00-overview/`](../00-overview/) — especially [VISION.md](../00-overview/VISION.md)
 
-**Downstream:** [IDENTITY_MODEL.md](IDENTITY_MODEL.md) → `DATA_MODEL.md` → state models → [`../../rfcs/`](../../rfcs/)
+**Downstream:** [IDENTITY_MODEL.md](IDENTITY_MODEL.md) → [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md) → `DATA_MODEL.md` → state models → [`../../rfcs/`](../../rfcs/)
 
 Documents at this level must align with constitutional documents. Architecture becomes normative when incorporated by an accepted RFC.
 
