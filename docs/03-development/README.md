@@ -52,8 +52,9 @@ Implementers should identify the RFC set they target (see [`../../rfcs/`](../../
 
 **In scope**
 
+- [CONFORMANCE_MODEL.md](CONFORMANCE_MODEL.md) — the constitution of interoperability; conformance pyramid, scenarios, RFC impact
 - Implementer's guide — how to read RFCs, architecture docs, and test vectors together
-- Conformance definition — what "VerityPay-compliant" means and how compliance is assessed
+- Conformance definition — what "VerityPay-compliant" means (see CONFORMANCE_MODEL)
 - Test vector specifications — expected inputs and outputs defined declaratively
 - Versioning and compatibility — how spec versions map to implementation releases
 - Reference implementation policy — role and non-normative status of any reference software
@@ -79,6 +80,7 @@ Test vectors specify **expected behavior**; executables that run them belong in 
 | Document / area | Relationship |
 |-----------------|--------------|
 | [`../../rfcs/`](../../rfcs/) | Normative behavior implementations must satisfy |
+| [CONFORMANCE_MODEL.md](CONFORMANCE_MODEL.md) | L3 conformance pyramid, scenarios, non-conformance, RFC impact |
 | [`../01-architecture/`](../01-architecture/) | Invariants and models conformance builds upon |
 | [`../02-product/`](../02-product/) | Observable outcomes conformance should produce |
 | [`../05-governance/`](../05-governance/) | Escalation when spec and implementation diverge |
