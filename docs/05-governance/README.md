@@ -51,6 +51,9 @@ Before submitting a protocol change, read [GOVERNANCE.md](GOVERNANCE.md) and [`.
 **In scope**
 
 - [GOVERNANCE.md](GOVERNANCE.md) — decision types, authority model, Architecture Alpha freeze, RFC governance
+- [ADR_GUIDE.md](ADR_GUIDE.md) — when and how to record Architecture Decision Records (engineering memory)
+- [SPECIFICATION_VERSIONING.md](SPECIFICATION_VERSIONING.md) — Editions, Protocol Versions, and document versioning
+- [SPECIFICATION_RELEASE_PROCESS.md](SPECIFICATION_RELEASE_PROCESS.md) — how reviewed work becomes a published Edition
 - RFC process summary — how proposals move from draft to accepted (details in [`../../rfcs/`](../../rfcs/))
 - Roles and responsibilities — maintainers, editors, working groups, and participants
 - Decision-making model — consensus expectations, escalation, and deadlock handling
@@ -75,6 +78,9 @@ Governance documents may themselves be updated through RFC when process changes 
 | Document / area | Relationship |
 |-----------------|--------------|
 | [GOVERNANCE.md](GOVERNANCE.md) | Authoritative governance overview for contributors and funders |
+| [ADR_GUIDE.md](ADR_GUIDE.md) | ADR lifecycle, structure, and RFC boundary |
+| [SPECIFICATION_VERSIONING.md](SPECIFICATION_VERSIONING.md) | Editions, Protocol Versions, document versions |
+| [SPECIFICATION_RELEASE_PROCESS.md](SPECIFICATION_RELEASE_PROCESS.md) | Edition publication lifecycle and manifest |
 | [`../../rfcs/README.md`](../../rfcs/README.md) | Operational RFC process and lifecycle |
 | [`../../rfcs/templates/RFC_TEMPLATE.md`](../../rfcs/templates/RFC_TEMPLATE.md) | Required format for protocol change proposals |
 | [`../00-overview/MANIFESTO.md`](../00-overview/MANIFESTO.md) | Mission and public-good philosophy (forthcoming) |

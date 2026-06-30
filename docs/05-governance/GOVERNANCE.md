@@ -82,7 +82,7 @@ Not every change needs an RFC. Classify work before opening a pull request.
 |------|---------------------------|------------------|
 | **Editorial clarification** | No | PR + issue |
 | **Documentation improvement** | No | PR |
-| **Architecture decision** | Maybe (if structural) | ADR; RFC if normative |
+| **Architecture decision** | Maybe (if structural) | ADR per [ADR_GUIDE.md](ADR_GUIDE.md); RFC if normative |
 | **RFC / normative change** | Yes | RFC |
 | **Implementation change** | Only if reflecting accepted spec | PR in implementation repo |
 | **Security emergency** | Possibly | Security advisory + follow-up RFC/ADR |
@@ -152,7 +152,7 @@ For each decision type: required artifact, review path, approval requirement, an
 
 | Field | Definition |
 |-------|------------|
-| **Artifact** | ADR using [`DECISION_RECORD_TEMPLATE.md`](../templates/DECISION_RECORD_TEMPLATE.md); RFC if normative |
+| **Artifact** | ADR per [ADR_GUIDE.md](ADR_GUIDE.md) and [`DECISION_RECORD_TEMPLATE.md`](../templates/DECISION_RECORD_TEMPLATE.md); RFC if normative |
 | **Review path** | Principal Architect + Reviewer |
 | **Approval** | Principal Architect or Maintainer; RFC acceptance if behavior binds implementers |
 | **Record** | `docs/` ADR path or accepted RFC |
@@ -383,7 +383,10 @@ Private grant negotiations, contract terms, and employment agreements—see [Out
 | [rfcs/README.md](../../rfcs/README.md) | RFC operational process |
 | [01-architecture/](../01-architecture/) | Architecture Alpha (frozen) |
 | [03-development/](../03-development/) | Conformance (forthcoming, L3) |
-| [DECISION_RECORD_TEMPLATE.md](../templates/DECISION_RECORD_TEMPLATE.md) | ADR format |
+| [SPECIFICATION_VERSIONING.md](SPECIFICATION_VERSIONING.md) | Editions, Protocol Versions, and document version axes |
+| [SPECIFICATION_RELEASE_PROCESS.md](SPECIFICATION_RELEASE_PROCESS.md) | Edition publication and Edition Manifest |
+| [ADR_GUIDE.md](ADR_GUIDE.md) | When to write ADRs; RFC vs ADR boundary |
+| [DECISION_RECORD_TEMPLATE.md](../templates/DECISION_RECORD_TEMPLATE.md) | ADR copy-paste scaffold |
 
 ---
 
