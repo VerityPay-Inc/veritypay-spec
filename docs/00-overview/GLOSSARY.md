@@ -4,6 +4,8 @@
 
 This document will define shared terminology used consistently across the VerityPay specification: canonical terms, precise meanings, and relationships between concepts referenced in architecture documents, RFCs, and product documentation.
 
+**Authoritative source for protocol and domain terms:** [DOMAIN_MODEL.md](../01-architecture/DOMAIN_MODEL.md) (Part I: protocol; Part II: domain). The glossary distills Part II into quick reference.
+
 The glossary will be maintained collaboratively and updated through governance when terminology stabilizes or changes.
 
 ---
