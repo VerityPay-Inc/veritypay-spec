@@ -18,8 +18,8 @@ Manifesto → Vision → Principles → Glossary   ← this folder
 |----------|----------|------|--------|
 | 1 | Manifesto | [MANIFESTO.md](MANIFESTO.md) | Draft |
 | 2 | Vision | [VISION.md](VISION.md) | Draft |
-| 3 | Principles | [PRINCIPLES.md](PRINCIPLES.md) | Placeholder |
-| 4 | Glossary | [GLOSSARY.md](GLOSSARY.md) | Placeholder |
+| 3 | Principles | [PRINCIPLES.md](PRINCIPLES.md) | Draft |
+| 4 | Glossary | [GLOSSARY.md](GLOSSARY.md) | Draft |
 
 These four documents cross-link to each other and constrain all lower levels. Nothing in architecture, RFCs, or implementations may contradict an adopted constitutional document.
 
@@ -57,8 +57,8 @@ Read the constitutional documents in order, then proceed to [`../01-architecture
 
 - [MANIFESTO.md](MANIFESTO.md) — mission and public declaration (draft)
 - [VISION.md](VISION.md) — VerityPay's role in creating the world the institution serves (draft)
-- [PRINCIPLES.md](PRINCIPLES.md) — durable values and decision heuristics (forthcoming)
-- [GLOSSARY.md](GLOSSARY.md) — shared terminology (forthcoming)
+- [PRINCIPLES.md](PRINCIPLES.md) — engineering principles for RFC review (draft)
+- [GLOSSARY.md](GLOSSARY.md) — canonical protocol vocabulary (draft)
 - Whitepaper — long-form description of goals, approach, and design rationale
 - FAQ — common conceptual questions (not implementation troubleshooting)
 - Roadmap — high-level, non-binding direction for specification maturity

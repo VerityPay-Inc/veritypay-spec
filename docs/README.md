@@ -80,8 +80,8 @@ The four documents below form the **constitutional layer**—the highest level o
 |----------|------|--------|
 | Manifesto | [`00-overview/MANIFESTO.md`](00-overview/MANIFESTO.md) | Draft |
 | Vision | [`00-overview/VISION.md`](00-overview/VISION.md) | Draft |
-| Principles | [`00-overview/PRINCIPLES.md`](00-overview/PRINCIPLES.md) | Placeholder |
-| Glossary | [`00-overview/GLOSSARY.md`](00-overview/GLOSSARY.md) | Placeholder |
+| Principles | [`00-overview/PRINCIPLES.md`](00-overview/PRINCIPLES.md) | Draft |
+| Glossary | [`00-overview/GLOSSARY.md`](00-overview/GLOSSARY.md) | Draft |
 
 All four cross-link to each other. Every future specification must declare its pyramid level and cite relevant constitutional documents using [`templates/snippets/SPEC_HEADER.md`](templates/snippets/SPEC_HEADER.md).
 
