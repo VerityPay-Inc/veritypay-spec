@@ -30,7 +30,7 @@ Architecture documents explain the *shape* of the system without prescribing a p
 
 This folder is where readers learn the protocol's skeleton before reading product-facing workflows or individual RFCs.
 
-**Start here:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md) — what VerityPay is (protocol), then the shared language (domain). Then [IDENTITY_MODEL.md](IDENTITY_MODEL.md) — what makes each object *itself*. Then [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md) — what is allowed to happen before schemas and state machines.
+**Start here:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md) → [IDENTITY_MODEL.md](IDENTITY_MODEL.md) → [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md) → [DATA_MODEL.md](DATA_MODEL.md) → [STATE_MODEL.md](STATE_MODEL.md)
 
 ---
 
@@ -55,8 +55,9 @@ Readers should already understand VerityPay's intent from [`../00-overview/`](..
 - [DOMAIN_MODEL.md](DOMAIN_MODEL.md) — protocol model (incl. truth & trust) + domain language
 - [IDENTITY_MODEL.md](IDENTITY_MODEL.md) — semantic identity, invariants, identity hierarchy (before data model)
 - [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md) — protocol verbs, interactions, events, behavioral invariants
+- [DATA_MODEL.md](DATA_MODEL.md) — canonical entities, identifiers, attributes, representation invariants
+- [STATE_MODEL.md](STATE_MODEL.md) — knowledge states, lifecycles, state invariants
 - System architecture — subsystems, trust boundaries, and interaction patterns
-- Data model — entities, relationships, storage identifiers, encodings (declarative, not ORM schemas)
 - Privacy model — what information exists, who may learn it, and under what conditions
 - Security model — threat assumptions, trust anchors, and security invariants
 - Interoperability model — how independent implementations validate compatibility
@@ -86,6 +87,8 @@ Architecture content becomes **normative** only when incorporated into or refere
 | [DOMAIN_MODEL.md](DOMAIN_MODEL.md) | Protocol, domain, truth model, trust model—authoring foundation |
 | [IDENTITY_MODEL.md](IDENTITY_MODEL.md) | Semantic identity before data model and state models |
 | [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md) | Protocol verbs and events before representation and state machines |
+| [DATA_MODEL.md](DATA_MODEL.md) | Entity representation before state models and RFC encodings |
+| [STATE_MODEL.md](STATE_MODEL.md) | Knowledge states and lifecycle of protocol truth |
 | [`../00-overview/`](../00-overview/) | Principles and vision that constrain architectural choices |
 | [`../02-product/`](../02-product/) | Participant-facing flows that architecture must support |
 | [`../03-development/`](../03-development/) | Conformance expectations derived from architectural invariants |

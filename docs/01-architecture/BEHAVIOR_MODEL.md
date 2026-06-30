@@ -30,7 +30,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md) (protocol, domain, truth and trust), [IDENTITY_MODEL.md](IDENTITY_MODEL.md) (semantic identity)
 
-**Related documents:** `DATA_MODEL.md` (forthcoming), state models (forthcoming), `CONFORMANCE_MODEL` (forthcoming)
+**Related documents:** [DATA_MODEL.md](DATA_MODEL.md), [STATE_MODEL.md](STATE_MODEL.md), `CONFORMANCE_MODEL` (forthcoming)
 
 ---
 
@@ -56,7 +56,7 @@ Manifesto → Vision → Principles → Glossary
 
 **Upstream:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md)
 
-**Downstream:** `DATA_MODEL.md`, state models, conformance scenarios
+**Downstream:** [DATA_MODEL.md](DATA_MODEL.md), [STATE_MODEL.md](STATE_MODEL.md), conformance scenarios
 
 ---
 

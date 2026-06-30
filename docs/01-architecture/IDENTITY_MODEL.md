@@ -28,7 +28,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md) Part I (truth and trust) and Part II (domain language)
 
-**Related documents:** [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md), `DATA_MODEL.md` (forthcoming), state models (forthcoming)
+**Related documents:** [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md), [DATA_MODEL.md](DATA_MODEL.md), [STATE_MODEL.md](STATE_MODEL.md)
 
 ---
 
@@ -54,7 +54,7 @@ Manifesto → Vision → Principles → Glossary
 
 **Upstream:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md)
 
-**Downstream:** [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md) → `DATA_MODEL.md` (representations and storage identity), state models (mutable lifecycle)
+**Downstream:** [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md) → [DATA_MODEL.md](DATA_MODEL.md) → [STATE_MODEL.md](STATE_MODEL.md)
 
 ---
 
