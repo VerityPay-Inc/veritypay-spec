@@ -30,7 +30,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md) (protocol, domain, truth and trust), [IDENTITY_MODEL.md](IDENTITY_MODEL.md) (semantic identity)
 
-**Related documents:** [DATA_MODEL.md](DATA_MODEL.md), [STATE_MODEL.md](STATE_MODEL.md), `CONFORMANCE_MODEL` (forthcoming)
+**Related documents:** [DATA_MODEL.md](DATA_MODEL.md), [STATE_MODEL.md](STATE_MODEL.md), [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md)
 
 ---
 
@@ -202,6 +202,8 @@ Recording outcome **fixes** the verification record for audit ([IDENTITY_MODEL.m
 
 ---
 
+<a id="bm-3-7"></a>
+
 ### supersede
 
 | Field | Definition |
@@ -316,6 +318,8 @@ These invariants MUST hold across all conforming behavior unless an accepted RFC
 | **B10** | **Compatible outcomes.** Two conforming implementations with identical inputs MUST reach the same outcome at `record outcome` | Domain invariant 7; interoperability |
 
 ---
+
+<a id="bm-5-1"></a>
 
 ## Protocol events
 

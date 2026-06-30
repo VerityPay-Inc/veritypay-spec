@@ -152,6 +152,8 @@ Confusing identity with state produces un-auditable history—"the same claim" t
 
 ---
 
+<a id="im-2-1"></a>
+
 ## Identity hierarchy
 
 Protocol objects form a referential hierarchy. Each level answers: **What makes this object itself?**
@@ -357,6 +359,8 @@ Evidence may be **composed**, **presented**, **evaluated**, or **archived**. Ide
 *Forthcoming in `DATA_MODEL.md`.* Expected: evidence handles, content references, optional integrity proofs—distinct from claim identifiers.
 
 ---
+
+<a id="im-6-1"></a>
 
 ## Verification Record
 

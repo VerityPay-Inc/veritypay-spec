@@ -128,6 +128,8 @@ These outcomes serve a world where open infrastructure expands participation. Ve
 
 ---
 
+<a id="vi-3-1"></a>
+
 ## What VerityPay is responsible for
 
 Within this Vision, VerityPay takes responsibility for:

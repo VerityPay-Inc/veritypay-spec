@@ -31,7 +31,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md)
 
-**Related documents:** [STATE_MODEL.md](STATE_MODEL.md), `CONFORMANCE_MODEL` (forthcoming), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/`](../../rfcs/)
 
 ---
 
@@ -126,6 +126,8 @@ Entity definitions and representation guarantees here are **authoritative for au
 
 ---
 
+<a id="dat-3-1"></a>
+
 ## Data modeling principles
 
 | Principle | Meaning |
@@ -193,6 +195,8 @@ Entities are classified by how they evolve as the protocol extends:
 Future domain entities (e.g., **Grant Claim**) MUST extend **Verifiable Claim** under the same core contract unless an RFC amends the core.
 
 ---
+
+<a id="dat-4-1"></a>
 
 ## Canonical entities
 
@@ -1338,6 +1342,8 @@ Independent implementations may differ on:
 
 ---
 
+<a id="dat-8-1"></a>
+
 ## Identifier model
 
 Identifiers **represent** protocol meaning; they **do not create** it ([IDENTITY_MODEL.md](IDENTITY_MODEL.md)).
@@ -1453,6 +1459,8 @@ erDiagram
 ```
 
 ---
+
+<a id="dat-9-1"></a>
 
 ## Global representation guarantees
 

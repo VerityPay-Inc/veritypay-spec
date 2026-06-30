@@ -31,7 +31,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md), [DATA_MODEL.md](DATA_MODEL.md)
 
-**Related documents:** `CONFORMANCE_MODEL` (forthcoming), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), [`../../rfcs/`](../../rfcs/)
 
 ---
 
@@ -162,6 +162,8 @@ Knowledge states and state invariants here are **authoritative for authoring** c
 ---
 
 ## State machine philosophy
+
+<a id="sm-2-1"></a>
 
 ### Knowledge states
 

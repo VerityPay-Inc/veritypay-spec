@@ -48,6 +48,8 @@ Open protocols outlive individual contributors. Governance makes change **delibe
 
 ---
 
+<a id="gv-2-1"></a>
+
 ## Normative status
 
 This document is **informative** until adopted through governance amendment. Process described here guides project operation; binding protocol behavior remains in accepted RFCs and incorporated architecture text.
@@ -69,6 +71,8 @@ When this document and an accepted RFC conflict on **protocol requirements**, th
 These principles align with institutional Canon (Constitution, Engineering DNA) and public constitutional documents ([VISION.md](../00-overview/VISION.md), [PRINCIPLES.md](../00-overview/PRINCIPLES.md)).
 
 ---
+
+<a id="gv-4-1"></a>
 
 ## Decision types
 
@@ -195,6 +199,8 @@ Implementation MUST NOT introduce behavior absent from accepted specification.
 
 ---
 
+<a id="gv-5-1"></a>
+
 ## RFC governance
 
 ### When an RFC is required
@@ -244,6 +250,8 @@ Maintainers accept RFCs when:
 Rejection preserves the document with rationale to prevent repeated debate without new evidence.
 
 ---
+
+<a id="gv-6-1"></a>
 
 ## Architecture freeze
 

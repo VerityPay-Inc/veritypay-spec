@@ -89,6 +89,8 @@ This document does not define wire formats, APIs, schemas, state transition tabl
 
 # Part I — Protocol model
 
+<a id="dm-1-1"></a>
+
 ## What is VerityPay?
 
 **VerityPay is an open protocol for expressing, verifying, and interoperating verifiable claims between independent participants.**
@@ -202,6 +204,8 @@ Claims and evidence may **reference** earlier claims—forming chains of reasoni
 
 Semantic identity of an asserted claim is stable; amendments are new claims or governed supersession.
 
+<a id="dm-1-4"></a>
+
 ### Capability IV — Interoperate
 
 Independent implementations, given the same claim, evidence, and specification version, reach **compatible verification outcomes** without shared libraries or bilateral agreements for core behavior.
@@ -232,6 +236,8 @@ VerityPay deliberately **does not** attempt to be:
 Applications combine domain claims with local policy. The protocol supplies **shared verifiable language**—not every business rule on Earth.
 
 ---
+
+<a id="dm-3-1"></a>
 
 ## Truth model
 
@@ -405,6 +411,8 @@ flowchart LR
 
 ## Core concepts
 
+<a id="dm-4-1"></a>
+
 ### Verifiable Claim
 
 A **verifiable claim** is a structured statement about a **subject**, presented in a form governed by protocol rules, evaluable through **verification** against evidence.
@@ -414,6 +422,8 @@ Verifiable claims are the **central artifact of the core protocol**. They are no
 Payment claims (below) are the first standardized family of verifiable claims in VerityPay.
 
 ---
+
+<a id="dm-4-2"></a>
 
 ### Payment Claim
 
@@ -435,6 +445,8 @@ A **payment** is the economic or operational event the payment domain discusses�
 
 ---
 
+<a id="dm-4-5"></a>
+
 ### Claim Subject
 
 The **claim subject** is what a claim is *about*—the anchor tying assertion to identity in the domain.
@@ -442,6 +454,8 @@ The **claim subject** is what a claim is *about*—the anchor tying assertion to
 Multiple claims may reference the same subject. Conflicts resolve through verification rules.
 
 ---
+
+<a id="dm-4-6"></a>
 
 ### Assertion
 
@@ -451,6 +465,8 @@ Assertion establishes presence and provenance, not validity.
 
 ---
 
+<a id="dm-4-7"></a>
+
 ### Evidence
 
 **Evidence** is material verification rules may consume—proofs, prior claims, attestations, or specified inputs.
@@ -459,11 +475,15 @@ How evidence is encoded belongs to lower layers.
 
 ---
 
+<a id="dm-4-8"></a>
+
 ### Verification
 
 **Verification** is evaluating a verifiable claim and applicable evidence against **accepted protocol rules** at a stated **specification version**.
 
 ---
+
+<a id="dm-4-9"></a>
 
 ### Verification Outcome
 
@@ -477,11 +497,15 @@ Exact taxonomies are specified in RFCs. Outcomes MUST be **explicit and interope
 
 ---
 
+<a id="dm-4-10"></a>
+
 ### Participant
 
 A **participant** is an entity acting in the protocol through one or more **roles**.
 
 ---
+
+<a id="dm-4-11"></a>
 
 ### Role
 
@@ -502,6 +526,8 @@ Product personas (payer, payee, merchant, issuer, acquirer, auditor) **map to** 
 An obligation or permitted action attached to a role—expressed here before RFCs state MUST/SHOULD.
 
 ---
+
+<a id="dm-4-12"></a>
 
 ### Specification Version
 

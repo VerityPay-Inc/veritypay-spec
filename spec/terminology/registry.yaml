@@ -1,0 +1,574 @@
+# VerityPay Terminology Registry (machine-readable)
+# Human-readable definitions: docs/00-overview/GLOSSARY.md
+# RFCs SHOULD cite VP-TERM-* and architecture section IDs (e.g. DM-4.8, VP-TERM-009)
+
+spec: SPEC-0004
+title: VerityPay Terminology Registry
+version: 0.4.0
+status: draft
+human_readable: docs/00-overview/GLOSSARY.md
+section_id_scheme: docs/00-overview/GLOSSARY.md#architecture-section-ids
+terms:
+- id: VP-TERM-001
+  anchor: protocol
+  title: Protocol
+  stability: stable
+  classification: fundamental
+  normative_status: core
+  depends_on: []
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-1.1
+  referenced_by:
+  - MANIFESTO
+- id: VP-TERM-002
+  anchor: participant
+  title: Participant
+  stability: stable
+  classification: fundamental
+  normative_status: core
+  depends_on:
+  - VP-TERM-001
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-4.10
+  referenced_by:
+  - DATA_MODEL
+  - STATE_MODEL
+- id: VP-TERM-003
+  anchor: role
+  title: Role
+  stability: stable
+  classification: behavioral
+  normative_status: core
+  depends_on:
+  - VP-TERM-002
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-4.11
+  referenced_by:
+  - BEHAVIOR_MODEL
+  - DATA_MODEL
+- id: VP-TERM-004
+  anchor: verifiable-claim
+  title: Verifiable Claim
+  stability: stable
+  classification: fundamental
+  normative_status: core
+  depends_on:
+  - VP-TERM-013
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-4.1
+  referenced_by:
+  - IDENTITY_MODEL
+  - DATA_MODEL
+  - STATE_MODEL
+- id: VP-TERM-005
+  anchor: subject
+  title: Subject
+  stability: stable
+  classification: fundamental
+  normative_status: core
+  depends_on:
+  - VP-TERM-004
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-4.5
+  referenced_by:
+  - IDENTITY_MODEL
+  - DATA_MODEL
+- id: VP-TERM-006
+  anchor: identity
+  title: Identity
+  stability: stable
+  classification: fundamental
+  normative_status: core
+  depends_on:
+  - VP-TERM-004
+  normative_definition:
+    document: IDENTITY_MODEL
+    path: docs/01-architecture/IDENTITY_MODEL.md
+    section_id: IM-2.1
+  referenced_by:
+  - PRINCIPLES
+- id: VP-TERM-007
+  anchor: semantic-identity
+  title: Semantic Identity
+  stability: stable
+  classification: fundamental
+  normative_status: core
+  depends_on:
+  - VP-TERM-006
+  normative_definition:
+    document: IDENTITY_MODEL
+    path: docs/01-architecture/IDENTITY_MODEL.md
+    section_id: IM-2.1
+  referenced_by:
+  - DATA_MODEL
+- id: VP-TERM-008
+  anchor: evidence
+  title: Evidence
+  stability: stable
+  classification: behavioral
+  normative_status: core
+  depends_on:
+  - VP-TERM-004
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-4.7
+  referenced_by:
+  - BEHAVIOR_MODEL
+  - DATA_MODEL
+- id: VP-TERM-009
+  anchor: verification
+  title: Verification
+  stability: stable
+  classification: behavioral
+  normative_status: core
+  depends_on:
+  - VP-TERM-004
+  - VP-TERM-008
+  - VP-TERM-028
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-4.8
+  referenced_by:
+  - BEHAVIOR_MODEL
+  - STATE_MODEL
+- id: VP-TERM-010
+  anchor: verification-record
+  title: Verification Record
+  stability: stable
+  classification: structural
+  normative_status: core
+  depends_on:
+  - VP-TERM-009
+  normative_definition:
+    document: IDENTITY_MODEL
+    path: docs/01-architecture/IDENTITY_MODEL.md
+    section_id: IM-6.1
+  referenced_by:
+  - DATA_MODEL
+  - STATE_MODEL
+- id: VP-TERM-011
+  anchor: verification-outcome
+  title: Verification Outcome
+  stability: stable
+  classification: behavioral
+  normative_status: core
+  depends_on:
+  - VP-TERM-009
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-4.9
+  referenced_by:
+  - DATA_MODEL
+  - BEHAVIOR_MODEL
+- id: VP-TERM-012
+  anchor: knowledge-state
+  title: Knowledge State
+  stability: stable
+  classification: structural
+  normative_status: core
+  depends_on:
+  - VP-TERM-010
+  - VP-TERM-004
+  normative_definition:
+    document: STATE_MODEL
+    path: docs/01-architecture/STATE_MODEL.md
+    section_id: SM-2.1
+  referenced_by: []
+- id: VP-TERM-013
+  anchor: assertion
+  title: Assertion
+  stability: stable
+  classification: behavioral
+  normative_status: core
+  depends_on:
+  - VP-TERM-002
+  - VP-TERM-003
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-4.6
+  referenced_by:
+  - BEHAVIOR_MODEL
+- id: VP-TERM-014
+  anchor: protocol-event
+  title: Protocol Event
+  stability: stable
+  classification: structural
+  normative_status: core
+  depends_on:
+  - VP-TERM-013
+  - VP-TERM-009
+  normative_definition:
+    document: BEHAVIOR_MODEL
+    path: docs/01-architecture/BEHAVIOR_MODEL.md
+    section_id: BM-5.1
+  referenced_by:
+  - DATA_MODEL
+  - STATE_MODEL
+- id: VP-TERM-015
+  anchor: supersession
+  title: Supersession
+  stability: stable
+  classification: behavioral
+  normative_status: core
+  depends_on:
+  - VP-TERM-004
+  normative_definition:
+    document: BEHAVIOR_MODEL
+    path: docs/01-architecture/BEHAVIOR_MODEL.md
+    section_id: BM-3.7
+  referenced_by:
+  - STATE_MODEL
+- id: VP-TERM-016
+  anchor: storage-identifier
+  title: Storage Identifier
+  stability: stable
+  classification: structural
+  normative_status: core
+  depends_on:
+  - VP-TERM-007
+  normative_definition:
+    document: DATA_MODEL
+    path: docs/01-architecture/DATA_MODEL.md
+    section_id: DAT-8.1
+  referenced_by:
+  - DATA_MODEL
+- id: VP-TERM-017
+  anchor: representation
+  title: Representation
+  stability: stable
+  classification: structural
+  normative_status: core
+  depends_on:
+  - VP-TERM-006
+  normative_definition:
+    document: DATA_MODEL
+    path: docs/01-architecture/DATA_MODEL.md
+    section_id: DAT-3.1
+  referenced_by:
+  - PRINCIPLES
+- id: VP-TERM-018
+  anchor: representation-guarantee
+  title: Representation Guarantee
+  stability: stable
+  classification: structural
+  normative_status: core
+  depends_on:
+  - VP-TERM-017
+  normative_definition:
+    document: DATA_MODEL
+    path: docs/01-architecture/DATA_MODEL.md
+    section_id: DAT-9.1
+  referenced_by: []
+- id: VP-TERM-019
+  anchor: protocol-truth
+  title: Protocol Truth
+  stability: stable
+  classification: fundamental
+  normative_status: core
+  depends_on:
+  - VP-TERM-011
+  - VP-TERM-028
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-3.1
+  referenced_by: []
+- id: VP-TERM-020
+  anchor: truth
+  title: Truth
+  stability: stable
+  classification: fundamental
+  normative_status: core
+  depends_on:
+  - VP-TERM-019
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-3.1
+  referenced_by:
+  - PRINCIPLES
+- id: VP-TERM-021
+  anchor: extension
+  title: Extension
+  stability: stable
+  classification: structural
+  normative_status: core
+  depends_on:
+  - VP-TERM-004
+  normative_definition:
+    document: DATA_MODEL
+    path: docs/01-architecture/DATA_MODEL.md
+    section_id: DAT-4.1
+  referenced_by:
+  - DOMAIN_MODEL
+- id: VP-TERM-022
+  anchor: interoperability
+  title: Interoperability
+  stability: stable
+  classification: fundamental
+  normative_status: core
+  depends_on:
+  - VP-TERM-009
+  - VP-TERM-011
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-1.4
+  referenced_by:
+  - VISION
+- id: VP-TERM-023
+  anchor: implementation
+  title: Implementation
+  stability: stable
+  classification: fundamental
+  normative_status: core
+  depends_on:
+  - VP-TERM-001
+  normative_definition:
+    document: VISION
+    path: docs/00-overview/VISION.md
+    section_id: VI-3.1
+  referenced_by:
+  - GOVERNANCE
+  - PRINCIPLES
+- id: VP-TERM-024
+  anchor: conformance
+  title: Conformance
+  stability: stable
+  classification: conformance
+  normative_status: core
+  depends_on:
+  - VP-TERM-022
+  - VP-TERM-028
+  normative_definition:
+    document: CONFORMANCE_MODEL
+    path: docs/03-development/CONFORMANCE_MODEL.md
+    section_id: CM-2.1
+  referenced_by:
+  - DOMAIN_MODEL
+- id: VP-TERM-025
+  anchor: conformance-scenario
+  title: Conformance Scenario
+  stability: experimental
+  classification: conformance
+  normative_status: experimental
+  depends_on:
+  - VP-TERM-024
+  normative_definition:
+    document: CONFORMANCE_MODEL
+    path: docs/03-development/CONFORMANCE_MODEL.md
+    section_id: CM-6.1
+  referenced_by: []
+- id: VP-TERM-026
+  anchor: reference-implementation
+  title: Reference Implementation
+  stability: stable
+  classification: conformance
+  normative_status: core
+  depends_on:
+  - VP-TERM-023
+  normative_definition:
+    document: VISION
+    path: docs/00-overview/VISION.md
+    section_id: VI-3.1
+  referenced_by:
+  - CONTRIBUTING
+  - GOVERNANCE
+- id: VP-TERM-027
+  anchor: reference-interpreter
+  title: Reference Interpreter
+  stability: experimental
+  classification: conformance
+  normative_status: experimental
+  depends_on:
+  - VP-TERM-025
+  - VP-TERM-009
+  normative_definition:
+    document: CONFORMANCE_MODEL
+    path: docs/03-development/CONFORMANCE_MODEL.md
+    section_id: CM-6.1
+  referenced_by:
+  - PRINCIPLES
+  - CONTRIBUTING
+- id: VP-TERM-028
+  anchor: specification-version
+  title: Specification Version
+  stability: stable
+  classification: governance
+  normative_status: core
+  depends_on:
+  - VP-TERM-029
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-4.12
+  referenced_by:
+  - DATA_MODEL
+  - GOVERNANCE
+- id: VP-TERM-029
+  anchor: rfc
+  title: RFC
+  stability: stable
+  classification: governance
+  normative_status: core
+  depends_on: []
+  normative_definition:
+    document: GOVERNANCE
+    path: docs/05-governance/GOVERNANCE.md
+    section_id: GV-5.1
+  referenced_by:
+  - rfcs
+  - PRINCIPLES
+- id: VP-TERM-030
+  anchor: adr
+  title: ADR
+  stability: stable
+  classification: governance
+  normative_status: core
+  depends_on:
+  - VP-TERM-029
+  normative_definition:
+    document: GOVERNANCE
+    path: docs/05-governance/GOVERNANCE.md
+    section_id: GV-4.1
+  referenced_by:
+  - CONTRIBUTING
+- id: VP-TERM-031
+  anchor: architecture
+  title: Architecture
+  stability: stable
+  classification: structural
+  normative_status: core
+  depends_on:
+  - VP-TERM-001
+  normative_definition:
+    document: ARCHITECTURE
+    path: docs/01-architecture/
+    section_id: GV-6.1
+  referenced_by:
+  - GOVERNANCE
+  - PRINCIPLES
+- id: VP-TERM-032
+  anchor: canonical
+  title: Canonical
+  stability: stable
+  classification: governance
+  normative_status: core
+  depends_on: []
+  normative_definition:
+    document: GLOSSARY
+    path: docs/00-overview/GLOSSARY.md
+    section_id: GL-1.1
+  referenced_by:
+  - DATA_MODEL
+- id: VP-TERM-033
+  anchor: normative
+  title: Normative
+  stability: stable
+  classification: governance
+  normative_status: core
+  depends_on:
+  - VP-TERM-029
+  normative_definition:
+    document: GOVERNANCE
+    path: docs/05-governance/GOVERNANCE.md
+    section_id: GV-2.1
+  referenced_by:
+  - rfcs
+- id: VP-TERM-034
+  anchor: informative
+  title: Informative
+  stability: stable
+  classification: governance
+  normative_status: core
+  depends_on:
+  - VP-TERM-033
+  normative_definition:
+    document: GOVERNANCE
+    path: docs/05-governance/GOVERNANCE.md
+    section_id: GV-2.1
+  referenced_by:
+  - ARCHITECTURE
+- id: VP-TERM-035
+  anchor: payment-claim
+  title: Payment Claim
+  stability: stable
+  classification: domain
+  normative_status: domain-specific
+  depends_on:
+  - VP-TERM-004
+  normative_definition:
+    document: DOMAIN_MODEL
+    path: docs/01-architecture/DOMAIN_MODEL.md
+    section_id: DM-4.2
+  referenced_by:
+  - DATA_MODEL
+- id: VP-TERM-036
+  anchor: payroll-claim
+  title: Payroll Claim
+  stability: reserved
+  classification: domain
+  normative_status: experimental
+  depends_on:
+  - VP-TERM-035
+  normative_definition: null
+  referenced_by:
+  - DOMAIN_MODEL
+- id: VP-TERM-037
+  anchor: settlement-claim
+  title: Settlement Claim
+  stability: reserved
+  classification: domain
+  normative_status: experimental
+  depends_on:
+  - VP-TERM-035
+  normative_definition: null
+  referenced_by:
+  - DOMAIN_MODEL
+- id: VP-TERM-038
+  anchor: grant-claim
+  title: Grant Claim
+  stability: reserved
+  classification: domain
+  normative_status: experimental
+  depends_on:
+  - VP-TERM-004
+  normative_definition: null
+  referenced_by:
+  - DOMAIN_MODEL
+- id: VP-TERM-039
+  anchor: credential-claim
+  title: Credential Claim
+  stability: reserved
+  classification: domain
+  normative_status: experimental
+  depends_on:
+  - VP-TERM-004
+  normative_definition: null
+  referenced_by:
+  - DOMAIN_MODEL
+- id: VP-TERM-040
+  anchor: compliance-claim
+  title: Compliance Claim
+  stability: reserved
+  classification: domain
+  normative_status: experimental
+  depends_on:
+  - VP-TERM-004
+  normative_definition: null
+  referenced_by:
+  - DOMAIN_MODEL
