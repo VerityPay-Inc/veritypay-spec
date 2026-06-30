@@ -42,7 +42,7 @@ This folder describes the **rules of change**, not the technical content being c
 | Legal and compliance teams | Review IP and contribution terms |
 | Any community member | Know how to participate responsibly |
 
-Before submitting a protocol change, read this folder and [`../../rfcs/README.md`](../../rfcs/README.md).
+Before submitting a protocol change, read [GOVERNANCE.md](GOVERNANCE.md) and [`../../rfcs/README.md`](../../rfcs/README.md).
 
 ---
 
@@ -50,7 +50,7 @@ Before submitting a protocol change, read this folder and [`../../rfcs/README.md
 
 **In scope**
 
-- Governance overview — goals, scope, and principles of project stewardship
+- [GOVERNANCE.md](GOVERNANCE.md) — decision types, authority model, Architecture Alpha freeze, RFC governance
 - RFC process summary — how proposals move from draft to accepted (details in [`../../rfcs/`](../../rfcs/))
 - Roles and responsibilities — maintainers, editors, working groups, and participants
 - Decision-making model — consensus expectations, escalation, and deadlock handling
@@ -74,6 +74,7 @@ Governance documents may themselves be updated through RFC when process changes 
 
 | Document / area | Relationship |
 |-----------------|--------------|
+| [GOVERNANCE.md](GOVERNANCE.md) | Authoritative governance overview for contributors and funders |
 | [`../../rfcs/README.md`](../../rfcs/README.md) | Operational RFC process and lifecycle |
 | [`../../rfcs/templates/RFC_TEMPLATE.md`](../../rfcs/templates/RFC_TEMPLATE.md) | Required format for protocol change proposals |
 | [`../00-overview/MANIFESTO.md`](../00-overview/MANIFESTO.md) | Mission and public-good philosophy (forthcoming) |
