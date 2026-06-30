@@ -2,6 +2,8 @@
 
 **The canonical specification for the VerityPay protocol and ecosystem.**
 
+**Current status:** see **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** for maturity, milestones, and ecosystem health (updated periodically).
+
 This repository defines *what* VerityPay is and *how* it must behave. It does not contain implementation code. Implementations live in separate repositories and must conform to the specifications accepted here.
 
 ---
@@ -86,6 +88,7 @@ See [`docs/README.md`](docs/README.md) for the full **Documentation Pyramid**.
 
 | Role | Start with |
 |------|------------|
+| **Anyone needing current maturity** | **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** |
 | New to VerityPay | [`docs/README.md`](docs/README.md) then [`docs/00-overview/`](docs/00-overview/) |
 | Designing or reviewing system structure | [`docs/01-architecture/`](docs/01-architecture/) |
 | Understanding user-facing behavior | [`docs/02-product/`](docs/02-product/) |
