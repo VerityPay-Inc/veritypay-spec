@@ -127,17 +127,9 @@ Implementation repositories should link back to the specific RFCs and document v
 
 ## Contributing
 
-All substantive protocol changes flow through the RFC process described in [`rfcs/README.md`](rfcs/README.md) and governed by [`docs/05-governance/`](docs/05-governance/).
+Read **[CONTRIBUTING.md](CONTRIBUTING.md)** — the onboarding handbook for the VerityPay protocol ecosystem: reading order, repository guide, contributor levels, workflow, and pull request requirements.
 
-Before opening a proposal:
-
-- Search existing RFCs and documentation for prior art
-- Read the relevant folder README to place your contribution correctly
-- Use [`rfcs/templates/RFC_TEMPLATE.md`](rfcs/templates/RFC_TEMPLATE.md) for protocol changes
-- Use [`docs/templates/`](docs/templates/) for stable specifications and decision records
-- Prepend [`docs/templates/snippets/SPEC_HEADER.md`](docs/templates/snippets/SPEC_HEADER.md) to every new specification document
-
-Questions, typos, and clarifications to existing accepted text are welcome via issues and pull requests. New protocol behavior requires an RFC.
+Normative protocol changes flow through the RFC process in [`rfcs/README.md`](rfcs/README.md), governed by [`docs/05-governance/`](docs/05-governance/).
 
 ---
 
