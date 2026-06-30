@@ -78,8 +78,8 @@ The four documents below form the **constitutional layer**—the highest level o
 
 | Document | File | Status |
 |----------|------|--------|
-| Manifesto | [`00-overview/MANIFESTO.md`](00-overview/MANIFESTO.md) | Placeholder |
-| Vision | [`00-overview/VISION.md`](00-overview/VISION.md) | Placeholder |
+| Manifesto | [`00-overview/MANIFESTO.md`](00-overview/MANIFESTO.md) | Draft |
+| Vision | [`00-overview/VISION.md`](00-overview/VISION.md) | Draft |
 | Principles | [`00-overview/PRINCIPLES.md`](00-overview/PRINCIPLES.md) | Placeholder |
 | Glossary | [`00-overview/GLOSSARY.md`](00-overview/GLOSSARY.md) | Placeholder |
 

@@ -16,7 +16,7 @@ Manifesto → Vision → Principles → Glossary   ← this folder
 
 | Position | Document | File | Status |
 |----------|----------|------|--------|
-| 1 | Manifesto | [MANIFESTO.md](MANIFESTO.md) | Placeholder |
+| 1 | Manifesto | [MANIFESTO.md](MANIFESTO.md) | Draft |
 | 2 | Vision | [VISION.md](VISION.md) | Draft |
 | 3 | Principles | [PRINCIPLES.md](PRINCIPLES.md) | Placeholder |
 | 4 | Glossary | [GLOSSARY.md](GLOSSARY.md) | Placeholder |
@@ -55,7 +55,7 @@ Read the constitutional documents in order, then proceed to [`../01-architecture
 
 **In scope**
 
-- [MANIFESTO.md](MANIFESTO.md) — mission and public-good philosophy (forthcoming)
+- [MANIFESTO.md](MANIFESTO.md) — mission and public declaration (draft)
 - [VISION.md](VISION.md) — VerityPay's role in creating the world the institution serves (draft)
 - [PRINCIPLES.md](PRINCIPLES.md) — durable values and decision heuristics (forthcoming)
 - [GLOSSARY.md](GLOSSARY.md) — shared terminology (forthcoming)
