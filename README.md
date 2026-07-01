@@ -16,7 +16,7 @@ This repository defines *what* VerityPay is and *how* it must behave. It does no
 
 Verity is versioned as an **engineering platform**, not as isolated repository tags. A **Platform Release** names a compatible set of `veritypay-spec`, `veritypay-tooling`, `veritypay-reference`, and `veritypay-conformance` baselines against a Specification Edition.
 
-See **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** for the official compatibility table, supported RFCs, rules, VP-CS scenarios, and versioning philosophy. Policy is recorded in [ADR-0008 — Platform Release Policy](docs/adrs/0008-platform-release-policy.md).
+See **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** for the official compatibility table, supported RFCs, rules, VP-CS scenarios, and versioning philosophy. See **[RELEASE_NOTES_PLATFORM_1_0.md](RELEASE_NOTES_PLATFORM_1_0.md)** for the first platform release summary. Policy is recorded in [ADR-0008 — Platform Release Policy](docs/adrs/0008-platform-release-policy.md).
 
 ---
 
@@ -74,6 +74,7 @@ veritypay-spec/
 ├── README.md                      ← You are here
 ├── ECOSYSTEM.md                   ← Platform map across sibling repositories
 ├── PLATFORM_RELEASES.md           ← Official platform compatibility index
+├── RELEASE_NOTES_PLATFORM_1_0.md ← Platform 1.0 release summary
 ├── SPECIFICATION_STATUS.md        ← Living maturity dashboard
 ├── docs/                          ← Curated specification corpus
 │   ├── README.md                  ← Documentation pyramid (start here)
@@ -104,7 +105,7 @@ See [`docs/README.md`](docs/README.md) for the full **Documentation Pyramid**.
 | Role | Start with |
 |------|------------|
 | **Anyone mapping the full platform** | **[ECOSYSTEM.md](ECOSYSTEM.md)** |
-| **Anyone pinning compatible repository baselines** | **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** |
+| **Anyone pinning compatible repository baselines** | **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** · **[RELEASE_NOTES_PLATFORM_1_0.md](RELEASE_NOTES_PLATFORM_1_0.md)** |
 | **Anyone needing current maturity** | **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** |
 | New to VerityPay | [`docs/README.md`](docs/README.md) then [`docs/00-overview/`](docs/00-overview/) |
 | Designing or reviewing system structure | [`docs/01-architecture/`](docs/01-architecture/) |
