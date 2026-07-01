@@ -442,7 +442,7 @@ graph TD
 
 | Step | Artifact | Content |
 |------|----------|---------|
-| 1 | **VP-RFC-00XX** (RFC) | Reference interpreter required; conformance scenarios VP-CS-000N apply |
+| 1 | **VP-RFC-NNNN** (RFC) | Reference interpreter required; conformance scenarios VP-CS-000N apply |
 | 2 | **ADR-0001** (ADR) | Reference interpreter implemented in Rust; repository `veritypay-reference`; Cargo workspace layout |
 | 3 | Implementation | Code demonstrates RFC; ADR explains stack choice |
 

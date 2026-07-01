@@ -130,11 +130,11 @@ Authors and maintainers update `implementation_status` in RFC front matter as kn
 | [`../docs/README.md`](../docs/README.md) | Documentation pyramid |
 | [`../docs/05-governance/`](../docs/05-governance/) | Authority for roles, voting, and acceptance criteria |
 | [`../docs/01-architecture/`](../docs/01-architecture/) | Structural context RFCs must align with or update |
-| [`../docs/04-research/`](../04-research/) | Source material that may precede an RFC |
+| [`../docs/04-research/`](../docs/04-research/) | Source material that may precede an RFC |
 | [`../docs/templates/snippets/SPEC_HEADER.md`](../docs/templates/snippets/SPEC_HEADER.md) | Required metadata block for RFC front matter |
 | [`../docs/templates/SPEC_TEMPLATE.md`](../docs/templates/SPEC_TEMPLATE.md) | Format for stable docs an RFC may create or amend |
 | [`../docs/templates/DECISION_RECORD_TEMPLATE.md`](../docs/templates/DECISION_RECORD_TEMPLATE.md) | Optional companion for decisions not fully captured in RFC prose |
-| [`../docs/03-development/`](../03-development/) | Conformance expectations for implementers of accepted RFCs |
+| [`../docs/03-development/`](../docs/03-development/) | Conformance expectations for implementers of accepted RFCs |
 
 ---
 
