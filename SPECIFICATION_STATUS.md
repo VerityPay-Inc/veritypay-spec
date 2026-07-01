@@ -32,7 +32,7 @@ For normative rules, follow accepted RFCs and published Editions. For process, s
 | **Specification phase** | Pre-Genesis · Architecture Alpha complete |
 | **Architecture status** | Architecture Alpha frozen (structural); draft documents informative until Edition |
 | **Governance status** | Canonical process docs; [GOVERNANCE.md](docs/05-governance/GOVERNANCE.md) draft |
-| **Conformance status** | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) draft; VP-CS-0001–0005 defined in prose |
+| **Conformance status** | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) draft; VP-CS-0001–0005 in prose; [`VP-CS-0001` fixture](spec/conformance/scenarios/VP-CS-0001.toml) published (draft) |
 | **Reference interpreter** | Not started (repository not established) |
 | **Independent implementations** | 0 publicly declared conforming implementations |
 | **Latest specification update** | 2026-06-29 |
@@ -52,7 +52,7 @@ Legend: 🟢 Complete · 🟡 In progress · ⚪ Not started · 🔴 Blocked
 | **Architecture** | 🟢 | Five models complete (Architecture Alpha); informative until Genesis |
 | **Governance** | 🟡 | GOVERNANCE, versioning, release process, ADR guide, RFC-0000 in place |
 | **Terminology** | 🟢 | Glossary v0.4.0; [`spec/terminology/registry.yaml`](spec/terminology/registry.yaml) (40 VP-TERM) |
-| **Conformance** | 🟡 | Conformance model draft; scenarios authored; no executable suite yet |
+| **Conformance** | 🟡 | Conformance model draft; **VP-CS-0001** machine-readable fixture published; harness consumes via `veritypay-conformance` |
 | **Reference interpreter** | ⚪ | Planned; follows Genesis Edition and conformance baseline |
 | **SDKs** | ⚪ | Future; after Protocol Version declaration |
 | **Tooling** | 🟡 | Terminology + RFC registries; Edition manifest automation planned |
@@ -138,7 +138,7 @@ Document `status` values reflect front matter at last update. **Draft** means va
 |----------|---------|--------|------------------|----------------|
 | **VP-TERM** | Canonical terminology | Active | [`spec/terminology/registry.yaml`](spec/terminology/registry.yaml) | [GLOSSARY.md](docs/00-overview/GLOSSARY.md) |
 | **VP-RFC** | Accepted RFC index | Active | [`spec/rfcs/registry.yaml`](spec/rfcs/registry.yaml) | [`rfcs/`](rfcs/) |
-| **VP-CS** | Conformance scenarios | Draft in spec | *Future dedicated registry* | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) |
+| **VP-CS** | Conformance scenarios | Draft in spec | [`spec/conformance/scenarios/`](spec/conformance/scenarios/) (fixtures); dedicated registry *future* | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) |
 | **VP-ADR** | Engineering decisions | Planned | *Future* | [ADR_GUIDE.md](docs/05-governance/ADR_GUIDE.md) |
 | **VP-EDITION** | Published Edition manifests | Planned | *Future* | [SPECIFICATION_RELEASE_PROCESS.md](docs/05-governance/SPECIFICATION_RELEASE_PROCESS.md) |
 
@@ -151,7 +151,7 @@ Document `status` values reflect front matter at last update. **Draft** means va
 | **veritypay-spec** | Canonical specification, RFCs, registries | **Active** (this repository) |
 | **veritypay-core** | Reference / core implementation | *Separate repo; existence assumed by docs—not tracked here* |
 | **veritypay-reference** | Reference interpreter | ⚪ Planned |
-| **veritypay-conformance** | Executable VP-CS suite | ⚪ Planned |
+| **veritypay-conformance** | Executable VP-CS suite | 🟡 Active — loads local fixtures; spec fixture path integration pending |
 | **veritypay-sdk-*** | Language SDKs | ⚪ Future |
 | **veritypay-website** | Public specification site | ⚪ Future |
 
@@ -170,7 +170,7 @@ Implementation repositories MUST declare target Edition and Protocol Version whe
 | **RFC process** | 🟢 | VP-RFC-0000 accepted; author guide published |
 | **Genesis Edition** | 🟡 | In preparation; manifest not issued |
 | **Reference interpreter** | ⚪ | Not started |
-| **Conformance suite** | ⚪ | Scenarios defined; runners not shipped |
+| **Conformance suite** | 🟡 | **VP-CS-0001** fixture in spec; full spec-path loading pending in harness |
 | **Developer preview** | ⚪ | Post-Genesis + interpreter |
 | **Protocol 1.0** | ⚪ | Declared at Genesis publication (target) |
 

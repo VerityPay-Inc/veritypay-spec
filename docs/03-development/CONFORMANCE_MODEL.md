@@ -326,6 +326,8 @@ Each scenario defines:
 - Claim content unchanged
 - Implementation A and Implementation B produce **compatible outcomes**
 
+**Machine-readable fixture (executable profile):** [`../../spec/conformance/scenarios/VP-CS-0001.toml`](../../spec/conformance/scenarios/VP-CS-0001.toml) — inputs and expected oracle outcome per [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (draft). The narrative above describes L5 interoperability intent; the fixture defines the minimal Phase III vertical slice.
+
 ---
 
 ### VP-CS-0002 — Supersession preserves history

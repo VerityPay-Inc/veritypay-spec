@@ -265,7 +265,7 @@ Harness verdict vocabulary (`pass` / `fail`) remains distinct from verification 
 
 *Informative — execution order for sibling repositories after acceptance:*
 
-1. **veritypay-spec** — Amend [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) minimally to cross-reference **VP-RFC-0001** field envelopes where appropriate; align [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) **VP-CS-0001** executable profile; add **VP-CS-0001** fixture under the conformance/scenario area of this repository; register **VP-RFC-0001** in [`spec/rfcs/registry.yaml`](../spec/rfcs/registry.yaml); introduce or extend a **VP-RULE** registry when governance approves registry shape.
+1. **veritypay-spec** — Amend [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) minimally to cross-reference **VP-RFC-0001** field envelopes where appropriate; align [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) **VP-CS-0001** executable profile; ~~add **VP-CS-0001** fixture under the conformance/scenario area of this repository~~ **done** — [`spec/conformance/scenarios/VP-CS-0001.toml`](../spec/conformance/scenarios/VP-CS-0001.toml); ~~register **VP-RFC-0001** in [`spec/rfcs/registry.yaml`](../spec/rfcs/registry.yaml)~~ **done** (draft entry); introduce or extend a **VP-RULE** registry when governance approves registry shape.
 2. **veritypay-reference** — Replace temporary ADR-0004 body-equality scaffolding with **VP-RULE-0001**; map outcomes to [ADR-0007](https://github.com/VerityPay-Inc/veritypay-reference/blob/main/docs/adrs/0007-reference-interpreter-public-contract.md) public contract.
 3. **veritypay-tooling** — No validator change required for this RFC beyond existing corpus checks; future VP-RULE registry entries **MAY** be validated when registry exists.
 4. **veritypay-conformance** — Load spec-published **VP-CS-0001** fixture; compare adapter vs oracle under **VP-RULE-0001**.
@@ -403,7 +403,7 @@ Dual support of scaffolding vs normative rule **SHOULD NOT** persist beyond one 
 - [ ] Informative negative examples are included and do not contradict normative rule text
 - [ ] Architecture, terminology, conformance, security, compatibility, and migration sections are complete
 - [ ] Reference scaffolding vs normative rule distinction is explicit
-- [ ] [RFC invariants](../0000-rfc-process.md#11-rfc-invariants) satisfied
+- [ ] [RFC invariants](0000-rfc-process.md#11-rfc-invariants) satisfied
 
 ---
 
