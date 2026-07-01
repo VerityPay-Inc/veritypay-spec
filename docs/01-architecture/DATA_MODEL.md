@@ -31,7 +31,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md)
 
-**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted)
 
 ---
 
@@ -89,7 +89,55 @@ VerityPay specifications progress through maturity **levels**, not merely docume
 | **L3** | Conformance | Testable interoperability requirements | Conformance model, test scenarios |
 | **L4** | Reference | SDKs, examples, reference interpreter | Implementation repositories |
 
-**This document is L2.** It is authoritative for entity shape and guarantees; it does not alone establish wire-format MUST/SHOULD until promoted through RFCs (L3+).
+**This document is L2.** It is authoritative for entity shape and guarantees; executable verification envelopes for the first protocol slice are normatively defined in [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted). Wire-format MUST/SHOULD for broader entities remains in RFCs (L3+).
+
+---
+
+## Verification envelope model (VP-RFC-0001)
+
+[VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) defines the first **executable verification profile**—minimal envelopes and **VP-RULE-0001** that reference and conformance implementations exercise today. This section aligns architecture vocabulary with that RFC and with [`vp-reference-model`](https://github.com/VerityPay-Inc/veritypay-reference) field names. It does **not** replace full **Verifiable Claim** or **Evidence** lifecycle semantics in the canonical entities below.
+
+### Composition
+
+```text
+Claim
+ ├── id (ClaimId)
+ ├── subject
+ ├── assertion → Assertion
+ │                 ├── assertion_type
+ │                 └── body
+ ├── specification_binding (optional in reference model; specification_version in RFC fixtures)
+ └── metadata
+
+Evidence
+ ├── id (EvidenceId)
+ ├── claim_id (ClaimId)
+ ├── content → EvidenceContent
+ │               ├── content_type
+ │               └── body
+ └── metadata
+```
+
+**Claims contain Assertions.** A claim envelope binds identity, subject, and specification context around structured assertion content—it is not itself the assertion.
+
+**Evidence contains EvidenceContent.** An evidence envelope binds identity and claim linkage around evaluable payload—the envelope is not the content body.
+
+**Verification evaluates Assertions using EvidenceContent.** Under **VP-RULE-0001**, the reference interpreter compares `claim.assertion.body` to `evidence.content.body`. Rules operate on assertion and content semantics; envelope identifiers (`ClaimId`, `EvidenceId`) establish linkage and audit context but are not substituted for the compared bodies.
+
+The interpreter evaluates the **assertion**—not the envelope alone. Missing, mismatched, or empty content under the rule's preconditions yields `indeterminate` or `not_satisfied` per [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md); satisfied comparison requires matching bodies when linkage and type preconditions hold.
+
+### Field alignment
+
+| Concept | Architecture role | VP-RFC-0001 / reference model fields |
+|---------|-------------------|--------------------------------------|
+| **Claim** | Assertion envelope | `ClaimId` (`id`), `subject`, nested **Assertion**, optional **Metadata**, specification pin |
+| **Assertion** | Structured claim content under verification | `assertion_type`, `body` |
+| **Evidence** | Linked evidence envelope | `EvidenceId` (`id`), `ClaimId` (`claim_id`), nested **EvidenceContent**, optional **Metadata** |
+| **EvidenceContent** | Verifiable payload consumed by rules | `content_type`, `body` |
+
+RFC fixture field names (`claim_id`, `evidence_id`, `specification_version`) map to the reference model identifiers above when loaded by `veritypay-conformance`.
+
+Full **Verifiable Claim** and **Evidence** entities in this document retain richer lifecycle, attribution, and domain fields. Implementations claiming **VP-RFC-0001** conformance **MUST** satisfy the minimal profile in the RFC; they **MAY** carry additional metadata without altering **VP-RULE-0001** comparison semantics unless a future RFC says otherwise.
 
 ---
 
