@@ -4,9 +4,19 @@
 
 **Platform map:** see **[ECOSYSTEM.md](ECOSYSTEM.md)** for repository roles, reading order, and platform flow across sibling repositories.
 
+**Platform releases:** see **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** for official compatibility across specification and engineering repositories.
+
 **Current status:** see **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** for maturity, milestones, and ecosystem health (updated periodically).
 
 This repository defines *what* VerityPay is and *how* it must behave. It does not contain implementation code. Implementations live in separate repositories and must conform to the specifications accepted here.
+
+---
+
+## Platform Releases
+
+Verity is versioned as an **engineering platform**, not as isolated repository tags. A **Platform Release** names a compatible set of `veritypay-spec`, `veritypay-tooling`, `veritypay-reference`, and `veritypay-conformance` baselines against a Specification Edition.
+
+See **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** for the official compatibility table, supported RFCs, rules, VP-CS scenarios, and versioning philosophy. Policy is recorded in [ADR-0008 — Platform Release Policy](docs/adrs/0008-platform-release-policy.md).
 
 ---
 
@@ -63,6 +73,8 @@ If a behavior is not specified (or not yet accepted), it is **not part of the pr
 veritypay-spec/
 ├── README.md                      ← You are here
 ├── ECOSYSTEM.md                   ← Platform map across sibling repositories
+├── PLATFORM_RELEASES.md           ← Official platform compatibility index
+├── SPECIFICATION_STATUS.md        ← Living maturity dashboard
 ├── docs/                          ← Curated specification corpus
 │   ├── README.md                  ← Documentation pyramid (start here)
 │   ├── 00-overview/               ← Constitutional layer (Manifesto, Vision, Principles, Glossary)
@@ -92,6 +104,7 @@ See [`docs/README.md`](docs/README.md) for the full **Documentation Pyramid**.
 | Role | Start with |
 |------|------------|
 | **Anyone mapping the full platform** | **[ECOSYSTEM.md](ECOSYSTEM.md)** |
+| **Anyone pinning compatible repository baselines** | **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** |
 | **Anyone needing current maturity** | **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** |
 | New to VerityPay | [`docs/README.md`](docs/README.md) then [`docs/00-overview/`](docs/00-overview/) |
 | Designing or reviewing system structure | [`docs/01-architecture/`](docs/01-architecture/) |
