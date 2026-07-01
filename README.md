@@ -2,6 +2,8 @@
 
 **The canonical specification for the VerityPay protocol and ecosystem.**
 
+**Platform map:** see **[ECOSYSTEM.md](ECOSYSTEM.md)** for repository roles, reading order, and platform flow across sibling repositories.
+
 **Current status:** see **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** for maturity, milestones, and ecosystem health (updated periodically).
 
 This repository defines *what* VerityPay is and *how* it must behave. It does not contain implementation code. Implementations live in separate repositories and must conform to the specifications accepted here.
@@ -60,6 +62,7 @@ If a behavior is not specified (or not yet accepted), it is **not part of the pr
 ```
 veritypay-spec/
 ├── README.md                      ← You are here
+├── ECOSYSTEM.md                   ← Platform map across sibling repositories
 ├── docs/                          ← Curated specification corpus
 │   ├── README.md                  ← Documentation pyramid (start here)
 │   ├── 00-overview/               ← Constitutional layer (Manifesto, Vision, Principles, Glossary)
@@ -88,6 +91,7 @@ See [`docs/README.md`](docs/README.md) for the full **Documentation Pyramid**.
 
 | Role | Start with |
 |------|------------|
+| **Anyone mapping the full platform** | **[ECOSYSTEM.md](ECOSYSTEM.md)** |
 | **Anyone needing current maturity** | **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** |
 | New to VerityPay | [`docs/README.md`](docs/README.md) then [`docs/00-overview/`](docs/00-overview/) |
 | Designing or reviewing system structure | [`docs/01-architecture/`](docs/01-architecture/) |
