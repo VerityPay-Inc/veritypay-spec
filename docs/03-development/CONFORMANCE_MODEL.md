@@ -33,7 +33,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [PRINCIPLES.md](../00-overview/PRINCIPLES.md), [GLOSSARY.md](../00-overview/GLOSSARY.md)
 
-**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [`../../rfcs/`](../../rfcs/)
 
 ---
 
@@ -62,6 +62,38 @@ An implementer in Rust, TypeScript, Go, Java, Solidity, Move, or Cairo should as
 **"Am I conforming?"**
 
 This document answers it.
+
+---
+
+## Executable conformance flow
+
+The platform now runs an end-to-end conformance path for the first protocol slice. Scenario **meaning** remains normative in this repository and in accepted RFCs; **expected verification outcomes** come from the **reference interpreter** oracle; **conformance** compares an implementation adapter against that oracle.
+
+```text
+VP-CS scenario (fixture + narrative)
+        ↓
+Reference Interpreter  →  VerificationResult
+        ↓
+Conformance comparison  →  ConformanceResult (pass / fail)
+        ↓
+Implementation adapter  →  ComparableResult
+```
+
+| Stage | Owner | Role |
+|-------|-------|------|
+| **VP-CS** | `veritypay-spec` | Defines scenario inputs, rule under test, and binding; [`VP-CS-0001`](../../spec/conformance/scenarios/VP-CS-0001.toml) is the first executable scenario per [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) |
+| **Reference Interpreter** | `veritypay-reference` | Implements **VP-RULE-0001** and produces a **VerificationResult** (outcome, evaluated claim, specification binding) |
+| **Conformance harness** | `veritypay-conformance` | Loads spec-published fixtures, runs oracle and adapter, compares outcomes |
+
+**Scenario meaning is normative.** The TOML fixture and RFC text define what is under test—not harness code.
+
+**Expected outcomes come from the reference interpreter.** The fixture `expected.outcome` field records the oracle expectation for **VP-CS-0001**; it is a test oracle pin, not a substitute for rule text in [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md).
+
+**Conformance compares implementations against that oracle.** A harness **pass** means the adapter's verification outcome, evaluated claim id, and specification binding match the reference path for the loaded scenario—not that the implementation reimplemented rule logic independently.
+
+**VP-CS-0001** is the first scenario exercised through this flow: minimal claim and evidence envelopes, **VP-RULE-0001**, expected oracle outcome `satisfied` for the normative fixture inputs. The L5 interoperability narrative below describes long-term multi-implementation intent; the executable profile is defined by [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md).
+
+Harness verdict vocabulary (`pass` / `fail` / `skip` / `error`) remains distinct from verification outcomes (`satisfied` / `not_satisfied` / `indeterminate`) defined in this model and in the RFC.
 
 ---
 
@@ -326,7 +358,7 @@ Each scenario defines:
 - Claim content unchanged
 - Implementation A and Implementation B produce **compatible outcomes**
 
-**Machine-readable fixture (executable profile):** [`../../spec/conformance/scenarios/VP-CS-0001.toml`](../../spec/conformance/scenarios/VP-CS-0001.toml) — inputs and expected oracle outcome per [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (draft). The narrative above describes L5 interoperability intent; the fixture defines the minimal Phase III vertical slice.
+**Machine-readable fixture (executable profile):** [`../../spec/conformance/scenarios/VP-CS-0001.toml`](../../spec/conformance/scenarios/VP-CS-0001.toml) — inputs and expected oracle outcome per [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted). The narrative above describes L5 interoperability intent; the fixture defines the minimal executable profile implemented by `veritypay-reference` and `veritypay-conformance`.
 
 ---
 
