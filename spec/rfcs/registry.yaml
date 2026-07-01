@@ -29,7 +29,7 @@ rfcs:
     rfc: 0001
     anchor: minimal-claim-evidence-semantics
     title: Minimal Claim and Evidence Semantics
-    status: draft
+    status: accepted
     type: protocol
     version: 0.1.0
     created: 2026-06-29

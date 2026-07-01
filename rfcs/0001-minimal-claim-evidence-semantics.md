@@ -3,7 +3,7 @@ rfc: 0001
 id: 0001
 concept_id: VP-RFC-0001
 title: Minimal Claim and Evidence Semantics
-status: draft
+status: accepted
 version: 0.1.0
 type: protocol
 category: Protocol
@@ -47,11 +47,11 @@ related_docs:
   - ../docs/03-development/CONFORMANCE_MODEL.md
   - ../ECOSYSTEM.md
 
-implementation_status: not_started
+implementation_status: complete
 last_updated: 2026-06-29
 ---
 
-**Pyramid level:** specification · **Status:** draft · **Version:** 0.1.0 · **Concept ID:** VP-RFC-0001
+**Pyramid level:** specification · **Status:** accepted · **Version:** 0.1.0 · **Concept ID:** VP-RFC-0001
 
 **Constitutional basis:** [MANIFESTO.md](../docs/00-overview/MANIFESTO.md), [VISION.md](../docs/00-overview/VISION.md), [PRINCIPLES.md](../docs/00-overview/PRINCIPLES.md), [GLOSSARY.md](../docs/00-overview/GLOSSARY.md)
 
@@ -67,7 +67,7 @@ This RFC defines the first **real protocol-engineering vertical slice** for Veri
 
 The change is **additive**. It introduces minimal protocol semantics for education, reference evaluation, and conformance—not payment, payroll, blockchain, or legal certification behavior.
 
-Upon acceptance, implementations claiming support for this RFC **MUST** pass **VP-CS-0001** once the scenario fixture is published. The temporary body-equality rule currently implemented in `veritypay-reference` (reference-interpreter scaffolding only) **MUST** be replaced by **VP-RULE-0001**; that scaffolding is **not** normative protocol truth.
+Upon acceptance, implementations claiming support for this RFC **MUST** pass **VP-CS-0001**. The temporary body-equality rule previously implemented in `veritypay-reference` (reference-interpreter scaffolding only) **has been replaced** by **VP-RULE-0001**; that scaffolding is **not** normative protocol truth.
 
 ---
 
@@ -265,12 +265,21 @@ Harness verdict vocabulary (`pass` / `fail`) remains distinct from verification 
 
 *Informative — execution order for sibling repositories after acceptance:*
 
-1. **veritypay-spec** — Amend [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) minimally to cross-reference **VP-RFC-0001** field envelopes where appropriate; align [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) **VP-CS-0001** executable profile; ~~add **VP-CS-0001** fixture under the conformance/scenario area of this repository~~ **done** — [`spec/conformance/scenarios/VP-CS-0001.toml`](../spec/conformance/scenarios/VP-CS-0001.toml); ~~register **VP-RFC-0001** in [`spec/rfcs/registry.yaml`](../spec/rfcs/registry.yaml)~~ **done** (draft entry); introduce or extend a **VP-RULE** registry when governance approves registry shape.
-2. **veritypay-reference** — Replace temporary ADR-0004 body-equality scaffolding with **VP-RULE-0001**; map outcomes to [ADR-0007](https://github.com/VerityPay-Inc/veritypay-reference/blob/main/docs/adrs/0007-reference-interpreter-public-contract.md) public contract.
+1. **veritypay-spec** — Amend [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) minimally to cross-reference **VP-RFC-0001** field envelopes where appropriate; align [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) **VP-CS-0001** executable profile; ~~add **VP-CS-0001** fixture under the conformance/scenario area of this repository~~ **done** — [`spec/conformance/scenarios/VP-CS-0001.toml`](../spec/conformance/scenarios/VP-CS-0001.toml); ~~register **VP-RFC-0001** in [`spec/rfcs/registry.yaml`](../spec/rfcs/registry.yaml)~~ **done**; ~~accept **VP-RFC-0001**~~ **done**; introduce or extend a **VP-RULE** registry when governance approves registry shape.
+2. **veritypay-reference** — ~~Replace temporary ADR-0004 body-equality scaffolding with **VP-RULE-0001**~~ **done**; map outcomes to [ADR-0007](https://github.com/VerityPay-Inc/veritypay-reference/blob/main/docs/adrs/0007-reference-interpreter-public-contract.md) public contract.
 3. **veritypay-tooling** — No validator change required for this RFC beyond existing corpus checks; future VP-RULE registry entries **MAY** be validated when registry exists.
-4. **veritypay-conformance** — Load spec-published **VP-CS-0001** fixture; compare adapter vs oracle under **VP-RULE-0001**.
+4. **veritypay-conformance** — ~~Load spec-published **VP-CS-0001** fixture~~ **done**; compare adapter vs oracle under **VP-RULE-0001**.
 
-No code changes are part of this draft pull request.
+### Implementation status
+
+| Deliverable | Status |
+|-------------|--------|
+| **VP-RULE-0001** normative text | Complete |
+| **VP-CS-0001** fixture ([`spec/conformance/scenarios/VP-CS-0001.toml`](../spec/conformance/scenarios/VP-CS-0001.toml)) | Complete |
+| **Reference implementation** (`veritypay-reference` — **VP-RULE-0001**) | Complete |
+| **Conformance execution** (`veritypay-conformance` — spec-published **VP-CS-0001**) | Complete |
+
+Future protocol expansion (additional rules, VP-CS scenarios, DATA_MODEL lifecycle fields) remains out of scope for this RFC and follows separate RFCs.
 
 ---
 
@@ -347,10 +356,10 @@ No production protocol behavior is broken because executable behavior was explic
 
 ## Migration Strategy
 
-1. Accept **VP-RFC-0001**.
-2. Publish **VP-CS-0001** fixture in `veritypay-spec`.
-3. Update `veritypay-reference` to implement **VP-RULE-0001** (replacing scaffolding rule).
-4. Point `veritypay-conformance` minimal fixture at spec-published **VP-CS-0001**.
+1. ~~Accept **VP-RFC-0001**.~~ **Done.**
+2. ~~Publish **VP-CS-0001** fixture in `veritypay-spec`.~~ **Done.**
+3. ~~Update `veritypay-reference` to implement **VP-RULE-0001** (replacing scaffolding rule).~~ **Done.**
+4. ~~Point `veritypay-conformance` minimal fixture at spec-published **VP-CS-0001**.~~ **Done.**
 5. Mark reference ADR-0004 semantics as **superseded for protocol purposes** by **VP-RULE-0001** (reference repo documentation change; not a spec amendment).
 
 Dual support of scaffolding vs normative rule **SHOULD NOT** persist beyond one release cycle of the reference interpreter after acceptance.
@@ -396,14 +405,14 @@ Dual support of scaffolding vs normative rule **SHOULD NOT** persist beyond one 
 
 ## Acceptance Criteria
 
-- [ ] Proposal defines all required envelope fields in §1–§4 without payment-domain leakage
-- [ ] **VP-RULE-0001** outcome table is complete and deterministic
-- [ ] Only `satisfied`, `not_satisfied`, and `indeterminate` appear as verification outcomes
-- [ ] **VP-CS-0001** inputs and expected outcome are specified
-- [ ] Informative negative examples are included and do not contradict normative rule text
-- [ ] Architecture, terminology, conformance, security, compatibility, and migration sections are complete
-- [ ] Reference scaffolding vs normative rule distinction is explicit
-- [ ] [RFC invariants](0000-rfc-process.md#11-rfc-invariants) satisfied
+- [x] Proposal defines all required envelope fields in §1–§4 without payment-domain leakage
+- [x] **VP-RULE-0001** outcome table is complete and deterministic
+- [x] Only `satisfied`, `not_satisfied`, and `indeterminate` appear as verification outcomes
+- [x] **VP-CS-0001** inputs and expected outcome are specified
+- [x] Informative negative examples are included and do not contradict normative rule text
+- [x] Architecture, terminology, conformance, security, compatibility, and migration sections are complete
+- [x] Reference scaffolding vs normative rule distinction is explicit
+- [x] [RFC invariants](0000-rfc-process.md#11-rfc-invariants) satisfied
 
 ---
 
@@ -428,4 +437,4 @@ Dual support of scaffolding vs normative rule **SHOULD NOT** persist beyond one 
 
 | Version | Date | Summary |
 |---------|------|---------|
-| 0.1.0 | 2026-06-29 | Initial draft — minimal envelopes, VP-RULE-0001, VP-CS-0001 |
+| 0.1.0 | 2026-06-29 | Accepted — minimal envelopes, VP-RULE-0001, VP-CS-0001; reference and conformance paths complete |

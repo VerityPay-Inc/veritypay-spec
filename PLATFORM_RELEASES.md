@@ -65,14 +65,14 @@ veritypay-conformance
 
 | Platform Release | Specification Edition | Supported RFCs | Supported Rules | Supported VP-CS | Tooling | Reference | Conformance | Status |
 |------------------|----------------------|----------------|-----------------|-----------------|---------|-----------|-------------|--------|
-| **Platform 1.0** | Genesis Edition *(in preparation)* | VP-RFC-0000 (accepted); VP-RFC-0001 (draft) | VP-RULE-0001 | VP-CS-0001 | Validation Platform Ready | Reference Interpreter Ready | Conformance Platform Ready | **Current** |
+| **Platform 1.0** | Genesis Edition *(in preparation)* | VP-RFC-0000 (accepted); VP-RFC-0001 (accepted) | VP-RULE-0001 | VP-CS-0001 | Validation Platform Ready | Reference Interpreter Ready | Conformance Platform Ready | **Current** |
 
 ### Platform 1.0 — notes
 
 | Field | Detail |
 |-------|--------|
 | **Specification** | [Genesis Edition](docs/05-governance/SPECIFICATION_VERSIONING.md) — constitutional layer, Architecture Alpha, conformance model, governance canon, and initial RFC set. Edition manifest publication is the specification-side gate for declaring Platform 1.0 final. |
-| **Supported RFCs** | [VP-RFC-0000](rfcs/0000-rfc-process.md) (RFC Process, accepted); [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) (Minimal Claim and Evidence Semantics, draft) |
+| **Supported RFCs** | [VP-RFC-0000](rfcs/0000-rfc-process.md) (RFC Process, accepted); [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) (Minimal Claim and Evidence Semantics, **accepted**) |
 | **Supported Rules** | [VP-RULE-0001](rfcs/0001-minimal-claim-evidence-semantics.md) — Assertion Body Evidence Match |
 | **Supported VP-CS** | [VP-CS-0001](spec/conformance/scenarios/VP-CS-0001.toml) — minimal claim satisfied by matching evidence |
 | **Engineering baselines** | Phase II complete across tooling, reference, and conformance; spec-published VP-CS loading verified |
@@ -122,6 +122,7 @@ Maintainers update this document when a Platform Release is declared or extended
 | Document | Role |
 |----------|------|
 | [ADR-0008 — Platform Release Policy](docs/adrs/0008-platform-release-policy.md) | Governance rules for platform releases |
+| [RELEASE_NOTES_PLATFORM_1_0.md](RELEASE_NOTES_PLATFORM_1_0.md) | Platform 1.0 release summary |
 | [SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md) | Specification and ecosystem maturity dashboard |
 | [ECOSYSTEM.md](ECOSYSTEM.md) | Repository responsibilities and reading order |
 | [SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md) | Edition and Protocol Version semantics |

@@ -32,8 +32,9 @@ For normative rules, follow accepted RFCs and published Editions. For process, s
 | **Specification phase** | Pre-Genesis · Architecture Alpha complete |
 | **Architecture status** | Architecture Alpha frozen (structural); draft documents informative until Edition |
 | **Governance status** | Canonical process docs; [GOVERNANCE.md](docs/05-governance/GOVERNANCE.md) draft |
-| **Conformance status** | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) draft; VP-CS-0001–0005 in prose; [`VP-CS-0001` fixture](spec/conformance/scenarios/VP-CS-0001.toml) published (draft) |
-| **Reference interpreter** | Not started (repository not established) |
+| **Conformance status** | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) draft; **VP-CS-0001** executable via `veritypay-conformance`; [`VP-CS-0001` fixture](spec/conformance/scenarios/VP-CS-0001.toml) published |
+| **Reference interpreter** | **Active** — `veritypay-reference` implements **VP-RULE-0001** ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), accepted) |
+| **Platform release** | **[Platform 1.0](PLATFORM_RELEASES.md)** — ships with accepted **VP-RFC-0001**, **VP-RULE-0001**, executable **VP-CS-0001** |
 | **Independent implementations** | 0 publicly declared conforming implementations |
 | **Latest specification update** | 2026-06-29 |
 | **Next milestone** | Genesis Edition publication candidate |
@@ -52,14 +53,14 @@ Legend: 🟢 Complete · 🟡 In progress · ⚪ Not started · 🔴 Blocked
 | **Architecture** | 🟢 | Five models complete (Architecture Alpha); informative until Genesis |
 | **Governance** | 🟡 | GOVERNANCE, versioning, release process, ADR guide, RFC-0000 in place |
 | **Terminology** | 🟢 | Glossary v0.4.0; [`spec/terminology/registry.yaml`](spec/terminology/registry.yaml) (40 VP-TERM) |
-| **Conformance** | 🟡 | Conformance model draft; **VP-CS-0001** machine-readable fixture published; harness consumes via `veritypay-conformance` |
-| **Reference interpreter** | ⚪ | Planned; follows Genesis Edition and conformance baseline |
+| **Conformance** | 🟡 | Conformance model draft; **VP-CS-0001** executed by `veritypay-conformance` against reference oracle |
+| **Reference interpreter** | 🟢 | `veritypay-reference` implements **VP-RULE-0001** per accepted **VP-RFC-0001** |
 | **SDKs** | ⚪ | Future; after Protocol Version declaration |
 | **Tooling** | 🟡 | Terminology + RFC registries; Edition manifest automation planned |
 | **Independent implementations** | ⚪ | None declared |
 | **Community** | 🟡 | CONTRIBUTING handbook; public review via RFC process |
 | **Documentation** | 🟡 | Pyramid complete; product/research layers scaffolded |
-| **Testing** | ⚪ | Conformance suite repository not established |
+| **Testing** | 🟡 | **VP-CS-0001** end-to-end via `veritypay-conformance`; broader VP-CS catalog in prose |
 
 ---
 
@@ -75,7 +76,7 @@ Legend: 🟢 Complete · 🟡 In progress · ⚪ Not started · 🔴 Blocked
 | **Supported until** | N/A (unpublished) |
 | **Successor** | Edition Two *(future; not scoped)* |
 
-Genesis Edition will bundle the constitutional layer, Architecture Alpha, conformance model, governance canon, **VP-RFC-0000**, and registry snapshots per [SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md).
+Genesis Edition will bundle the constitutional layer, Architecture Alpha, conformance model, governance canon, **VP-RFC-0000**, **VP-RFC-0001**, and registry snapshots per [SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md). **[Platform 1.0](PLATFORM_RELEASES.md)** names the compatible engineering baseline that already executes **VP-RULE-0001** and **VP-CS-0001**.
 
 ---
 
@@ -129,6 +130,7 @@ Document `status` values reflect front matter at last update. **Draft** means va
 | Document | Status | Version | Role | Purpose |
 |----------|--------|---------|------|---------|
 | [VP-RFC-0000](rfcs/0000-rfc-process.md) | **Accepted** | 1.1.0 | Meta-RFC | How protocol changes are proposed and accepted |
+| [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) | **Accepted** | 0.1.0 | Protocol | Minimal claim/evidence envelopes, **VP-RULE-0001**, **VP-CS-0001** |
 
 ---
 
@@ -150,8 +152,8 @@ Document `status` values reflect front matter at last update. **Draft** means va
 |------------|---------|--------|
 | **veritypay-spec** | Canonical specification, RFCs, registries | **Active** (this repository) |
 | **veritypay-core** | Reference / core implementation | *Separate repo; existence assumed by docs—not tracked here* |
-| **veritypay-reference** | Reference interpreter | ⚪ Planned |
-| **veritypay-conformance** | Executable VP-CS suite | 🟡 Active — loads local fixtures; spec fixture path integration pending |
+| **veritypay-reference** | Reference interpreter | 🟢 **Active** — implements **VP-RULE-0001** |
+| **veritypay-conformance** | Executable VP-CS suite | 🟢 **Active** — executes spec-published **VP-CS-0001** |
 | **veritypay-sdk-*** | Language SDKs | ⚪ Future |
 | **veritypay-website** | Public specification site | ⚪ Future |
 
@@ -169,8 +171,8 @@ Implementation repositories MUST declare target Edition and Protocol Version whe
 | **Governance canon** | 🟡 | Process docs canonical; GOVERNANCE draft |
 | **RFC process** | 🟢 | VP-RFC-0000 accepted; author guide published |
 | **Genesis Edition** | 🟡 | In preparation; manifest not issued |
-| **Reference interpreter** | ⚪ | Not started |
-| **Conformance suite** | 🟡 | **VP-CS-0001** fixture in spec; full spec-path loading pending in harness |
+| **Reference interpreter** | 🟢 | **VP-RULE-0001** in `veritypay-reference` |
+| **Conformance suite** | 🟢 | **VP-CS-0001** end-to-end; spec fixture path in harness |
 | **Developer preview** | ⚪ | Post-Genesis + interpreter |
 | **Protocol 1.0** | ⚪ | Declared at Genesis publication (target) |
 
@@ -186,9 +188,10 @@ Capability-based progress—not a calendar roadmap. Check when the capability ex
 - [x] Terminology registry (**VP-TERM**)
 - [x] RFC registry scaffold (**VP-RFC**)
 - [x] Conformance model (draft scenarios VP-CS-0001–0005)
+- [x] **VP-RFC-0001** accepted (minimal claim/evidence semantics)
+- [x] Reference interpreter executes **VP-RULE-0001**
+- [x] Conformance suite runs spec-published **VP-CS-0001**
 - [ ] **Genesis Edition published** (Edition Manifest + Protocol Version)
-- [ ] Reference interpreter (executable semantics)
-- [ ] Conformance suite (automated VP-CS)
 - [ ] Public SDK (at least one language)
 - [ ] Independent implementation #1 (declared conformance)
 - [ ] Independent implementation #2 (declared conformance)
