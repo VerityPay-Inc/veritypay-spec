@@ -101,13 +101,17 @@ Implementation adapter  →  ComparableResult
 
 Future VP-CS scenario fixtures **MAY** declare **multiple Evidence records** for one claim (for example two independently bound envelopes). Scenario loaders **SHOULD** treat evidence list ordering as non-normative once multi-evidence fixture schema is published.
 
-This model does **not** define:
+### Evaluation policy in scenarios (VP-RFC-0004)
 
-- whether all evidence must pass or any evidence suffices
-- how per-evidence rule outcomes aggregate into one verification outcome
-- new verification outcome labels
+[VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) defines **Evaluation Policy** — how per-envelope verification outcomes over an **Evidence Set** combine into one verification outcome.
 
-Evaluation policy for **Evidence Set** remains **implementation-independent** in the reference and conformance path until a future RFC defines normative multi-evidence semantics. **VP-CS-0003** in [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) is a **loading profile** (one claim, two bound evidence envelopes) with **deferred** oracle expectations—not an executable aggregation scenario yet.
+Future VP-CS scenario fixtures **MAY** declare an evaluation policy identifier. The initial normative policy in that RFC is **`ALL_REQUIRED`**: every applicable evidence envelope must be `satisfied` for aggregate `satisfied`; any `not_satisfied` dominates; otherwise any `indeterminate` (with no `not_satisfied`) yields aggregate `indeterminate`; an empty **Evidence Set** yields `indeterminate`.
+
+This model does **not** define future policies beyond **`ALL_REQUIRED`**. Trust, weighting, and authorization remain out of scope.
+
+**VP-CS-0004** in [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) is the executable profile for **`ALL_REQUIRED`** aggregation (fixture deferred). The narrative catalog entry [VP-CS-0004 — Identity immutability](#vp-cs-0004-identity-immutability) below predates the **VP-RFC-0004** executable profile ID; reconcile catalog IDs before publishing a **VP-CS-0004** fixture.
+
+**VP-CS-0003** in [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) remains a **loading profile** until multi-evidence fixtures and policy-aware oracle paths exist.
 
 The narrative catalog entry [VP-CS-0003 — Representation independence](#vp-cs-0003-representation-independence) below predates the **VP-RFC-0003** executable profile ID; reconcile catalog IDs before publishing a **VP-CS-0003** fixture.
 

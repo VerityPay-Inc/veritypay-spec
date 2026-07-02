@@ -106,3 +106,31 @@ rfcs:
     related_conformance:
       - VP-CS-0003
     path: rfcs/0003-multiple-evidence.md
+  - id: VP-RFC-0004
+    rfc: 0004
+    anchor: evidence-evaluation-policies
+    title: Evidence Evaluation Policies
+    status: draft
+    type: protocol
+    version: 0.1.0
+    created: 2026-06-29
+    updated: 2026-06-29
+    depends_on:
+      - VP-RFC-0000
+      - VP-RFC-0001
+      - VP-RFC-0002
+      - VP-RFC-0003
+    supersedes: []
+    superseded_by: null
+    related_terms:
+      - VP-TERM-004
+      - VP-TERM-008
+      - VP-TERM-011
+      - VP-TERM-013
+      - VP-TERM-024
+    related_architecture:
+      - docs/01-architecture/DATA_MODEL.md
+      - docs/03-development/CONFORMANCE_MODEL.md
+    related_conformance:
+      - VP-CS-0004
+    path: rfcs/0004-evidence-evaluation-policies.md

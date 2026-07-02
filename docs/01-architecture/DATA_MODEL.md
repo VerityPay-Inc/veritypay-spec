@@ -31,7 +31,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md)
 
-**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, draft)
+**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, draft), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, draft)
 
 ---
 
@@ -162,9 +162,34 @@ Claim
 | **Ordering** | Evidence ordering **MUST NOT** affect protocol meaning |
 | **Independence** | Each **Evidence** **MUST** be treated as an independent envelope with its own `evidence_id` and **EvidenceContent** |
 | **Binding** | Each **Evidence** binds to the claim independently per [VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md) when binding rules are in scope |
-| **Evaluation** | How an **Evidence Set** maps to a verification outcome is **deferred** — see **VP-RFC-0003** |
+| **Evaluation** | Per-envelope rule outcomes aggregate via an **Evaluation Policy** — see [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) |
 
 Existing single-evidence diagrams and reference model types are unchanged. Multi-evidence support **extends** evaluation inputs without replacing the **Evidence** or **EvidenceContent** envelope definitions.
+
+### Evaluation Policy (VP-RFC-0004)
+
+[VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) defines **Evaluation Policy** — the protocol-defined strategy for deriving one **verification outcome** from an **Evidence Set** and per-envelope rule results.
+
+This subsection describes **protocol composition only**. It does **not** specify reference interpreter implementation.
+
+```text
+Claim
+ └── Evidence Set
+      └── Evaluation Policy
+           └── Verification Result
+                ├── outcome (satisfied | not_satisfied | indeterminate)
+                ├── evaluated claim reference
+                └── specification binding / trace (as applicable)
+```
+
+| Property | Statement |
+|----------|-----------|
+| **Initial policy** | **`ALL_REQUIRED`** — every applicable evidence envelope must be `satisfied` for aggregate `satisfied`; see **VP-RFC-0004** |
+| **Determinism** | Policies **MUST** be deterministic; evidence ordering **MUST NOT** affect the aggregated outcome |
+| **Outcomes** | Aggregated results use existing verification outcome vocabulary only — no new outcome labels |
+| **Scope** | Policies aggregate logical rule outcomes only — no trust, weighting, or signatures |
+
+Single-evidence evaluation **MAY** treat **`ALL_REQUIRED`** as the implicit default when one envelope is present, preserving **VP-CS-0001** semantics.
 
 ---
 
