@@ -55,7 +55,7 @@ rfcs:
     rfc: 0002
     anchor: claim-identity-binding
     title: Claim Identity Binding
-    status: draft
+    status: accepted
     type: protocol
     version: 0.1.0
     created: 2026-06-29

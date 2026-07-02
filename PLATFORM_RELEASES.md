@@ -1,6 +1,6 @@
 ---
 document: Platform Releases
-version: 1.0.0
+version: 1.1.0
 status: canonical
 last_updated: 2026-06-29
 related:
@@ -9,7 +9,7 @@ related:
   - ECOSYSTEM.md
 ---
 
-**Document:** Platform Releases · **Version:** 1.0.0 · **Status:** canonical (living document)
+**Document:** Platform Releases · **Version:** 1.1.0 · **Status:** canonical (living document)
 
 **Last updated:** 2026-06-29 · **Policy:** [ADR-0008 — Platform Release Policy](docs/adrs/0008-platform-release-policy.md)
 
@@ -65,7 +65,20 @@ veritypay-conformance
 
 | Platform Release | Specification Edition | Supported RFCs | Supported Rules | Supported VP-CS | Tooling | Reference | Conformance | Status |
 |------------------|----------------------|----------------|-----------------|-----------------|---------|-----------|-------------|--------|
-| **Platform 1.0** | Genesis Edition *(in preparation)* | VP-RFC-0000 (accepted); VP-RFC-0001 (accepted) | VP-RULE-0001 | VP-CS-0001 | Validation Platform Ready | Reference Interpreter Ready | Conformance Platform Ready | **Current** |
+| **Platform 1.1** | Genesis Edition *(in preparation)* + **VP-RFC-0002** | VP-RFC-0000 (accepted); VP-RFC-0001 (accepted); VP-RFC-0002 (accepted) | VP-RULE-0001; VP-RULE-0002 | VP-CS-0001; VP-CS-0002 | Validation Platform Ready | Reference Interpreter Ready | Conformance Platform Ready | **Current** |
+| **Platform 1.0** | Genesis Edition *(in preparation)* | VP-RFC-0000 (accepted); VP-RFC-0001 (accepted) | VP-RULE-0001 | VP-CS-0001 | Validation Platform Ready | Reference Interpreter Ready | Conformance Platform Ready | Supported |
+
+### Platform 1.1 — notes
+
+| Field | Detail |
+|-------|--------|
+| **Specification** | [Genesis Edition](docs/05-governance/SPECIFICATION_VERSIONING.md) plus accepted [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) (*Claim Identity Binding*). Backward compatible with Platform 1.0 pins. |
+| **Supported RFCs** | [VP-RFC-0000](rfcs/0000-rfc-process.md) (RFC Process, accepted); [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) (Minimal Claim and Evidence Semantics, accepted); [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) (Claim Identity Binding, **accepted**) |
+| **Supported Rules** | [VP-RULE-0001](rfcs/0001-minimal-claim-evidence-semantics.md) — Assertion Body Evidence Match; [VP-RULE-0002](rfcs/0002-claim-identity-binding.md) — Evidence Claim Binding |
+| **Supported VP-CS** | [VP-CS-0001](spec/conformance/scenarios/VP-CS-0001.toml) — minimal claim satisfied by matching evidence; [VP-CS-0002](spec/conformance/scenarios/VP-CS-0002.toml) — evidence with mismatched claim id is indeterminate |
+| **Engineering baselines** | Multi-rule reference `RuleSet`; spec-published **VP-CS-0002** smoke in conformance readiness gate |
+
+Platform 1.1 is a **minor** platform release: additive protocol capability under the Platform 1.x major version. **VP-CS-0001** oracle expectations are unchanged.
 
 ### Platform 1.0 — notes
 
@@ -110,7 +123,7 @@ Future rows (informative placeholders):
 
 | Platform Release | Trigger | Status |
 |------------------|---------|--------|
-| **Platform 1.1** | Additional accepted RFCs, rules, and VP-CS coverage under Genesis Edition | Planned |
+| **Platform 1.1** | Additional accepted RFCs, rules, and VP-CS coverage under Genesis Edition | **Current** |
 | **Platform 2.0** | New published Edition with breaking protocol baseline | Planned |
 
 Maintainers update this document when a Platform Release is declared or extended. [SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md) summarizes living maturity; this document is the **compatibility contract**.
@@ -123,6 +136,7 @@ Maintainers update this document when a Platform Release is declared or extended
 |----------|------|
 | [ADR-0008 — Platform Release Policy](docs/adrs/0008-platform-release-policy.md) | Governance rules for platform releases |
 | [RELEASE_NOTES_PLATFORM_1_0.md](RELEASE_NOTES_PLATFORM_1_0.md) | Platform 1.0 release summary |
+| [RELEASE_NOTES_PLATFORM_1_1.md](RELEASE_NOTES_PLATFORM_1_1.md) | Platform 1.1 release summary |
 | [SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md) | Specification and ecosystem maturity dashboard |
 | [ECOSYSTEM.md](ECOSYSTEM.md) | Repository responsibilities and reading order |
 | [SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md) | Edition and Protocol Version semantics |

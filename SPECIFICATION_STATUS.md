@@ -32,9 +32,9 @@ For normative rules, follow accepted RFCs and published Editions. For process, s
 | **Specification phase** | Pre-Genesis · Architecture Alpha complete |
 | **Architecture status** | Architecture Alpha frozen (structural); draft documents informative until Edition |
 | **Governance status** | Canonical process docs; [GOVERNANCE.md](docs/05-governance/GOVERNANCE.md) draft |
-| **Conformance status** | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) draft; **VP-CS-0001** executable via `veritypay-conformance`; [`VP-CS-0001`](spec/conformance/scenarios/VP-CS-0001.toml) and [`VP-CS-0002`](spec/conformance/scenarios/VP-CS-0002.toml) fixtures published (draft) |
-| **Reference interpreter** | **Active** — `veritypay-reference` implements **VP-RULE-0001** ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), accepted) |
-| **Platform release** | **[Platform 1.0](PLATFORM_RELEASES.md)** — ships with accepted **VP-RFC-0001**, **VP-RULE-0001**, executable **VP-CS-0001** |
+| **Conformance status** | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) draft; **VP-CS-0001** and **VP-CS-0002** executable via `veritypay-conformance`; [`VP-CS-0001`](spec/conformance/scenarios/VP-CS-0001.toml) and [`VP-CS-0002`](spec/conformance/scenarios/VP-CS-0002.toml) fixtures published |
+| **Reference interpreter** | **Active** — `veritypay-reference` implements **VP-RULE-0001** and **VP-RULE-0002** ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), [VP-RFC-0002](rfcs/0002-claim-identity-binding.md), accepted) |
+| **Platform release** | **[Platform 1.1](PLATFORM_RELEASES.md)** — extends Platform 1.0 with accepted **VP-RFC-0002**, **VP-RULE-0002**, executable **VP-CS-0002** |
 | **Independent implementations** | 0 publicly declared conforming implementations |
 | **Latest specification update** | 2026-06-29 |
 | **Next milestone** | Genesis Edition publication candidate |
@@ -53,14 +53,14 @@ Legend: 🟢 Complete · 🟡 In progress · ⚪ Not started · 🔴 Blocked
 | **Architecture** | 🟢 | Five models complete (Architecture Alpha); informative until Genesis |
 | **Governance** | 🟡 | GOVERNANCE, versioning, release process, ADR guide, RFC-0000 in place |
 | **Terminology** | 🟢 | Glossary v0.4.0; [`spec/terminology/registry.yaml`](spec/terminology/registry.yaml) (40 VP-TERM) |
-| **Conformance** | 🟡 | Conformance model draft; **VP-CS-0001** executed by `veritypay-conformance` against reference oracle |
-| **Reference interpreter** | 🟢 | `veritypay-reference` implements **VP-RULE-0001** per accepted **VP-RFC-0001** |
+| **Conformance** | 🟡 | Conformance model draft; **VP-CS-0001** and **VP-CS-0002** executed by `veritypay-conformance` against reference oracle |
+| **Reference interpreter** | 🟢 | `veritypay-reference` implements **VP-RULE-0001** and **VP-RULE-0002** per accepted **VP-RFC-0001** and **VP-RFC-0002** |
 | **SDKs** | ⚪ | Future; after Protocol Version declaration |
 | **Tooling** | 🟡 | Terminology + RFC registries; Edition manifest automation planned |
 | **Independent implementations** | ⚪ | None declared |
 | **Community** | 🟡 | CONTRIBUTING handbook; public review via RFC process |
 | **Documentation** | 🟡 | Pyramid complete; product/research layers scaffolded |
-| **Testing** | 🟡 | **VP-CS-0001** end-to-end via `veritypay-conformance`; broader VP-CS catalog in prose |
+| **Testing** | 🟡 | **VP-CS-0001** and **VP-CS-0002** end-to-end via `veritypay-conformance`; broader VP-CS catalog in prose |
 
 ---
 
@@ -76,7 +76,7 @@ Legend: 🟢 Complete · 🟡 In progress · ⚪ Not started · 🔴 Blocked
 | **Supported until** | N/A (unpublished) |
 | **Successor** | Edition Two *(future; not scoped)* |
 
-Genesis Edition will bundle the constitutional layer, Architecture Alpha, conformance model, governance canon, **VP-RFC-0000**, **VP-RFC-0001**, and registry snapshots per [SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md). **[Platform 1.0](PLATFORM_RELEASES.md)** names the compatible engineering baseline that already executes **VP-RULE-0001** and **VP-CS-0001**.
+Genesis Edition will bundle the constitutional layer, Architecture Alpha, conformance model, governance canon, **VP-RFC-0000**, **VP-RFC-0001**, **VP-RFC-0002**, and registry snapshots per [SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md). **[Platform 1.1](PLATFORM_RELEASES.md)** names the current compatible engineering baseline that executes **VP-RULE-0001**, **VP-RULE-0002**, **VP-CS-0001**, and **VP-CS-0002**.
 
 ---
 
@@ -131,7 +131,7 @@ Document `status` values reflect front matter at last update. **Draft** means va
 |----------|--------|---------|------|---------|
 | [VP-RFC-0000](rfcs/0000-rfc-process.md) | **Accepted** | 1.1.0 | Meta-RFC | How protocol changes are proposed and accepted |
 | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) | **Accepted** | 0.1.0 | Protocol | Minimal claim/evidence envelopes, **VP-RULE-0001**, **VP-CS-0001** |
-| [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) | Draft | 0.1.0 | Protocol | Claim identity binding, **VP-RULE-0002**, **VP-CS-0002** |
+| [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) | **Accepted** | 0.1.0 | Protocol | Claim identity binding, **VP-RULE-0002**, **VP-CS-0002** |
 
 ---
 
@@ -153,8 +153,8 @@ Document `status` values reflect front matter at last update. **Draft** means va
 |------------|---------|--------|
 | **veritypay-spec** | Canonical specification, RFCs, registries | **Active** (this repository) |
 | **veritypay-core** | Reference / core implementation | *Separate repo; existence assumed by docs—not tracked here* |
-| **veritypay-reference** | Reference interpreter | 🟢 **Active** — implements **VP-RULE-0001** |
-| **veritypay-conformance** | Executable VP-CS suite | 🟢 **Active** — executes spec-published **VP-CS-0001** |
+| **veritypay-reference** | Reference interpreter | 🟢 **Active** — implements **VP-RULE-0001**, **VP-RULE-0002** |
+| **veritypay-conformance** | Executable VP-CS suite | 🟢 **Active** — executes spec-published **VP-CS-0001**, **VP-CS-0002** |
 | **veritypay-sdk-*** | Language SDKs | ⚪ Future |
 | **veritypay-website** | Public specification site | ⚪ Future |
 
@@ -172,8 +172,8 @@ Implementation repositories MUST declare target Edition and Protocol Version whe
 | **Governance canon** | 🟡 | Process docs canonical; GOVERNANCE draft |
 | **RFC process** | 🟢 | VP-RFC-0000 accepted; author guide published |
 | **Genesis Edition** | 🟡 | In preparation; manifest not issued |
-| **Reference interpreter** | 🟢 | **VP-RULE-0001** in `veritypay-reference` |
-| **Conformance suite** | 🟢 | **VP-CS-0001** end-to-end; spec fixture path in harness |
+| **Reference interpreter** | 🟢 | **VP-RULE-0001**, **VP-RULE-0002** in `veritypay-reference` |
+| **Conformance suite** | 🟢 | **VP-CS-0001**, **VP-CS-0002** end-to-end; spec fixture path in harness |
 | **Developer preview** | ⚪ | Post-Genesis + interpreter |
 | **Protocol 1.0** | ⚪ | Declared at Genesis publication (target) |
 
@@ -190,8 +190,9 @@ Capability-based progress—not a calendar roadmap. Check when the capability ex
 - [x] RFC registry scaffold (**VP-RFC**)
 - [x] Conformance model (draft scenarios VP-CS-0001–0005)
 - [x] **VP-RFC-0001** accepted (minimal claim/evidence semantics)
-- [x] Reference interpreter executes **VP-RULE-0001**
-- [x] Conformance suite runs spec-published **VP-CS-0001**
+- [x] **VP-RFC-0002** accepted (claim identity binding)
+- [x] Reference interpreter executes **VP-RULE-0001** and **VP-RULE-0002**
+- [x] Conformance suite runs spec-published **VP-CS-0001** and **VP-CS-0002**
 - [ ] **Genesis Edition published** (Edition Manifest + Protocol Version)
 - [ ] Public SDK (at least one language)
 - [ ] Independent implementation #1 (declared conformance)
