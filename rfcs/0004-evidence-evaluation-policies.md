@@ -3,7 +3,7 @@ rfc: 0004
 id: 0004
 concept_id: VP-RFC-0004
 title: Evidence Evaluation Policies
-status: draft
+status: accepted
 version: 0.1.0
 type: protocol
 category: Protocol
@@ -56,7 +56,7 @@ implementation_status: not_started
 last_updated: 2026-06-29
 ---
 
-**Pyramid level:** specification · **Status:** draft · **Version:** 0.1.0 · **Concept ID:** VP-RFC-0004
+**Pyramid level:** specification · **Status:** accepted · **Version:** 0.1.0 · **Concept ID:** VP-RFC-0004
 
 **Constitutional basis:** [MANIFESTO.md](../docs/00-overview/MANIFESTO.md), [VISION.md](../docs/00-overview/VISION.md), [PRINCIPLES.md](../docs/00-overview/PRINCIPLES.md), [GLOSSARY.md](../docs/00-overview/GLOSSARY.md)
 
@@ -72,11 +72,11 @@ This RFC defines **how an Evidence Set produces a verification decision** per [V
 
 It introduces **Evaluation Policy** — the protocol-defined strategy used to derive a single verification outcome from per-envelope rule results over an **Evidence Set**.
 
-This draft defines one normative policy identifier: **`ALL_REQUIRED`**. Future RFCs **MAY** add additional policies.
+This RFC defines one normative policy identifier: **`ALL_REQUIRED`**. Future RFCs **MAY** add additional policies.
 
 The change is **additive**. It does **not** introduce trust, issuer reputation, weighting, confidence scores, signatures, or authorization. It does **not** redefine **Evidence Set** membership — that remains [VP-RFC-0003](0003-multiple-evidence.md). Implementation in reference and conformance repositories is **deferred**.
 
-**VP-RFC-0003** and **VP-RFC-0004** are intended for **joint acceptance** as **Platform 1.2**.
+**VP-RFC-0003** and **VP-RFC-0004** are **accepted** together as **[Platform 1.2](../PLATFORM_RELEASES.md)**.
 
 ---
 
@@ -226,14 +226,14 @@ Additional evaluation policy identifiers **MAY** be defined in future RFCs (for 
 
 ### 7. Compatibility
 
-This RFC is **additive** relative to accepted [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md), [VP-RFC-0002](0002-claim-identity-binding.md), and draft [VP-RFC-0003](0003-multiple-evidence.md).
+This RFC is **additive** relative to accepted [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md), [VP-RFC-0002](0002-claim-identity-binding.md), and accepted [VP-RFC-0003](0003-multiple-evidence.md).
 
 | Artifact | Impact |
 |----------|--------|
 | **VP-CS-0001** | Unchanged when **Evidence Set** has one envelope and policy is **`ALL_REQUIRED`** |
 | **VP-CS-0002** | Unchanged — single envelope binding failure |
 | **VP-RULE-0001** / **VP-RULE-0002** | Unchanged — per-envelope semantics |
-| **Platform 1.1** | Unaffected — **VP-RFC-0003** and **VP-RFC-0004** are planned for joint acceptance as **Platform 1.2** |
+| **Platform 1.1** | Unaffected — **VP-RFC-0004** acceptance is additive; **Platform 1.2** extends capability |
 
 Implementations that do not claim **VP-RFC-0003** and **VP-RFC-0004** **MAY** continue single-evidence evaluation without declaring an **Evaluation Policy**.
 
@@ -243,8 +243,8 @@ Implementations that do not claim **VP-RFC-0003** and **VP-RFC-0004** **MAY** co
 
 | Model | Section ID | Change |
 |-------|------------|--------|
-| [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) | Evaluation Policy | **Extension on acceptance** — aggregation layer between Evidence Set and Verification Result |
-| [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) | Scenario policy metadata | **Clarification on acceptance** — fixtures **MAY** declare `evaluation_policy` |
+| [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) | Evaluation Policy | **Extension** — aggregation layer between Evidence Set and Verification Result |
+| [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) | Scenario policy metadata | **Clarification** — fixtures **MAY** declare `evaluation_policy` |
 | [BEHAVIOR_MODEL.md](../docs/01-architecture/BEHAVIOR_MODEL.md) | — | **None** in this draft |
 | [STATE_MODEL.md](../docs/01-architecture/STATE_MODEL.md) | — | **None** in this draft |
 
@@ -290,8 +290,8 @@ Threat modeling for trust and reputation belongs in future RFCs.
 
 ## Migration Strategy
 
-1. Accept **VP-RFC-0004** together with [VP-RFC-0003](0003-multiple-evidence.md) as **Platform 1.2**.
-2. Align [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) and [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md).
+1. ~~Accept **VP-RFC-0004** together with [VP-RFC-0003](0003-multiple-evidence.md) as **Platform 1.2**.~~ **Done.**
+2. ~~Align [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) and [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md).~~ **Done.**
 3. Extend reference interpreter to aggregate per-envelope outcomes under a declared policy (future engineering work).
 4. Publish **VP-CS-0004** fixture when multi-evidence schema and oracle support exist.
 
@@ -301,7 +301,7 @@ Threat modeling for trust and reputation belongs in future RFCs.
 
 *Informative — deferred:*
 
-1. **veritypay-spec** — Register **VP-RFC-0004**; publish **VP-CS-0004** fixture when schema approved.
+1. **veritypay-spec** — ~~Register **VP-RFC-0004**~~ **done**; publish **VP-CS-0004** fixture when schema approved.
 2. **veritypay-reference** — Apply **`ALL_REQUIRED`** after per-envelope rule evaluation over an Evidence Set.
 3. **veritypay-tooling** — No validator change required beyond existing corpus checks unless fixture schema adds `evaluation_policy`.
 4. **veritypay-conformance** — Scenario metadata for `evaluation_policy`; **VP-CS-0004** when fixture exists.
@@ -310,9 +310,9 @@ Threat modeling for trust and reputation belongs in future RFCs.
 
 | Deliverable | Status |
 |-------------|--------|
-| **Evaluation Policy** / **`ALL_REQUIRED`** normative text | Complete (this draft) |
-| **VP-CS-0004** scenario profile | Complete (this draft) |
-| **VP-CS-0004** fixture | Not started |
+| **Evaluation Policy** / **`ALL_REQUIRED`** normative text | Complete |
+| **VP-CS-0004** scenario profile | Complete |
+| **VP-CS-0004** fixture | Deferred — until reference/conformance multi-evidence support |
 | **Reference implementation** (policy aggregation) | Not started |
 | **Conformance execution** | Not started |
 
@@ -350,14 +350,14 @@ Threat modeling for trust and reputation belongs in future RFCs.
 
 ## Acceptance Criteria
 
-- [ ] **Evaluation Policy** is defined without trust or weighting semantics
-- [ ] **`ALL_REQUIRED`** outcome table is complete and deterministic
-- [ ] Ordering independence and empty-set behavior are specified
-- [ ] Only `satisfied`, `not_satisfied`, and `indeterminate` appear as aggregated outcomes
-- [ ] **VP-CS-0004** profile is specified without requiring fixture publication in this draft
-- [ ] Compatibility with **VP-RFC-0001**, **VP-RFC-0002**, and **VP-RFC-0003** is documented
-- [ ] Architecture, terminology, conformance, security, compatibility, and migration sections are complete
-- [ ] [RFC invariants](0000-rfc-process.md#11-rfc-invariants) satisfied
+- [x] **Evaluation Policy** is defined without trust or weighting semantics
+- [x] **`ALL_REQUIRED`** outcome table is complete and deterministic
+- [x] Ordering independence and empty-set behavior are specified
+- [x] Only `satisfied`, `not_satisfied`, and `indeterminate` appear as aggregated outcomes
+- [x] **VP-CS-0004** profile is specified without requiring fixture publication in this RFC
+- [x] Compatibility with **VP-RFC-0001**, **VP-RFC-0002**, and **VP-RFC-0003** is documented
+- [x] Architecture, terminology, conformance, security, compatibility, and migration sections are complete
+- [x] [RFC invariants](0000-rfc-process.md#11-rfc-invariants) satisfied
 
 ---
 
@@ -366,7 +366,7 @@ Threat modeling for trust and reputation belongs in future RFCs.
 - [VP-RFC-0000](0000-rfc-process.md) — RFC Process
 - [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md) — Minimal Claim and Evidence Semantics (accepted)
 - [VP-RFC-0002](0002-claim-identity-binding.md) — Claim Identity Binding (accepted)
-- [VP-RFC-0003](0003-multiple-evidence.md) — Multiple Evidence (draft)
+- [VP-RFC-0003](0003-multiple-evidence.md) — Multiple Evidence (accepted)
 - [MANIFESTO.md](../docs/00-overview/MANIFESTO.md)
 - [VISION.md](../docs/00-overview/VISION.md)
 - [PRINCIPLES.md](../docs/00-overview/PRINCIPLES.md)
@@ -383,4 +383,4 @@ Threat modeling for trust and reputation belongs in future RFCs.
 
 | Version | Date | Summary |
 |---------|------|---------|
-| 0.1.0 | 2026-06-29 | Initial draft — Evaluation Policy, `ALL_REQUIRED`, VP-CS-0004 profile; companion to VP-RFC-0003; implementation deferred |
+| 0.1.0 | 2026-06-29 | Accepted — Evaluation Policy, `ALL_REQUIRED`, VP-CS-0004 profile; **Platform 1.2** with VP-RFC-0003; fixture and engineering paths deferred |

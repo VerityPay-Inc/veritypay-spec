@@ -1,6 +1,6 @@
 ---
 document: Platform Releases
-version: 1.1.0
+version: 1.2.0
 status: canonical
 last_updated: 2026-06-29
 related:
@@ -9,7 +9,7 @@ related:
   - ECOSYSTEM.md
 ---
 
-**Document:** Platform Releases · **Version:** 1.1.0 · **Status:** canonical (living document)
+**Document:** Platform Releases · **Version:** 1.2.0 · **Status:** canonical (living document)
 
 **Last updated:** 2026-06-29 · **Policy:** [ADR-0008 — Platform Release Policy](docs/adrs/0008-platform-release-policy.md)
 
@@ -65,8 +65,22 @@ veritypay-conformance
 
 | Platform Release | Specification Edition | Supported RFCs | Supported Rules | Supported VP-CS | Tooling | Reference | Conformance | Status |
 |------------------|----------------------|----------------|-----------------|-----------------|---------|-----------|-------------|--------|
-| **Platform 1.1** | Genesis Edition *(in preparation)* + **VP-RFC-0002** | VP-RFC-0000 (accepted); VP-RFC-0001 (accepted); VP-RFC-0002 (accepted) | VP-RULE-0001; VP-RULE-0002 | VP-CS-0001; VP-CS-0002 | Validation Platform Ready | Reference Interpreter Ready | Conformance Platform Ready | **Current** |
+| **Platform 1.2** | Genesis Edition *(in preparation)* + **VP-RFC-0003**, **VP-RFC-0004** | VP-RFC-0000 (accepted); VP-RFC-0001 (accepted); VP-RFC-0002 (accepted); VP-RFC-0003 (accepted); VP-RFC-0004 (accepted) | VP-RULE-0001; VP-RULE-0002 | VP-CS-0001; VP-CS-0002 | Validation Platform Ready | Reference Interpreter Ready | Conformance Platform Ready | **Current** |
+| **Platform 1.1** | Genesis Edition *(in preparation)* + **VP-RFC-0002** | VP-RFC-0000 (accepted); VP-RFC-0001 (accepted); VP-RFC-0002 (accepted) | VP-RULE-0001; VP-RULE-0002 | VP-CS-0001; VP-CS-0002 | Validation Platform Ready | Reference Interpreter Ready | Conformance Platform Ready | Supported |
 | **Platform 1.0** | Genesis Edition *(in preparation)* | VP-RFC-0000 (accepted); VP-RFC-0001 (accepted) | VP-RULE-0001 | VP-CS-0001 | Validation Platform Ready | Reference Interpreter Ready | Conformance Platform Ready | Supported |
+
+### Platform 1.2 — notes
+
+| Field | Detail |
+|-------|--------|
+| **Specification** | [Genesis Edition](docs/05-governance/SPECIFICATION_VERSIONING.md) plus accepted [VP-RFC-0003](rfcs/0003-multiple-evidence.md) (*Multiple Evidence*) and [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) (*Evidence Evaluation Policies*). Backward compatible with Platform 1.1 pins. |
+| **Supported RFCs** | [VP-RFC-0000](rfcs/0000-rfc-process.md) (RFC Process, accepted); [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) (Minimal Claim and Evidence Semantics, accepted); [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) (Claim Identity Binding, accepted); [VP-RFC-0003](rfcs/0003-multiple-evidence.md) (Multiple Evidence, **accepted**); [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) (Evidence Evaluation Policies, **accepted**) |
+| **Supported Rules** | [VP-RULE-0001](rfcs/0001-minimal-claim-evidence-semantics.md) — Assertion Body Evidence Match; [VP-RULE-0002](rfcs/0002-claim-identity-binding.md) — Evidence Claim Binding |
+| **Supported VP-CS** | [VP-CS-0001](spec/conformance/scenarios/VP-CS-0001.toml) — minimal claim satisfied by matching evidence; [VP-CS-0002](spec/conformance/scenarios/VP-CS-0002.toml) — evidence with mismatched claim id is indeterminate |
+| **Deferred VP-CS** | **VP-CS-0003** ([VP-RFC-0003](rfcs/0003-multiple-evidence.md) loading profile) and **VP-CS-0004** ([VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) **`ALL_REQUIRED`** profile) — scenario profiles are accepted; machine-readable fixtures deferred until reference and conformance support multi-evidence evaluation |
+| **Engineering baselines** | Platform 1.1 engineering capabilities unchanged; normative **Evidence Set** and **`ALL_REQUIRED`** **Evaluation Policy** semantics available for downstream implementation |
+
+Platform 1.2 is a **minor** platform release: additive protocol vocabulary and aggregation semantics under the Platform 1.x major version. **VP-CS-0001** and **VP-CS-0002** oracle expectations are unchanged.
 
 ### Platform 1.1 — notes
 
@@ -123,7 +137,7 @@ Future rows (informative placeholders):
 
 | Platform Release | Trigger | Status |
 |------------------|---------|--------|
-| **Platform 1.1** | Additional accepted RFCs, rules, and VP-CS coverage under Genesis Edition | **Current** |
+| **Platform 1.2** | Accepted **VP-RFC-0003** and **VP-RFC-0004** under Genesis Edition | **Current** |
 | **Platform 2.0** | New published Edition with breaking protocol baseline | Planned |
 
 Maintainers update this document when a Platform Release is declared or extended. [SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md) summarizes living maturity; this document is the **compatibility contract**.

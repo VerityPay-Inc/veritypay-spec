@@ -83,7 +83,7 @@ rfcs:
     rfc: 0003
     anchor: multiple-evidence
     title: Multiple Evidence
-    status: draft
+    status: accepted
     type: protocol
     version: 0.1.0
     created: 2026-06-29
@@ -110,7 +110,7 @@ rfcs:
     rfc: 0004
     anchor: evidence-evaluation-policies
     title: Evidence Evaluation Policies
-    status: draft
+    status: accepted
     type: protocol
     version: 0.1.0
     created: 2026-06-29

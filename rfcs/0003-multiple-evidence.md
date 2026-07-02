@@ -3,7 +3,7 @@ rfc: 0003
 id: 0003
 concept_id: VP-RFC-0003
 title: Multiple Evidence
-status: draft
+status: accepted
 version: 0.1.0
 type: protocol
 category: Protocol
@@ -55,11 +55,11 @@ implementation_status: not_started
 last_updated: 2026-06-29
 ---
 
-**Pyramid level:** specification · **Status:** draft · **Version:** 0.1.0 · **Concept ID:** VP-RFC-0003
+**Pyramid level:** specification · **Status:** accepted · **Version:** 0.1.0 · **Concept ID:** VP-RFC-0003
 
 **Constitutional basis:** [MANIFESTO.md](../docs/00-overview/MANIFESTO.md), [VISION.md](../docs/00-overview/VISION.md), [PRINCIPLES.md](../docs/00-overview/PRINCIPLES.md), [GLOSSARY.md](../docs/00-overview/GLOSSARY.md)
 
-**Related documents:** [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md) · [VP-RFC-0002](0002-claim-identity-binding.md) · [VP-RFC-0004](0004-evidence-evaluation-policies.md) *(Evaluation Policy — draft)* · [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) · [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) · [ECOSYSTEM.md](../ECOSYSTEM.md)
+**Related documents:** [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md) · [VP-RFC-0002](0002-claim-identity-binding.md) · [VP-RFC-0004](0004-evidence-evaluation-policies.md) *(Evaluation Policy — accepted)* · [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) · [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) · [ECOSYSTEM.md](../ECOSYSTEM.md)
 
 ---
 
@@ -71,11 +71,11 @@ This RFC extends the minimal verification profile so a **Claim MAY be supported 
 
 It introduces the protocol concept **Evidence Set** — the unordered collection of **Evidence** associated with one claim under evaluation — without defining **Evaluation Policy** or how multiple evidence items combine into a verification outcome.
 
-The change is **additive**. Accepted [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md) and [VP-RFC-0002](0002-claim-identity-binding.md) semantics for single-evidence evaluation remain valid. **Evaluation Policy** semantics are defined exclusively in draft [VP-RFC-0004](0004-evidence-evaluation-policies.md).
+The change is **additive**. Accepted [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md) and [VP-RFC-0002](0002-claim-identity-binding.md) semantics for single-evidence evaluation remain valid. **Evaluation Policy** semantics are defined exclusively in accepted [VP-RFC-0004](0004-evidence-evaluation-policies.md).
 
-This draft defines **VP-CS-0003** as a conformance scenario profile for successful loading of one claim and two correctly bound evidence envelopes. Verification outcome semantics for **VP-CS-0003** are **out of scope** for this RFC — see [VP-RFC-0004](0004-evidence-evaluation-policies.md).
+This RFC defines **VP-CS-0003** as a conformance scenario profile for successful loading of one claim and two correctly bound evidence envelopes. Verification outcome semantics for **VP-CS-0003** are **out of scope** for this RFC — see [VP-RFC-0004](0004-evidence-evaluation-policies.md).
 
-**VP-RFC-0003** and **VP-RFC-0004** are intended for **joint acceptance** as **Platform 1.2**.
+**VP-RFC-0003** and **VP-RFC-0004** are **accepted** together as **[Platform 1.2](../PLATFORM_RELEASES.md)**.
 
 ---
 
@@ -220,7 +220,7 @@ This RFC is **additive** relative to accepted [VP-RFC-0001](0001-minimal-claim-e
 | **VP-CS-0002** | Unchanged — single evidence envelope |
 | **VP-RULE-0001** | Unchanged — applies per evidence envelope when invoked |
 | **VP-RULE-0002** | Unchanged — applies per evidence envelope when invoked |
-| **Platform 1.1** | Unaffected — **VP-RFC-0003** and **VP-RFC-0004** are planned for joint acceptance as **Platform 1.2** |
+| **Platform 1.1** | Unaffected — **VP-RFC-0003** acceptance is additive; **Platform 1.2** extends capability |
 
 Single-evidence implementations **MAY** continue to operate without claiming **VP-RFC-0003** support.
 
@@ -230,8 +230,8 @@ Single-evidence implementations **MAY** continue to operate without claiming **V
 
 | Model | Section ID | Change |
 |-------|------------|--------|
-| [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) | Verification envelope model; Evidence Set | **Extension on acceptance** — unordered multi-evidence concept |
-| [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) | Multi-evidence fixtures | **Clarification on acceptance** — scenarios **MAY** declare multiple evidence records |
+| [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) | Verification envelope model; Evidence Set | **Extension** — unordered multi-evidence concept |
+| [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) | Multi-evidence fixtures | **Clarification** — scenarios **MAY** declare multiple evidence records |
 | [BEHAVIOR_MODEL.md](../docs/01-architecture/BEHAVIOR_MODEL.md) | — | **None** in this draft |
 | [STATE_MODEL.md](../docs/01-architecture/STATE_MODEL.md) | — | **None** in this draft |
 
@@ -255,7 +255,7 @@ A dedicated **VP-TERM** registry entry **MAY** follow in a terminology amendment
 |----------|-----------------|
 | **VP-CS-0003** | **Defined loading profile** — one claim, two bound evidence envelopes; verification outcome deferred |
 
-**Harness behavior (draft):** Conformance loaders **SHOULD** accept scenario formats that declare multiple evidence records once fixture schema is published. Harnesses **MUST NOT** infer aggregated verification outcomes for multi-evidence scenarios from this RFC alone — see [VP-RFC-0004](0004-evidence-evaluation-policies.md).
+**Harness behavior:** Conformance loaders **SHOULD** accept scenario formats that declare multiple evidence records once fixture schema is published. Harnesses **MUST NOT** infer aggregated verification outcomes for multi-evidence scenarios from this RFC alone — see [VP-RFC-0004](0004-evidence-evaluation-policies.md).
 
 Claiming **VP-RFC-0003** **SHOULD** imply **VP-RFC-0001** and **VP-RFC-0002** support but does **not** supersede their conformance requirements. Claiming **VP-RFC-0003** alone does **not** imply **Evaluation Policy** support — see [VP-RFC-0004](0004-evidence-evaluation-policies.md).
 
@@ -281,8 +281,8 @@ Multi-evidence **Evaluation Policy** and threat modeling belong in [VP-RFC-0004]
 
 ## Migration Strategy
 
-1. Accept **VP-RFC-0003** together with [VP-RFC-0004](0004-evidence-evaluation-policies.md) as **Platform 1.2**.
-2. Align [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) and [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) executable profiles.
+1. ~~Accept **VP-RFC-0003** together with [VP-RFC-0004](0004-evidence-evaluation-policies.md) as **Platform 1.2**.~~ **Done.**
+2. ~~Align [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) and [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) executable profiles.~~ **Done.**
 3. Extend reference interpreter evaluation context to carry an **Evidence Set** (future engineering work).
 4. Publish **VP-CS-0003** fixture; publish **VP-CS-0004** fixture when multi-evidence schema and policy-aware oracle paths exist per **VP-RFC-0004**.
 
@@ -292,23 +292,23 @@ Multi-evidence **Evaluation Policy** and threat modeling belong in [VP-RFC-0004]
 
 *Informative — execution order for sibling repositories after acceptance:*
 
-1. **veritypay-spec** — Register **VP-RFC-0003** in [`spec/rfcs/registry.yaml`](../spec/rfcs/registry.yaml); publish **VP-CS-0003** fixture when schema is approved; reconcile narrative vs executable **VP-CS-0003** catalog IDs if needed.
+1. **veritypay-spec** — ~~Register **VP-RFC-0003** in [`spec/rfcs/registry.yaml`](../spec/rfcs/registry.yaml)~~ **done**; publish **VP-CS-0003** fixture when schema is approved; reconcile narrative vs executable **VP-CS-0003** catalog IDs if needed.
 2. **veritypay-reference** — Extend evaluation context to accept multiple evidence envelopes; apply **Evaluation Policy** per [VP-RFC-0004](0004-evidence-evaluation-policies.md) when implemented.
 3. **veritypay-tooling** — No validator change required beyond existing corpus checks unless fixture schema extensions require it.
 4. **veritypay-conformance** — Extend scenario loader for multiple evidence records; **VP-CS-0003** smoke when fixture and oracle policy exist.
 
-No code changes are part of this draft RFC.
+No code changes are required for RFC acceptance. Reference and conformance implementation remain deferred.
 
 ### Implementation status
 
 | Deliverable | Status |
 |-------------|--------|
-| **Evidence Set** normative definition | Complete (this draft) |
-| **VP-CS-0003** scenario profile (loading intent) | Complete (this draft) |
-| **VP-CS-0003** fixture | Not started |
+| **Evidence Set** normative definition | Complete |
+| **VP-CS-0003** scenario profile (loading intent) | Complete |
+| **VP-CS-0003** fixture | Deferred — until reference/conformance multi-evidence support |
 | **Reference implementation** (multi-evidence context) | Not started |
 | **Conformance execution** (multi-evidence loading) | Not started |
-| **Multi-evidence evaluation policy** ([VP-RFC-0004](0004-evidence-evaluation-policies.md)) | Draft — normative text in sibling RFC |
+| **Multi-evidence evaluation policy** ([VP-RFC-0004](0004-evidence-evaluation-policies.md)) | Accepted — normative text in sibling RFC |
 
 ---
 
@@ -348,14 +348,14 @@ No code changes are part of this draft RFC.
 
 ## Acceptance Criteria
 
-- [ ] Proposal defines **Evidence Set** without payment-domain leakage
-- [ ] Multiple evidence association is specified without aggregation semantics
-- [ ] Normative ordering and independence statements are complete
-- [ ] Evaluation semantics are **not** defined in this RFC (exclusive to [VP-RFC-0004](0004-evidence-evaluation-policies.md))
-- [ ] **VP-CS-0003** loading profile is specified without normative verification outcome
-- [ ] Compatibility with **VP-RFC-0001** and **VP-RFC-0002** is documented
-- [ ] Architecture, terminology, conformance, security, compatibility, and migration sections are complete
-- [ ] [RFC invariants](0000-rfc-process.md#11-rfc-invariants) satisfied
+- [x] Proposal defines **Evidence Set** without payment-domain leakage
+- [x] Multiple evidence association is specified without aggregation semantics
+- [x] Normative ordering and independence statements are complete
+- [x] Evaluation semantics are **not** defined in this RFC (exclusive to [VP-RFC-0004](0004-evidence-evaluation-policies.md))
+- [x] **VP-CS-0003** loading profile is specified without normative verification outcome
+- [x] Compatibility with **VP-RFC-0001** and **VP-RFC-0002** is documented
+- [x] Architecture, terminology, conformance, security, compatibility, and migration sections are complete
+- [x] [RFC invariants](0000-rfc-process.md#11-rfc-invariants) satisfied
 
 ---
 
@@ -364,7 +364,7 @@ No code changes are part of this draft RFC.
 - [VP-RFC-0000](0000-rfc-process.md) — RFC Process
 - [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md) — Minimal Claim and Evidence Semantics (accepted)
 - [VP-RFC-0002](0002-claim-identity-binding.md) — Claim Identity Binding (accepted)
-- [VP-RFC-0004](0004-evidence-evaluation-policies.md) — Evidence Evaluation Policies (draft; **Evaluation Policy** companion)
+- [VP-RFC-0004](0004-evidence-evaluation-policies.md) — Evidence Evaluation Policies (accepted; **Evaluation Policy** companion)
 - [MANIFESTO.md](../docs/00-overview/MANIFESTO.md)
 - [VISION.md](../docs/00-overview/VISION.md)
 - [PRINCIPLES.md](../docs/00-overview/PRINCIPLES.md)
@@ -381,4 +381,4 @@ No code changes are part of this draft RFC.
 
 | Version | Date | Summary |
 |---------|------|---------|
-| 0.1.0 | 2026-06-29 | Initial draft — Evidence Set, multiple evidence association, VP-CS-0003 loading profile; Evaluation Policy deferred to VP-RFC-0004 |
+| 0.1.0 | 2026-06-29 | Accepted — Evidence Set, multiple evidence association, VP-CS-0003 loading profile; **Platform 1.2** with VP-RFC-0004; fixture and engineering paths deferred |

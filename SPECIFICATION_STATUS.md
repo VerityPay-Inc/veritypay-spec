@@ -34,7 +34,7 @@ For normative rules, follow accepted RFCs and published Editions. For process, s
 | **Governance status** | Canonical process docs; [GOVERNANCE.md](docs/05-governance/GOVERNANCE.md) draft |
 | **Conformance status** | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) draft; **VP-CS-0001** and **VP-CS-0002** executable via `veritypay-conformance`; [`VP-CS-0001`](spec/conformance/scenarios/VP-CS-0001.toml) and [`VP-CS-0002`](spec/conformance/scenarios/VP-CS-0002.toml) fixtures published |
 | **Reference interpreter** | **Active** — `veritypay-reference` implements **VP-RULE-0001** and **VP-RULE-0002** ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), [VP-RFC-0002](rfcs/0002-claim-identity-binding.md), accepted) |
-| **Platform release** | **[Platform 1.1](PLATFORM_RELEASES.md)** — extends Platform 1.0 with accepted **VP-RFC-0002**, **VP-RULE-0002**, executable **VP-CS-0002** |
+| **Platform release** | **[Platform 1.2](PLATFORM_RELEASES.md)** — extends Platform 1.1 with accepted **VP-RFC-0003**, **VP-RFC-0004**; **VP-CS-0003** and **VP-CS-0004** fixtures deferred |
 | **Independent implementations** | 0 publicly declared conforming implementations |
 | **Latest specification update** | 2026-06-29 |
 | **Next milestone** | Genesis Edition publication candidate |
@@ -76,7 +76,7 @@ Legend: 🟢 Complete · 🟡 In progress · ⚪ Not started · 🔴 Blocked
 | **Supported until** | N/A (unpublished) |
 | **Successor** | Edition Two *(future; not scoped)* |
 
-Genesis Edition will bundle the constitutional layer, Architecture Alpha, conformance model, governance canon, **VP-RFC-0000**, **VP-RFC-0001**, **VP-RFC-0002**, and registry snapshots per [SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md). **[Platform 1.1](PLATFORM_RELEASES.md)** names the current compatible engineering baseline that executes **VP-RULE-0001**, **VP-RULE-0002**, **VP-CS-0001**, and **VP-CS-0002**.
+Genesis Edition will bundle the constitutional layer, Architecture Alpha, conformance model, governance canon, **VP-RFC-0000** through **VP-RFC-0004**, and registry snapshots per [SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md). **[Platform 1.2](PLATFORM_RELEASES.md)** names the current compatible engineering baseline that executes **VP-RULE-0001**, **VP-RULE-0002**, **VP-CS-0001**, and **VP-CS-0002**, with normative **Evidence Set** and **Evaluation Policy** semantics from accepted **VP-RFC-0003** and **VP-RFC-0004**.
 
 ---
 
@@ -132,8 +132,8 @@ Document `status` values reflect front matter at last update. **Draft** means va
 | [VP-RFC-0000](rfcs/0000-rfc-process.md) | **Accepted** | 1.1.0 | Meta-RFC | How protocol changes are proposed and accepted |
 | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) | **Accepted** | 0.1.0 | Protocol | Minimal claim/evidence envelopes, **VP-RULE-0001**, **VP-CS-0001** |
 | [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) | **Accepted** | 0.1.0 | Protocol | Claim identity binding, **VP-RULE-0002**, **VP-CS-0002** |
-| [VP-RFC-0003](rfcs/0003-multiple-evidence.md) | Draft | 0.1.0 | Protocol | Multiple evidence, **Evidence Set**, **VP-CS-0003** (loading profile) |
-| [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) | Draft | 0.1.0 | Protocol | **Evaluation Policy**, **`ALL_REQUIRED`**, **VP-CS-0004** (profile) |
+| [VP-RFC-0003](rfcs/0003-multiple-evidence.md) | **Accepted** | 0.1.0 | Protocol | **Evidence Set**, multiple evidence per claim, **VP-CS-0003** (loading profile) |
+| [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) | **Accepted** | 0.1.0 | Protocol | **Evaluation Policy**, **`ALL_REQUIRED`**, **VP-CS-0004** (profile) |
 
 ---
 
@@ -145,10 +145,10 @@ Protocol RFCs that define executable verification inputs and rules. Status refle
 |-----|--------|------------|
 | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) | **Accepted** | Minimal claim/evidence envelopes, **VP-RULE-0001**, **VP-CS-0001** |
 | [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) | **Accepted** | Evidence claim binding, **VP-RULE-0002**, **VP-CS-0002** |
-| [VP-RFC-0003](rfcs/0003-multiple-evidence.md) | **Draft** | **Evidence Set** — multiple evidence per claim; **VP-CS-0003** loading profile |
-| [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) | **Draft** | **Evaluation Policy** — **`ALL_REQUIRED`**; **VP-CS-0004** profile |
+| [VP-RFC-0003](rfcs/0003-multiple-evidence.md) | **Accepted** | **Evidence Set** — multiple evidence per claim; **VP-CS-0003** loading profile |
+| [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) | **Accepted** | **Evaluation Policy** — **`ALL_REQUIRED`**; **VP-CS-0004** profile |
 
-Platform release remains **[Platform 1.1](PLATFORM_RELEASES.md)**. **VP-RFC-0003** and **VP-RFC-0004** are drafted for **joint acceptance** as **Platform 1.2** (not yet declared).
+Platform release is **[Platform 1.2](PLATFORM_RELEASES.md)**. Executable **VP-CS-0003** and **VP-CS-0004** fixtures remain deferred until reference and conformance support multi-evidence evaluation.
 
 ---
 
@@ -208,6 +208,8 @@ Capability-based progress—not a calendar roadmap. Check when the capability ex
 - [x] Conformance model (draft scenarios VP-CS-0001–0005)
 - [x] **VP-RFC-0001** accepted (minimal claim/evidence semantics)
 - [x] **VP-RFC-0002** accepted (claim identity binding)
+- [x] **VP-RFC-0003** accepted (multiple evidence, **Evidence Set**)
+- [x] **VP-RFC-0004** accepted (**Evaluation Policy**, **`ALL_REQUIRED`**)
 - [x] Reference interpreter executes **VP-RULE-0001** and **VP-RULE-0002**
 - [x] Conformance suite runs spec-published **VP-CS-0001** and **VP-CS-0002**
 - [ ] **Genesis Edition published** (Edition Manifest + Protocol Version)
