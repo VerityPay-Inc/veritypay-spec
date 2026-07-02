@@ -31,7 +31,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md)
 
-**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted)
+**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, draft)
 
 ---
 
@@ -138,6 +138,33 @@ The interpreter evaluates the **assertion**—not the envelope alone. Missing, m
 RFC fixture field names (`claim_id`, `evidence_id`, `specification_version`) map to the reference model identifiers above when loaded by `veritypay-conformance`.
 
 Full **Verifiable Claim** and **Evidence** entities in this document retain richer lifecycle, attribution, and domain fields. Implementations claiming **VP-RFC-0001** conformance **MUST** satisfy the minimal profile in the RFC; they **MAY** carry additional metadata without altering **VP-RULE-0001** comparison semantics unless a future RFC says otherwise.
+
+### Evidence Set (VP-RFC-0003)
+
+[VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (draft) introduces **Evidence Set** — the **unordered** collection of **Evidence** associated with one **Claim** during evaluation. A claim **MAY** reference zero or more evidence envelopes; each envelope retains the shape defined above and in **VP-RFC-0001**.
+
+This subsection describes **protocol composition only**. It does **not** define how multiple evidence items combine into a verification outcome.
+
+```text
+Claim
+ └── Assertion
+      └── (evaluated using)
+           Evidence Set
+            ├── Evidence
+            │    └── EvidenceContent
+            ├── Evidence
+            │    └── EvidenceContent
+            └── …
+```
+
+| Property | Statement |
+|----------|-----------|
+| **Ordering** | Evidence ordering **MUST NOT** affect protocol meaning |
+| **Independence** | Each **Evidence** **MUST** be treated as an independent envelope with its own `evidence_id` and **EvidenceContent** |
+| **Binding** | Each **Evidence** binds to the claim independently per [VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md) when binding rules are in scope |
+| **Evaluation** | How an **Evidence Set** maps to a verification outcome is **deferred** — see **VP-RFC-0003** |
+
+Existing single-evidence diagrams and reference model types are unchanged. Multi-evidence support **extends** evaluation inputs without replacing the **Evidence** or **EvidenceContent** envelope definitions.
 
 ---
 

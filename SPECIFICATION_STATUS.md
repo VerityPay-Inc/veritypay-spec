@@ -132,6 +132,21 @@ Document `status` values reflect front matter at last update. **Draft** means va
 | [VP-RFC-0000](rfcs/0000-rfc-process.md) | **Accepted** | 1.1.0 | Meta-RFC | How protocol changes are proposed and accepted |
 | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) | **Accepted** | 0.1.0 | Protocol | Minimal claim/evidence envelopes, **VP-RULE-0001**, **VP-CS-0001** |
 | [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) | **Accepted** | 0.1.0 | Protocol | Claim identity binding, **VP-RULE-0002**, **VP-CS-0002** |
+| [VP-RFC-0003](rfcs/0003-multiple-evidence.md) | Draft | 0.1.0 | Protocol | Multiple evidence, **Evidence Set**, **VP-CS-0003** (loading profile) |
+
+---
+
+## Protocol core
+
+Protocol RFCs that define executable verification inputs and rules. Status reflects this repository only—not downstream implementation claims.
+
+| RFC | Status | Capability |
+|-----|--------|------------|
+| [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) | **Accepted** | Minimal claim/evidence envelopes, **VP-RULE-0001**, **VP-CS-0001** |
+| [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) | **Accepted** | Evidence claim binding, **VP-RULE-0002**, **VP-CS-0002** |
+| [VP-RFC-0003](rfcs/0003-multiple-evidence.md) | **Draft** | **Evidence Set**, multiple evidence per claim; evaluation policy deferred |
+
+Platform release remains **[Platform 1.1](PLATFORM_RELEASES.md)** until **VP-RFC-0003** is accepted and engineering baselines opt in.
 
 ---
 

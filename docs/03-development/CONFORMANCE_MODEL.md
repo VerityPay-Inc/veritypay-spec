@@ -81,7 +81,7 @@ Implementation adapter  →  ComparableResult
 
 | Stage | Owner | Role |
 |-------|-------|------|
-| **VP-CS** | `veritypay-spec` | Defines scenario inputs, rule under test, and binding; [`VP-CS-0001`](../../spec/conformance/scenarios/VP-CS-0001.toml) per [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted); [`VP-CS-0002`](../../spec/conformance/scenarios/VP-CS-0002.toml) per [VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md) (draft) |
+| **VP-CS** | `veritypay-spec` | Defines scenario inputs, rule under test, and binding; [`VP-CS-0001`](../../spec/conformance/scenarios/VP-CS-0001.toml) per [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted); [`VP-CS-0002`](../../spec/conformance/scenarios/VP-CS-0002.toml) per [VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md) (accepted) |
 | **Reference Interpreter** | `veritypay-reference` | Implements **VP-RULE-0001** and produces a **VerificationResult** (outcome, evaluated claim, specification binding) |
 | **Conformance harness** | `veritypay-conformance` | Loads spec-published fixtures, runs oracle and adapter, compares outcomes |
 
@@ -93,7 +93,23 @@ Implementation adapter  →  ComparableResult
 
 **VP-CS-0001** is the first scenario exercised through this flow: minimal claim and evidence envelopes, **VP-RULE-0001**, expected oracle outcome `satisfied` for the normative fixture inputs. The L5 interoperability narrative below describes long-term multi-implementation intent; the executable profile is defined by [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md).
 
-**VP-CS-0002** (draft) exercises **VP-RULE-0002** (*Evidence Claim Binding*): evidence whose `claim_id` does not match the claim under evaluation yields oracle outcome `indeterminate` even when content bodies match. Machine-readable fixture: [`../../spec/conformance/scenarios/VP-CS-0002.toml`](../../spec/conformance/scenarios/VP-CS-0002.toml) per [VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md). The supersession narrative under [VP-CS-0002 — Supersession preserves history](#vp-cs-0002-supersession-preserves-history) below remains a separate long-term catalog entry pending ID reconciliation.
+**VP-CS-0002** exercises **VP-RULE-0002** (*Evidence Claim Binding*): evidence whose `claim_id` does not match the claim under evaluation yields oracle outcome `indeterminate` even when content bodies match. Machine-readable fixture: [`../../spec/conformance/scenarios/VP-CS-0002.toml`](../../spec/conformance/scenarios/VP-CS-0002.toml) per [VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md). The supersession narrative under [VP-CS-0002 — Supersession preserves history](#vp-cs-0002-supersession-preserves-history) below remains a separate long-term catalog entry pending ID reconciliation.
+
+### Multiple evidence in scenarios (VP-RFC-0003)
+
+[VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (draft) introduces **Evidence Set** — an **unordered** collection of **Evidence** envelopes associated with one **Claim** during evaluation.
+
+Future VP-CS scenario fixtures **MAY** declare **multiple Evidence records** for one claim (for example two independently bound envelopes). Scenario loaders **SHOULD** treat evidence list ordering as non-normative once multi-evidence fixture schema is published.
+
+This model does **not** define:
+
+- whether all evidence must pass or any evidence suffices
+- how per-evidence rule outcomes aggregate into one verification outcome
+- new verification outcome labels
+
+Evaluation policy for **Evidence Set** remains **implementation-independent** in the reference and conformance path until a future RFC defines normative multi-evidence semantics. **VP-CS-0003** in [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) is a **loading profile** (one claim, two bound evidence envelopes) with **deferred** oracle expectations—not an executable aggregation scenario yet.
+
+The narrative catalog entry [VP-CS-0003 — Representation independence](#vp-cs-0003-representation-independence) below predates the **VP-RFC-0003** executable profile ID; reconcile catalog IDs before publishing a **VP-CS-0003** fixture.
 
 Harness verdict vocabulary (`pass` / `fail` / `skip` / `error`) remains distinct from verification outcomes (`satisfied` / `not_satisfied` / `indeterminate`) defined in this model and in the RFC.
 
