@@ -32,7 +32,7 @@ For normative rules, follow accepted RFCs and published Editions. For process, s
 | **Specification phase** | Pre-Genesis · Architecture Alpha complete |
 | **Architecture status** | Architecture Alpha frozen (structural); draft documents informative until Edition |
 | **Governance status** | Canonical process docs; [GOVERNANCE.md](docs/05-governance/GOVERNANCE.md) draft |
-| **Conformance status** | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) draft; **VP-CS-0001** executable via `veritypay-conformance`; [`VP-CS-0001` fixture](spec/conformance/scenarios/VP-CS-0001.toml) published |
+| **Conformance status** | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) draft; **VP-CS-0001** executable via `veritypay-conformance`; [`VP-CS-0001`](spec/conformance/scenarios/VP-CS-0001.toml) and [`VP-CS-0002`](spec/conformance/scenarios/VP-CS-0002.toml) fixtures published (draft) |
 | **Reference interpreter** | **Active** — `veritypay-reference` implements **VP-RULE-0001** ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), accepted) |
 | **Platform release** | **[Platform 1.0](PLATFORM_RELEASES.md)** — ships with accepted **VP-RFC-0001**, **VP-RULE-0001**, executable **VP-CS-0001** |
 | **Independent implementations** | 0 publicly declared conforming implementations |
@@ -131,6 +131,7 @@ Document `status` values reflect front matter at last update. **Draft** means va
 |----------|--------|---------|------|---------|
 | [VP-RFC-0000](rfcs/0000-rfc-process.md) | **Accepted** | 1.1.0 | Meta-RFC | How protocol changes are proposed and accepted |
 | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) | **Accepted** | 0.1.0 | Protocol | Minimal claim/evidence envelopes, **VP-RULE-0001**, **VP-CS-0001** |
+| [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) | Draft | 0.1.0 | Protocol | Claim identity binding, **VP-RULE-0002**, **VP-CS-0002** |
 
 ---
 
@@ -140,7 +141,7 @@ Document `status` values reflect front matter at last update. **Draft** means va
 |----------|---------|--------|------------------|----------------|
 | **VP-TERM** | Canonical terminology | Active | [`spec/terminology/registry.yaml`](spec/terminology/registry.yaml) | [GLOSSARY.md](docs/00-overview/GLOSSARY.md) |
 | **VP-RFC** | Accepted RFC index | Active | [`spec/rfcs/registry.yaml`](spec/rfcs/registry.yaml) | [`rfcs/`](rfcs/) |
-| **VP-CS** | Conformance scenarios | Draft in spec | [`spec/conformance/scenarios/`](spec/conformance/scenarios/) (fixtures); dedicated registry *future* | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) |
+| **VP-CS** | Conformance scenarios | Draft in spec | [`spec/conformance/scenarios/`](spec/conformance/scenarios/) — **VP-CS-0001**, **VP-CS-0002** fixtures; dedicated registry *future* | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) |
 | **VP-ADR** | Engineering decisions | Planned | *Future* | [ADR_GUIDE.md](docs/05-governance/ADR_GUIDE.md) |
 | **VP-EDITION** | Published Edition manifests | Planned | *Future* | [SPECIFICATION_RELEASE_PROCESS.md](docs/05-governance/SPECIFICATION_RELEASE_PROCESS.md) |
 

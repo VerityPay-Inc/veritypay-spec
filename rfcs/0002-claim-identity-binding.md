@@ -280,6 +280,8 @@ When **VP-RULE-0002** passes and **VP-RULE-0001** runs, the final outcome **MUST
 
 **Expected oracle outcome:** `indeterminate`
 
+**Machine-readable fixture:** [`spec/conformance/scenarios/VP-CS-0002.toml`](../spec/conformance/scenarios/VP-CS-0002.toml)
+
 **Rationale:** Bodies match (`alpha` / `alpha`), but evidence is **not applicable** to the claim because `claim_id` values differ. Evaluators **SHOULD** short-circuit after **VP-RULE-0002** failure; content rules **MUST NOT** yield `satisfied`. **VP-RULE-0002** (and **VP-RULE-0001** step 2 in combined-rule implementations) **MUST** yield `indeterminate`.
 
 **Informative companion examples** *(not separate VP-CS IDs in this RFC)*:
@@ -313,12 +315,21 @@ Claiming **VP-RFC-0002** **SHOULD** imply **VP-RFC-0001** minimal envelope suppo
 
 *Informative — execution order for sibling repositories after acceptance:*
 
-1. **veritypay-spec** — Register **VP-RFC-0002** in [`spec/rfcs/registry.yaml`](../spec/rfcs/registry.yaml); publish **VP-CS-0002** fixture under [`spec/conformance/scenarios/`](../spec/conformance/scenarios/); amend [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) binding language if needed; align [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) **VP-CS-0002** executable profile; update [PLATFORM_RELEASES.md](../PLATFORM_RELEASES.md) / [RELEASE_NOTES_PLATFORM_1_0.md](../RELEASE_NOTES_PLATFORM_1_0.md) or Platform 1.1 notes when declared.
+1. **veritypay-spec** — Register **VP-RFC-0002** in [`spec/rfcs/registry.yaml`](../spec/rfcs/registry.yaml); ~~publish **VP-CS-0002** fixture under [`spec/conformance/scenarios/`](../spec/conformance/scenarios/)~~ **done** — [`spec/conformance/scenarios/VP-CS-0002.toml`](../spec/conformance/scenarios/VP-CS-0002.toml); amend [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) binding language if needed; align [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) **VP-CS-0002** executable profile; update [PLATFORM_RELEASES.md](../PLATFORM_RELEASES.md) / [RELEASE_NOTES_PLATFORM_1_0.md](../RELEASE_NOTES_PLATFORM_1_0.md) or Platform 1.1 notes when declared.
 2. **veritypay-reference** — Add **VP-RULE-0002** to `RuleSet` (distinct rule or factored precondition); preserve **VP-CS-0001** outcomes; evaluate **VP-RULE-0002** before **VP-RULE-0001** when both are present; **short-circuit** on binding failure without running **VP-RULE-0001**.
 3. **veritypay-tooling** — No validator change required beyond existing corpus checks unless a VP-RULE registry is introduced.
 4. **veritypay-conformance** — Load spec-published **VP-CS-0002** fixture; compare adapter vs oracle under binding scenarios.
 
-No code changes are part of this draft RFC.
+### Implementation status
+
+| Deliverable | Status |
+|-------------|--------|
+| **VP-RULE-0002** normative text | Complete |
+| **VP-CS-0002** fixture ([`spec/conformance/scenarios/VP-CS-0002.toml`](../spec/conformance/scenarios/VP-CS-0002.toml)) | Complete |
+| **Reference implementation** (`veritypay-reference` — **VP-RULE-0002**) | Pending |
+| **Conformance execution** (`veritypay-conformance` — spec-published **VP-CS-0002**) | Pending |
+
+No code changes are part of this draft RFC beyond fixture publication in this repository.
 
 ---
 
@@ -396,7 +407,7 @@ No code changes are part of this draft RFC.
 ## Migration Strategy
 
 1. Accept **VP-RFC-0002**.
-2. Publish **VP-CS-0002** fixture in `veritypay-spec`.
+2. ~~Publish **VP-CS-0002** fixture in `veritypay-spec`.~~ **Done** — [`spec/conformance/scenarios/VP-CS-0002.toml`](../spec/conformance/scenarios/VP-CS-0002.toml).
 3. Update `veritypay-reference` to expose **VP-RULE-0002** in `RuleSet` before **VP-RULE-0001**, **short-circuiting** on binding failure without running **VP-RULE-0001** (observable outcomes on existing scenarios unchanged).
 4. Point `veritypay-conformance` at spec-published **VP-CS-0002**.
 5. Update [PLATFORM_RELEASES.md](../PLATFORM_RELEASES.md) for Platform 1.1 extension when governance declares compatibility.
@@ -456,7 +467,8 @@ Dual-path implementations (combined vs factored rules) **SHOULD NOT** produce di
 - [ ] Proposal defines claim identity and evidence binding without payment-domain leakage
 - [ ] **VP-RULE-0002** outcome table is complete and deterministic
 - [ ] Only `satisfied`, `not_satisfied`, and `indeterminate` appear as verification outcomes (this rule uses `indeterminate` only when deciding)
-- [ ] **VP-CS-0002** inputs and expected outcome are specified
+- [x] **VP-CS-0002** inputs and expected outcome are specified
+- [x] **VP-CS-0002** machine-readable fixture published
 - [ ] Interaction with **VP-RULE-0001** is documented without requiring immediate VP-RFC-0001 amendment
 - [ ] Short-circuit on **VP-RULE-0002** binding failure is specified (§4)
 - [ ] Informative negative and positive companion examples included
@@ -487,4 +499,4 @@ Dual-path implementations (combined vs factored rules) **SHOULD NOT** produce di
 
 | Version | Date | Summary |
 |---------|------|---------|
-| 0.1.0 | 2026-06-29 | Initial draft — claim identity, VP-RULE-0002, VP-CS-0002; short-circuit on binding failure (§4) |
+| 0.1.0 | 2026-06-29 | Initial draft — claim identity, VP-RULE-0002, VP-CS-0002; short-circuit on binding failure (§4); **VP-CS-0002** fixture published |

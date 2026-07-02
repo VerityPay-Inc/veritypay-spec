@@ -81,7 +81,7 @@ Implementation adapter  →  ComparableResult
 
 | Stage | Owner | Role |
 |-------|-------|------|
-| **VP-CS** | `veritypay-spec` | Defines scenario inputs, rule under test, and binding; [`VP-CS-0001`](../../spec/conformance/scenarios/VP-CS-0001.toml) is the first executable scenario per [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) |
+| **VP-CS** | `veritypay-spec` | Defines scenario inputs, rule under test, and binding; [`VP-CS-0001`](../../spec/conformance/scenarios/VP-CS-0001.toml) per [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted); [`VP-CS-0002`](../../spec/conformance/scenarios/VP-CS-0002.toml) per [VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md) (draft) |
 | **Reference Interpreter** | `veritypay-reference` | Implements **VP-RULE-0001** and produces a **VerificationResult** (outcome, evaluated claim, specification binding) |
 | **Conformance harness** | `veritypay-conformance` | Loads spec-published fixtures, runs oracle and adapter, compares outcomes |
 
@@ -92,6 +92,8 @@ Implementation adapter  →  ComparableResult
 **Conformance compares implementations against that oracle.** A harness **pass** means the adapter's verification outcome, evaluated claim id, and specification binding match the reference path for the loaded scenario—not that the implementation reimplemented rule logic independently.
 
 **VP-CS-0001** is the first scenario exercised through this flow: minimal claim and evidence envelopes, **VP-RULE-0001**, expected oracle outcome `satisfied` for the normative fixture inputs. The L5 interoperability narrative below describes long-term multi-implementation intent; the executable profile is defined by [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md).
+
+**VP-CS-0002** (draft) exercises **VP-RULE-0002** (*Evidence Claim Binding*): evidence whose `claim_id` does not match the claim under evaluation yields oracle outcome `indeterminate` even when content bodies match. Machine-readable fixture: [`../../spec/conformance/scenarios/VP-CS-0002.toml`](../../spec/conformance/scenarios/VP-CS-0002.toml) per [VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md). The supersession narrative under [VP-CS-0002 — Supersession preserves history](#vp-cs-0002-supersession-preserves-history) below remains a separate long-term catalog entry pending ID reconciliation.
 
 Harness verdict vocabulary (`pass` / `fail` / `skip` / `error`) remains distinct from verification outcomes (`satisfied` / `not_satisfied` / `indeterminate`) defined in this model and in the RFC.
 
