@@ -209,21 +209,34 @@ Binding checks **identity linkage only**. They do **not** inspect assertion body
 
 [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md) **VP-RULE-0001** step 2 (`evidence.claim_id` mismatch → `indeterminate`) is **semantically equivalent** to a binding failure under **VP-RULE-0002**.
 
-**Recommended evaluation flow** *(informative — ordering guidance for reference and independent implementations)*:
+**Evaluation order:** Evaluators **SHOULD** apply **VP-RULE-0002** before **VP-RULE-0001** when both rules are in scope.
+
+**Short-circuit on binding failure:** When **VP-RULE-0002** fails, evaluators **SHOULD** short-circuit: report `indeterminate` and **SHOULD NOT** run **VP-RULE-0001**.
+
+| Rationale | Detail |
+|-----------|--------|
+| Applicability | Binding failure means evidence is **not applicable** to the claim under evaluation. |
+| Content rules | Assertion body comparison **SHOULD NOT** be evaluated against inapplicable evidence. |
+| Outcome stability | Observable verification outcomes remain **unchanged** from [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md) behavior on all published scenarios. |
+| Trace | Traces **MAY** record that **VP-RULE-0001** was skipped due to binding failure (e.g. `VP-RULE-0001 skipped: evidence not bound to claim`). |
+
+**Normative evaluation flow:**
 
 ```text
 1. Apply VP-RULE-0002 (Evidence Claim Binding)
-      ↓ binding failure → indeterminate (stop)
+      ↓ binding failure → indeterminate (short-circuit; do not run VP-RULE-0001)
       ↓ binding pass
 2. Apply VP-RULE-0001 (Assertion Body Evidence Match)
       ↓ satisfied | not_satisfied | indeterminate (content/precondition cases)
 ```
 
+When **VP-RULE-0002** passes, the final outcome **MUST** follow **VP-RFC-0001** outcome mapping for **VP-RULE-0001** (and any other downstream rules in scope).
+
 **Compatibility stance for this draft:**
 
-- **VP-RFC-0001** text **need not change** on acceptance of this RFC. Step 2 remains valid normative text.
+- **VP-RFC-0001** text **need not change** on acceptance of this RFC. Step 2 remains valid normative text for combined-rule implementations.
 - **VP-RULE-0001** behavior on **VP-CS-0001** and existing fixtures **MUST NOT** change solely because this RFC is accepted.
-- Reference interpreters **SHOULD** implement **VP-RULE-0002** as a distinct rule (or equivalent factored precondition) when claiming **VP-RFC-0002** support, and **SHOULD** evaluate it before **VP-RULE-0001** in the rule set.
+- Reference interpreters **SHOULD** implement **VP-RULE-0002** as a distinct rule (or equivalent factored precondition) when claiming **VP-RFC-0002** support, **SHOULD** evaluate it before **VP-RULE-0001**, and **SHOULD** short-circuit on binding failure.
 - **VP-RULE-0001** **SHOULD** reference **VP-RULE-0002** in documentation and trace metadata as the named binding precondition once factoring is complete.
 
 This RFC **extracts** an implicit precondition into an explicit named rule; it does **not** alter the observable outcome table for scenarios that already pass under **VP-RFC-0001** alone.
@@ -267,7 +280,7 @@ When **VP-RULE-0002** passes and **VP-RULE-0001** runs, the final outcome **MUST
 
 **Expected oracle outcome:** `indeterminate`
 
-**Rationale:** Bodies match (`alpha` / `alpha`), but evidence is **not applicable** to the claim because `claim_id` values differ. Content rules **MUST NOT** yield `satisfied`. **VP-RULE-0002** (and **VP-RULE-0001** step 2) **MUST** yield `indeterminate`.
+**Rationale:** Bodies match (`alpha` / `alpha`), but evidence is **not applicable** to the claim because `claim_id` values differ. Evaluators **SHOULD** short-circuit after **VP-RULE-0002** failure; content rules **MUST NOT** yield `satisfied`. **VP-RULE-0002** (and **VP-RULE-0001** step 2 in combined-rule implementations) **MUST** yield `indeterminate`.
 
 **Informative companion examples** *(not separate VP-CS IDs in this RFC)*:
 
@@ -301,7 +314,7 @@ Claiming **VP-RFC-0002** **SHOULD** imply **VP-RFC-0001** minimal envelope suppo
 *Informative — execution order for sibling repositories after acceptance:*
 
 1. **veritypay-spec** — Register **VP-RFC-0002** in [`spec/rfcs/registry.yaml`](../spec/rfcs/registry.yaml); publish **VP-CS-0002** fixture under [`spec/conformance/scenarios/`](../spec/conformance/scenarios/); amend [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) binding language if needed; align [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) **VP-CS-0002** executable profile; update [PLATFORM_RELEASES.md](../PLATFORM_RELEASES.md) / [RELEASE_NOTES_PLATFORM_1_0.md](../RELEASE_NOTES_PLATFORM_1_0.md) or Platform 1.1 notes when declared.
-2. **veritypay-reference** — Add **VP-RULE-0002** to `RuleSet` (distinct rule or factored precondition); preserve **VP-CS-0001** outcomes; evaluate **VP-RULE-0002** before **VP-RULE-0001** when both are present.
+2. **veritypay-reference** — Add **VP-RULE-0002** to `RuleSet` (distinct rule or factored precondition); preserve **VP-CS-0001** outcomes; evaluate **VP-RULE-0002** before **VP-RULE-0001** when both are present; **short-circuit** on binding failure without running **VP-RULE-0001**.
 3. **veritypay-tooling** — No validator change required beyond existing corpus checks unless a VP-RULE registry is introduced.
 4. **veritypay-conformance** — Load spec-published **VP-CS-0002** fixture; compare adapter vs oracle under binding scenarios.
 
@@ -329,7 +342,7 @@ No code changes are part of this draft RFC.
 | VP-TERM-008 | Evidence | **Clarifying use** — `claim_id` binding field names applicability precondition |
 | VP-TERM-011 | Verification Outcome | **No vocabulary change** — binding failure uses existing `indeterminate` |
 | VP-TERM-024 | Conformance Scenario (VP-CS) | **Clarifying use** — **VP-CS-0002** targets binding in isolation |
-| VP-TERM-027 | Reference Interpreter | **Clarifying use** — rule sets **SHOULD** compose **VP-RULE-0002** before content rules |
+| VP-TERM-027 | Reference Interpreter | **Clarifying use** — rule sets **SHOULD** apply **VP-RULE-0002** before content rules and **SHOULD** short-circuit on binding failure |
 
 **New identifiers introduced by this RFC (proposal):**
 
@@ -384,11 +397,11 @@ No code changes are part of this draft RFC.
 
 1. Accept **VP-RFC-0002**.
 2. Publish **VP-CS-0002** fixture in `veritypay-spec`.
-3. Update `veritypay-reference` to expose **VP-RULE-0002** in `RuleSet` before **VP-RULE-0001** (behavior on existing scenarios unchanged).
+3. Update `veritypay-reference` to expose **VP-RULE-0002** in `RuleSet` before **VP-RULE-0001**, **short-circuiting** on binding failure without running **VP-RULE-0001** (observable outcomes on existing scenarios unchanged).
 4. Point `veritypay-conformance` at spec-published **VP-CS-0002**.
 5. Update [PLATFORM_RELEASES.md](../PLATFORM_RELEASES.md) for Platform 1.1 extension when governance declares compatibility.
 
-Dual-path implementations (combined vs factored rules) **SHOULD NOT** produce divergent outcomes on **VP-CS-0001** and **VP-CS-0002** once migration completes.
+Dual-path implementations (combined vs factored rules) **SHOULD NOT** produce divergent outcomes on **VP-CS-0001** and **VP-CS-0002** once migration completes. Factored rule sets **SHOULD** short-circuit after **VP-RULE-0002** failure rather than running **VP-RULE-0001** against inapplicable evidence.
 
 ---
 
@@ -429,9 +442,12 @@ Dual-path implementations (combined vs factored rules) **SHOULD NOT** produce di
 ## Open Questions
 
 1. **VP-RFC-0001 amendment timing** — Should a follow-on errata RFC remove step 2 from **VP-RULE-0001** once all implementations factor **VP-RULE-0002**?
-2. **RuleSet aggregation** — When **VP-RULE-0002** fails, should the interpreter short-circuit before **VP-RULE-0001** or run both and merge trace events?
-3. **Empty claim_id handling** — Should envelope validators reject before rule evaluation rather than mapping to `indeterminate` at the rule layer?
-4. **VP-CS-0002 fixture metadata** — Pin `rule_id` to **VP-RULE-0002** only, or declare a multi-rule profile explicitly?
+2. **Empty claim_id handling** — Should envelope validators reject before rule evaluation rather than mapping to `indeterminate` at the rule layer?
+3. **VP-CS-0002 fixture metadata** — Pin `rule_id` to **VP-RULE-0002** only, or declare a multi-rule profile explicitly?
+
+**Resolved:**
+
+- ~~**RuleSet aggregation** — When **VP-RULE-0002** fails, should the interpreter short-circuit before **VP-RULE-0001** or run both and merge trace events?~~ **Decision:** Evaluators **SHOULD** short-circuit and report `indeterminate` without running **VP-RULE-0001**; traces **MAY** note the skip. See §4.
 
 ---
 
@@ -442,6 +458,7 @@ Dual-path implementations (combined vs factored rules) **SHOULD NOT** produce di
 - [ ] Only `satisfied`, `not_satisfied`, and `indeterminate` appear as verification outcomes (this rule uses `indeterminate` only when deciding)
 - [ ] **VP-CS-0002** inputs and expected outcome are specified
 - [ ] Interaction with **VP-RULE-0001** is documented without requiring immediate VP-RFC-0001 amendment
+- [ ] Short-circuit on **VP-RULE-0002** binding failure is specified (§4)
 - [ ] Informative negative and positive companion examples included
 - [ ] Architecture, terminology, conformance, security, compatibility, and migration sections are complete
 - [ ] [RFC invariants](0000-rfc-process.md#11-rfc-invariants) satisfied
@@ -470,4 +487,4 @@ Dual-path implementations (combined vs factored rules) **SHOULD NOT** produce di
 
 | Version | Date | Summary |
 |---------|------|---------|
-| 0.1.0 | 2026-06-29 | Initial draft — claim identity, VP-RULE-0002, VP-CS-0002 |
+| 0.1.0 | 2026-06-29 | Initial draft — claim identity, VP-RULE-0002, VP-CS-0002; short-circuit on binding failure (§4) |
