@@ -68,13 +68,15 @@ last_updated: 2026-06-29
 
 ## Summary
 
-This RFC defines **how an Evidence Set produces a verification decision**.
+This RFC defines **how an Evidence Set produces a verification decision** per [VP-RFC-0003](0003-multiple-evidence.md).
 
-It introduces **Evaluation Policy** — the protocol-defined strategy used to derive a single verification outcome from per-evidence rule results over an [Evidence Set](0003-multiple-evidence.md).
+It introduces **Evaluation Policy** — the protocol-defined strategy used to derive a single verification outcome from per-envelope rule results over an **Evidence Set**.
 
 This draft defines one normative policy identifier: **`ALL_REQUIRED`**. Future RFCs **MAY** add additional policies.
 
-The change is **additive**. It does **not** introduce trust, issuer reputation, weighting, confidence scores, signatures, or authorization. Implementation in reference and conformance repositories is **deferred**.
+The change is **additive**. It does **not** introduce trust, issuer reputation, weighting, confidence scores, signatures, or authorization. It does **not** redefine **Evidence Set** membership — that remains [VP-RFC-0003](0003-multiple-evidence.md). Implementation in reference and conformance repositories is **deferred**.
+
+**VP-RFC-0003** and **VP-RFC-0004** are intended for **joint acceptance** as **Platform 1.2**.
 
 ---
 
@@ -102,7 +104,7 @@ That mapping is an **evaluation policy** problem, distinct from envelope shape (
 
 ## Goals
 
-- Define **Evaluation Policy** as protocol vocabulary.
+- Define **Evaluation Policy** as protocol vocabulary (companion to **Evidence Set** in [VP-RFC-0003](0003-multiple-evidence.md)).
 - Specify the **`ALL_REQUIRED`** policy with a deterministic outcome table.
 - Require policy evaluation to be independent of evidence ordering.
 - Define **VP-CS-0004** as a conformance scenario profile for **`ALL_REQUIRED`** (fixture publication deferred).
@@ -117,11 +119,16 @@ That mapping is an **evaluation policy** problem, distinct from envelope shape (
 - Policies other than **`ALL_REQUIRED`** in this draft (future RFCs **MAY** add them).
 - Machine-readable **VP-CS-0004** fixture publication in this draft.
 - Reference or conformance implementation (deferred).
+- Redefining **Evidence Set** membership or envelope shape ([VP-RFC-0003](0003-multiple-evidence.md)).
 - Amending per-envelope rule text in **VP-RULE-0001** or **VP-RULE-0002**.
 
 ---
 
 ## Proposal
+
+### Prerequisite — Evidence Set
+
+This RFC **depends on** [VP-RFC-0003](0003-multiple-evidence.md). An **Evaluation Policy** applies to an **Evidence Set** as defined there. Evaluators **MUST NOT** use this RFC without a well-formed **Evidence Set** input model.
 
 ### 1. Evaluation Policy
 
@@ -134,7 +141,7 @@ An evaluation **MUST** declare which policy applies when aggregating an **Eviden
 
 Policies **MUST** be **deterministic**: identical claim, evidence set (as a set), rules in scope, and per-envelope outcomes **MUST** yield the same aggregated verification outcome.
 
-Evidence ordering **MUST NOT** affect the aggregated verification outcome.
+Evidence ordering **MUST NOT** affect the aggregated verification outcome (consistent with **Evidence Set** ordering independence in [VP-RFC-0003](0003-multiple-evidence.md) §3).
 
 ### 2. Applicable evidence
 
@@ -226,9 +233,9 @@ This RFC is **additive** relative to accepted [VP-RFC-0001](0001-minimal-claim-e
 | **VP-CS-0001** | Unchanged when **Evidence Set** has one envelope and policy is **`ALL_REQUIRED`** |
 | **VP-CS-0002** | Unchanged — single envelope binding failure |
 | **VP-RULE-0001** / **VP-RULE-0002** | Unchanged — per-envelope semantics |
-| **Platform 1.1** | Unaffected until **VP-RFC-0004** is accepted and engineering repos opt in |
+| **Platform 1.1** | Unaffected — **VP-RFC-0003** and **VP-RFC-0004** are planned for joint acceptance as **Platform 1.2** |
 
-Implementations that do not claim **VP-RFC-0003** or **VP-RFC-0004** **MAY** continue single-evidence evaluation without declaring an evaluation policy.
+Implementations that do not claim **VP-RFC-0003** and **VP-RFC-0004** **MAY** continue single-evidence evaluation without declaring an **Evaluation Policy**.
 
 ---
 
@@ -247,7 +254,7 @@ Implementations that do not claim **VP-RFC-0003** or **VP-RFC-0004** **MAY** con
 
 | Term | Change |
 |------|--------|
-| **Evaluation Policy** | **New protocol concept** — strategy for deriving one verification outcome from an Evidence Set |
+| **Evaluation Policy** | **New protocol concept** — strategy for deriving one verification outcome from an **Evidence Set** ([VP-RFC-0003](0003-multiple-evidence.md)) |
 | **`ALL_REQUIRED`** | **New policy identifier** — every applicable envelope must be `satisfied` for aggregate `satisfied` |
 | VP-TERM-011 (*Verification Outcome*) | **No vocabulary change** — policies compose existing outcomes only |
 
@@ -259,7 +266,7 @@ Implementations that do not claim **VP-RFC-0003** or **VP-RFC-0004** **MAY** con
 |----------|-----------------|
 | **VP-CS-0004** | **Defined profile** — **`ALL_REQUIRED`** multi-evidence aggregation; fixture deferred |
 
-Harnesses **MUST NOT** infer **`ALL_REQUIRED`** outcomes from [VP-RFC-0003](0003-multiple-evidence.md) alone. Claiming **VP-RFC-0004** **SHOULD** imply **VP-RFC-0003** support.
+Harnesses **MUST NOT** infer **`ALL_REQUIRED`** outcomes from [VP-RFC-0003](0003-multiple-evidence.md) alone. Claiming **VP-RFC-0004** **MUST** imply **VP-RFC-0003** support. Claiming **VP-RFC-0003** alone does **not** imply **Evaluation Policy** support.
 
 ---
 
@@ -283,7 +290,7 @@ Threat modeling for trust and reputation belongs in future RFCs.
 
 ## Migration Strategy
 
-1. Accept **VP-RFC-0004**.
+1. Accept **VP-RFC-0004** together with [VP-RFC-0003](0003-multiple-evidence.md) as **Platform 1.2**.
 2. Align [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) and [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md).
 3. Extend reference interpreter to aggregate per-envelope outcomes under a declared policy (future engineering work).
 4. Publish **VP-CS-0004** fixture when multi-evidence schema and oracle support exist.
@@ -376,4 +383,4 @@ Threat modeling for trust and reputation belongs in future RFCs.
 
 | Version | Date | Summary |
 |---------|------|---------|
-| 0.1.0 | 2026-06-29 | Initial draft — Evaluation Policy, `ALL_REQUIRED`, VP-CS-0004 profile; implementation deferred |
+| 0.1.0 | 2026-06-29 | Initial draft — Evaluation Policy, `ALL_REQUIRED`, VP-CS-0004 profile; companion to VP-RFC-0003; implementation deferred |

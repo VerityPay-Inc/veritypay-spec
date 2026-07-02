@@ -143,7 +143,7 @@ Full **Verifiable Claim** and **Evidence** entities in this document retain rich
 
 [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (draft) introduces **Evidence Set** — the **unordered** collection of **Evidence** associated with one **Claim** during evaluation. A claim **MAY** reference zero or more evidence envelopes; each envelope retains the shape defined above and in **VP-RFC-0001**.
 
-This subsection describes **protocol composition only**. It does **not** define how multiple evidence items combine into a verification outcome.
+This subsection describes **Evidence Set** input composition only. It does **not** define **Evaluation Policy** or aggregated verification outcomes — see [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft).
 
 ```text
 Claim
@@ -162,13 +162,13 @@ Claim
 | **Ordering** | Evidence ordering **MUST NOT** affect protocol meaning |
 | **Independence** | Each **Evidence** **MUST** be treated as an independent envelope with its own `evidence_id` and **EvidenceContent** |
 | **Binding** | Each **Evidence** binds to the claim independently per [VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md) when binding rules are in scope |
-| **Evaluation** | Per-envelope rule outcomes aggregate via an **Evaluation Policy** — see [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) |
+| **Aggregation** | Out of scope here — see **Evaluation Policy** in [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) |
 
 Existing single-evidence diagrams and reference model types are unchanged. Multi-evidence support **extends** evaluation inputs without replacing the **Evidence** or **EvidenceContent** envelope definitions.
 
 ### Evaluation Policy (VP-RFC-0004)
 
-[VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) defines **Evaluation Policy** — the protocol-defined strategy for deriving one **verification outcome** from an **Evidence Set** and per-envelope rule results.
+[VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) defines **Evaluation Policy** — the protocol-defined strategy for deriving one **verification outcome** from an **Evidence Set** ([VP-RFC-0003](../../rfcs/0003-multiple-evidence.md)) and per-envelope rule results.
 
 This subsection describes **protocol composition only**. It does **not** specify reference interpreter implementation.
 

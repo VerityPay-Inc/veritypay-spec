@@ -33,7 +33,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [PRINCIPLES.md](../00-overview/PRINCIPLES.md), [GLOSSARY.md](../00-overview/GLOSSARY.md)
 
-**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (draft), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft), [`../../rfcs/`](../../rfcs/)
 
 ---
 
@@ -95,25 +95,26 @@ Implementation adapter  →  ComparableResult
 
 **VP-CS-0002** exercises **VP-RULE-0002** (*Evidence Claim Binding*): evidence whose `claim_id` does not match the claim under evaluation yields oracle outcome `indeterminate` even when content bodies match. Machine-readable fixture: [`../../spec/conformance/scenarios/VP-CS-0002.toml`](../../spec/conformance/scenarios/VP-CS-0002.toml) per [VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md). The supersession narrative under [VP-CS-0002 — Supersession preserves history](#vp-cs-0002-supersession-preserves-history) below remains a separate long-term catalog entry pending ID reconciliation.
 
-### Multiple evidence in scenarios (VP-RFC-0003)
+### Multiple evidence and evaluation policy (VP-RFC-0003, VP-RFC-0004)
+
+Draft protocol RFCs **VP-RFC-0003** and **VP-RFC-0004** are intended for **joint acceptance** as **Platform 1.2**. They split responsibilities:
+
+| RFC | Concept | Scope |
+|-----|---------|--------|
+| [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (draft) | **Evidence Set** | Input model — zero or more **Evidence** envelopes per **Claim**; ordering independence; **VP-CS-0003** loading profile |
+| [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) | **Evaluation Policy** | Aggregation — how an **Evidence Set** maps to one verification outcome; initial policy **`ALL_REQUIRED`**; **VP-CS-0004** profile |
 
 [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (draft) introduces **Evidence Set** — an **unordered** collection of **Evidence** envelopes associated with one **Claim** during evaluation.
 
 Future VP-CS scenario fixtures **MAY** declare **multiple Evidence records** for one claim (for example two independently bound envelopes). Scenario loaders **SHOULD** treat evidence list ordering as non-normative once multi-evidence fixture schema is published.
 
-### Evaluation policy in scenarios (VP-RFC-0004)
-
 [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) defines **Evaluation Policy** — how per-envelope verification outcomes over an **Evidence Set** combine into one verification outcome.
 
-Future VP-CS scenario fixtures **MAY** declare an evaluation policy identifier. The initial normative policy in that RFC is **`ALL_REQUIRED`**: every applicable evidence envelope must be `satisfied` for aggregate `satisfied`; any `not_satisfied` dominates; otherwise any `indeterminate` (with no `not_satisfied`) yields aggregate `indeterminate`; an empty **Evidence Set** yields `indeterminate`.
+Future VP-CS scenario fixtures **MAY** declare an **Evaluation Policy** identifier. The initial normative policy in that RFC is **`ALL_REQUIRED`**: every applicable evidence envelope must be `satisfied` for aggregate `satisfied`; any `not_satisfied` dominates; otherwise any `indeterminate` (with no `not_satisfied`) yields aggregate `indeterminate`; an empty **Evidence Set** yields `indeterminate`.
 
 This model does **not** define future policies beyond **`ALL_REQUIRED`**. Trust, weighting, and authorization remain out of scope.
 
-**VP-CS-0004** in [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) is the executable profile for **`ALL_REQUIRED`** aggregation (fixture deferred). The narrative catalog entry [VP-CS-0004 — Identity immutability](#vp-cs-0004-identity-immutability) below predates the **VP-RFC-0004** executable profile ID; reconcile catalog IDs before publishing a **VP-CS-0004** fixture.
-
-**VP-CS-0003** in [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) remains a **loading profile** until multi-evidence fixtures and policy-aware oracle paths exist.
-
-The narrative catalog entry [VP-CS-0003 — Representation independence](#vp-cs-0003-representation-independence) below predates the **VP-RFC-0003** executable profile ID; reconcile catalog IDs before publishing a **VP-CS-0003** fixture.
+**VP-CS-0003** ([VP-RFC-0003](../../rfcs/0003-multiple-evidence.md)) is a **loading profile** only — no normative verification outcome. **VP-CS-0004** ([VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md)) is the **`ALL_REQUIRED`** aggregation profile (fixture deferred). Both require reconciling narrative catalog ID collisions before fixture publication — see notes under [VP-CS-0003 — Representation independence](#vp-cs-0003-representation-independence) and [VP-CS-0004 — Identity immutability](#vp-cs-0004-identity-immutability).
 
 Harness verdict vocabulary (`pass` / `fail` / `skip` / `error`) remains distinct from verification outcomes (`satisfied` / `not_satisfied` / `indeterminate`) defined in this model and in the RFC.
 
