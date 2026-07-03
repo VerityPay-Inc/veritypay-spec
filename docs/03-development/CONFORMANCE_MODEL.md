@@ -33,7 +33,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [PRINCIPLES.md](../00-overview/PRINCIPLES.md), [GLOSSARY.md](../00-overview/GLOSSARY.md)
 
-**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (draft), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [`../../rfcs/`](../../rfcs/)
 
 ---
 
@@ -97,24 +97,34 @@ Implementation adapter  →  ComparableResult
 
 ### Multiple evidence and evaluation policy (VP-RFC-0003, VP-RFC-0004)
 
-Draft protocol RFCs **VP-RFC-0003** and **VP-RFC-0004** are intended for **joint acceptance** as **Platform 1.2**. They split responsibilities:
+Accepted protocol RFCs **VP-RFC-0003** and **VP-RFC-0004** form **Platform 1.2**. They split responsibilities:
 
 | RFC | Concept | Scope |
 |-----|---------|--------|
-| [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (draft) | **Evidence Set** | Input model — zero or more **Evidence** envelopes per **Claim**; ordering independence; **VP-CS-0003** loading profile |
-| [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) | **Evaluation Policy** | Aggregation — how an **Evidence Set** maps to one verification outcome; initial policy **`ALL_REQUIRED`**; **VP-CS-0004** profile |
+| [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted) | **Evidence Set** | Input model — zero or more **Evidence** envelopes per **Claim**; ordering independence; **VP-CS-0003** loading profile |
+| [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted) | **Evaluation Policy** | Aggregation — how an **Evidence Set** maps to one verification outcome; initial policy **`ALL_REQUIRED`**; **VP-CS-0004** profile |
 
-[VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (draft) introduces **Evidence Set** — an **unordered** collection of **Evidence** envelopes associated with one **Claim** during evaluation.
+[VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted) introduces **Evidence Set** — an **unordered** collection of **Evidence** envelopes associated with one **Claim** during evaluation.
 
 Future VP-CS scenario fixtures **MAY** declare **multiple Evidence records** for one claim (for example two independently bound envelopes). Scenario loaders **SHOULD** treat evidence list ordering as non-normative once multi-evidence fixture schema is published.
 
-[VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) defines **Evaluation Policy** — how per-envelope verification outcomes over an **Evidence Set** combine into one verification outcome.
+[VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted) defines **Evaluation Policy** — how per-envelope verification outcomes over an **Evidence Set** combine into one verification outcome.
 
 Future VP-CS scenario fixtures **MAY** declare an **Evaluation Policy** identifier. The initial normative policy in that RFC is **`ALL_REQUIRED`**: every applicable evidence envelope must be `satisfied` for aggregate `satisfied`; any `not_satisfied` dominates; otherwise any `indeterminate` (with no `not_satisfied`) yields aggregate `indeterminate`; an empty **Evidence Set** yields `indeterminate`.
 
 This model does **not** define future policies beyond **`ALL_REQUIRED`**. Trust, weighting, and authorization remain out of scope.
 
 **VP-CS-0003** ([VP-RFC-0003](../../rfcs/0003-multiple-evidence.md)) is a **loading profile** only — no normative verification outcome. **VP-CS-0004** ([VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md)) is the **`ALL_REQUIRED`** aggregation profile (fixture deferred). Both require reconciling narrative catalog ID collisions before fixture publication — see notes under [VP-CS-0003 — Representation independence](#vp-cs-0003-representation-independence) and [VP-CS-0004 — Identity immutability](#vp-cs-0004-identity-immutability).
+
+### Assertion Types in scenarios (VP-RFC-0005)
+
+[VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft) introduces **Assertion Type** — the protocol identifier describing how an **Assertion** is interpreted.
+
+VP-CS scenario fixtures **MAY** specify `assertion_type` on claim inputs. The initial standardized **Assertion Type** in that RFC is **`body_equality`**: assertion body evaluation via **VP-RULE-0001** when applicable rule preconditions hold.
+
+**VP-CS-0001** and **VP-CS-0002** exercise **`body_equality`** semantics through the existing **VP-RULE-0001** / **VP-RULE-0002** pipeline. Published fixtures retain `assertion_type = minimal` per accepted **VP-RFC-0001** until a future fixture-alignment change.
+
+**Assertion Types** describe protocol semantics. Conformance compares independent implementations of those semantics against the reference oracle — not ad hoc string handling in harnesses alone. This RFC does **not** define evaluator dispatch from `assertion_type` to rules; oracle comparison remains rule- and scenario-bound per accepted RFCs.
 
 Harness verdict vocabulary (`pass` / `fail` / `skip` / `error`) remains distinct from verification outcomes (`satisfied` / `not_satisfied` / `indeterminate`) defined in this model and in the RFC.
 

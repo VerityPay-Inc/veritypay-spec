@@ -31,7 +31,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md)
 
-**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, draft), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, draft)
+**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, accepted), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, accepted), [`../../rfcs/0005-assertion-types.md`](../../rfcs/0005-assertion-types.md) (**VP-RFC-0005**, draft)
 
 ---
 
@@ -135,15 +135,35 @@ The interpreter evaluates the **assertion**—not the envelope alone. Missing, m
 | **Evidence** | Linked evidence envelope | `EvidenceId` (`id`), `ClaimId` (`claim_id`), nested **EvidenceContent**, optional **Metadata** |
 | **EvidenceContent** | Verifiable payload consumed by rules | `content_type`, `body` |
 
+### Assertion Type (VP-RFC-0005)
+
+[VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft) introduces **Assertion Type** — the protocol identifier that describes how an **Assertion** is interpreted.
+
+```text
+Claim
+ └── Assertion
+      ├── assertion_type  → Assertion Type
+      └── body            → protocol data (interpreted per type)
+```
+
+| Property | Detail |
+|----------|--------|
+| **Assertion Type** | Names semantic interpretation — not evaluation procedure |
+| **`body`** | Opaque protocol data whose meaning is defined by the declared type and applicable rules |
+| **Initial type** | **`body_equality`** — body comparison via **VP-RULE-0001** when preconditions hold |
+| **Evaluation** | Out of scope here — defined by rule RFCs (for example **VP-RFC-0001**, **VP-RFC-0002**) and **Evaluation Policy** in **VP-RFC-0004** |
+
+Every **Assertion** **MUST** declare exactly one **Assertion Type** via `assertion_type`. This subsection defines taxonomy only; it does **not** specify evaluator dispatch from type to rule.
+
 RFC fixture field names (`claim_id`, `evidence_id`, `specification_version`) map to the reference model identifiers above when loaded by `veritypay-conformance`.
 
 Full **Verifiable Claim** and **Evidence** entities in this document retain richer lifecycle, attribution, and domain fields. Implementations claiming **VP-RFC-0001** conformance **MUST** satisfy the minimal profile in the RFC; they **MAY** carry additional metadata without altering **VP-RULE-0001** comparison semantics unless a future RFC says otherwise.
 
 ### Evidence Set (VP-RFC-0003)
 
-[VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (draft) introduces **Evidence Set** — the **unordered** collection of **Evidence** associated with one **Claim** during evaluation. A claim **MAY** reference zero or more evidence envelopes; each envelope retains the shape defined above and in **VP-RFC-0001**.
+[VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted) introduces **Evidence Set** — the **unordered** collection of **Evidence** associated with one **Claim** during evaluation. A claim **MAY** reference zero or more evidence envelopes; each envelope retains the shape defined above and in **VP-RFC-0001**.
 
-This subsection describes **Evidence Set** input composition only. It does **not** define **Evaluation Policy** or aggregated verification outcomes — see [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft).
+This subsection describes **Evidence Set** input composition only. It does **not** define **Evaluation Policy** or aggregated verification outcomes — see [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted).
 
 ```text
 Claim
@@ -162,13 +182,13 @@ Claim
 | **Ordering** | Evidence ordering **MUST NOT** affect protocol meaning |
 | **Independence** | Each **Evidence** **MUST** be treated as an independent envelope with its own `evidence_id` and **EvidenceContent** |
 | **Binding** | Each **Evidence** binds to the claim independently per [VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md) when binding rules are in scope |
-| **Aggregation** | Out of scope here — see **Evaluation Policy** in [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) |
+| **Aggregation** | Out of scope here — see **Evaluation Policy** in [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted) |
 
 Existing single-evidence diagrams and reference model types are unchanged. Multi-evidence support **extends** evaluation inputs without replacing the **Evidence** or **EvidenceContent** envelope definitions.
 
 ### Evaluation Policy (VP-RFC-0004)
 
-[VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (draft) defines **Evaluation Policy** — the protocol-defined strategy for deriving one **verification outcome** from an **Evidence Set** ([VP-RFC-0003](../../rfcs/0003-multiple-evidence.md)) and per-envelope rule results.
+[VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted) defines **Evaluation Policy** — the protocol-defined strategy for deriving one **verification outcome** from an **Evidence Set** ([VP-RFC-0003](../../rfcs/0003-multiple-evidence.md)) and per-envelope rule results.
 
 This subsection describes **protocol composition only**. It does **not** specify reference interpreter implementation.
 

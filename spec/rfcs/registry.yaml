@@ -134,3 +134,28 @@ rfcs:
     related_conformance:
       - VP-CS-0004
     path: rfcs/0004-evidence-evaluation-policies.md
+  - id: VP-RFC-0005
+    rfc: 0005
+    anchor: assertion-types
+    title: Assertion Types
+    status: draft
+    type: protocol
+    version: 0.1.0
+    created: 2026-06-29
+    updated: 2026-06-29
+    depends_on:
+      - VP-RFC-0000
+      - VP-RFC-0001
+    supersedes: []
+    superseded_by: null
+    related_terms:
+      - VP-TERM-004
+      - VP-TERM-011
+      - VP-TERM-013
+    related_architecture:
+      - docs/01-architecture/DATA_MODEL.md
+      - docs/03-development/CONFORMANCE_MODEL.md
+    related_conformance:
+      - VP-CS-0001
+      - VP-CS-0002
+    path: rfcs/0005-assertion-types.md

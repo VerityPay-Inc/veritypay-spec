@@ -134,6 +134,7 @@ Document `status` values reflect front matter at last update. **Draft** means va
 | [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) | **Accepted** | 0.1.0 | Protocol | Claim identity binding, **VP-RULE-0002**, **VP-CS-0002** |
 | [VP-RFC-0003](rfcs/0003-multiple-evidence.md) | **Accepted** | 0.1.0 | Protocol | **Evidence Set**, multiple evidence per claim, **VP-CS-0003** (loading profile) |
 | [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) | **Accepted** | 0.1.0 | Protocol | **Evaluation Policy**, **`ALL_REQUIRED`**, **VP-CS-0004** (profile) |
+| [VP-RFC-0005](rfcs/0005-assertion-types.md) | Draft | 0.1.0 | Protocol | **Assertion Type**, **`body_equality`** taxonomy |
 
 ---
 
@@ -147,6 +148,7 @@ Protocol RFCs that define executable verification inputs and rules. Status refle
 | [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) | **Accepted** | Evidence claim binding, **VP-RULE-0002**, **VP-CS-0002** |
 | [VP-RFC-0003](rfcs/0003-multiple-evidence.md) | **Accepted** | **Evidence Set** — multiple evidence per claim; **VP-CS-0003** loading profile |
 | [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) | **Accepted** | **Evaluation Policy** — **`ALL_REQUIRED`**; **VP-CS-0004** profile |
+| [VP-RFC-0005](rfcs/0005-assertion-types.md) | **Draft** | **Assertion Type** — **`body_equality`**; evaluation dispatch deferred |
 
 Platform release is **[Platform 1.2](PLATFORM_RELEASES.md)**. Executable **VP-CS-0003** and **VP-CS-0004** fixtures remain deferred until reference and conformance support multi-evidence evaluation.
 
