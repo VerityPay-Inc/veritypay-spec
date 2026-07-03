@@ -43,6 +43,19 @@ For normative rules, follow accepted RFCs and published Editions. For process, s
 
 ---
 
+## Core Specification
+
+| Field | Value |
+|-------|--------|
+| **Document** | [VERITY_CORE.md](VERITY_CORE.md) |
+| **Status** | In Progress |
+| **Purpose** | Consolidate protocol RFCs into a single implementation-oriented specification |
+| **Current scope** | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) through [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md) |
+
+[VERITY_CORE.md](VERITY_CORE.md) is the primary entry point for protocol implementers. RFCs remain the normative change mechanism; the Core document presents accepted and in-progress RFC content as one coherent specification without introducing new semantics.
+
+---
+
 ## Specification health
 
 Legend: 🟢 Complete · 🟡 In progress · ⚪ Not started · 🔴 Blocked

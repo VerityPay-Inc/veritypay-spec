@@ -12,6 +12,20 @@ This repository defines *what* VerityPay is and *how* it must behave. It does no
 
 ---
 
+## Start Here
+
+**Recommended reading order for protocol implementers:**
+
+1. **[VERITY_CORE.md](VERITY_CORE.md)** — primary protocol specification (consolidated, implementation-oriented)
+2. **[ECOSYSTEM.md](ECOSYSTEM.md)** — platform map across sibling repositories
+3. **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** — maturity, milestones, and ecosystem health
+4. **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** — compatible engineering baselines
+5. **[RFCs](rfcs/)** — normative change proposals (as needed for rationale and history)
+
+**[VERITY_CORE.md](VERITY_CORE.md)** is the primary entry point for understanding the protocol as one coherent specification. **[RFCs](rfcs/)** remain the normative change mechanism and document how the protocol evolved — read them when you need proposal rationale, acceptance history, or governance context.
+
+---
+
 ## Platform Releases
 
 Verity is versioned as an **engineering platform**, not as isolated repository tags. A **Platform Release** names a compatible set of `veritypay-spec`, `veritypay-tooling`, `veritypay-reference`, and `veritypay-conformance` baselines against a Specification Edition.
@@ -72,6 +86,7 @@ If a behavior is not specified (or not yet accepted), it is **not part of the pr
 ```
 veritypay-spec/
 ├── README.md                      ← You are here
+├── VERITY_CORE.md                 ← Verity Core Protocol (living specification)
 ├── ECOSYSTEM.md                   ← Platform map across sibling repositories
 ├── PLATFORM_RELEASES.md           ← Official platform compatibility index
 ├── RELEASE_NOTES_PLATFORM_1_0.md ← Platform 1.0 release summary
@@ -104,6 +119,7 @@ See [`docs/README.md`](docs/README.md) for the full **Documentation Pyramid**.
 
 | Role | Start with |
 |------|------------|
+| **Protocol implementers** | **[VERITY_CORE.md](VERITY_CORE.md)** → **[ECOSYSTEM.md](ECOSYSTEM.md)** |
 | **Anyone mapping the full platform** | **[ECOSYSTEM.md](ECOSYSTEM.md)** |
 | **Anyone pinning compatible repository baselines** | **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** · **[RELEASE_NOTES_PLATFORM_1_0.md](RELEASE_NOTES_PLATFORM_1_0.md)** |
 | **Anyone needing current maturity** | **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** |

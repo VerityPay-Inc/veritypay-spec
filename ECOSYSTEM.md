@@ -10,6 +10,18 @@ For specification maturity detail, see [SPECIFICATION_STATUS.md](SPECIFICATION_S
 
 ---
 
+## The Verity Core
+
+The **Verity Core** is the shared protocol language used by all Verity protocols. It defines the verification model — claims, assertions, evidence, evaluation context, and conformance vocabulary — that independent implementations must share to interoperate.
+
+**VerityPay** is the first protocol built upon the Core. Payment-specific semantics extend Core entities without redefining them.
+
+Future protocols — identity, credentials, compliance, and others — are expected to reuse the same verification model, context framing, and capability vocabulary defined in the Core.
+
+For the consolidated protocol specification, see **[VERITY_CORE.md](VERITY_CORE.md)**. Normative changes to the Core still flow through RFCs in this repository; the Core document aggregates RFC content for implementers without replacing governance.
+
+---
+
 ## Ecosystem diagram
 
 The platform is a pipeline of single-responsibility repositories. Shared specification representation (`vp-spec-model`) lives in `veritypay-tooling` and is consumed by downstream executors.
