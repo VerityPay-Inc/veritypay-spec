@@ -6,7 +6,7 @@
 
 This document consolidates the Verity Core protocol RFCs into a single implementation-oriented specification. It is **not** a replacement for RFCs — [VP-RFC-0000](rfcs/0000-rfc-process.md) remains the normative change mechanism. RFCs document the evolution of the protocol; this document presents the current protocol as one coherent specification for implementers, reviewers, auditors, and educators.
 
-**Goals:** present the protocol in implementation order; describe the complete verification model; reference RFCs rather than duplicate rationale; remain synchronized with protocol RFCs; serve as the primary entry point for protocol implementers.
+**Goals:** present the protocol in implementation order; describe the complete protocol execution model; reference RFCs rather than duplicate rationale; remain synchronized with protocol RFCs; serve as the primary entry point for protocol implementers.
 
 **Non-goals:** introduce new protocol semantics; replace RFC governance; define implementation-specific behavior.
 
@@ -16,47 +16,119 @@ Normative behavior is defined by accepted RFCs and, where cited, draft RFCs in p
 
 ## 1. Introduction
 
-*Placeholder.* This section will summarize the Verity Core verification protocol, its scope, and its relationship to the VerityPay ecosystem. Content will be drawn from accepted protocol RFCs beginning with [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) and aligned with [DOMAIN_MODEL.md](docs/01-architecture/DOMAIN_MODEL.md).
+*Placeholder.* This section will summarize the Verity Core protocol, its scope, and its relationship to the VerityPay ecosystem. Content will be drawn from accepted protocol RFCs beginning with [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) and aligned with [DOMAIN_MODEL.md](docs/01-architecture/DOMAIN_MODEL.md).
 
-## 2. Design Principles
+## 2. Normative Language
+
+The key words **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT**, and **MAY** in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) unless otherwise stated.
+
+Informative notes, draft RFC references, and placeholder sections do not introduce normative requirements beyond the RFCs they summarize.
+
+## 3. Reading Guide
+
+| Reader | Start here |
+|--------|------------|
+| **Implementers** | Sections **10–23** (Protocol Execution Model through Protocol Capabilities) |
+| **Auditors** | Sections **10**, **21**, **23**, and **29** (References) |
+| **Contributors** | [VP-RFC-0000](rfcs/0000-rfc-process.md) (RFC Process) first, then Sections **27–28** |
+| **General readers** | Sections **1–5** (Introduction through Design Principles) |
+
+For platform context, see [ECOSYSTEM.md](ECOSYSTEM.md). For maturity and release pins, see [SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md) and [PLATFORM_RELEASES.md](PLATFORM_RELEASES.md).
+
+## 4. Canonical Terminology
+
+The vocabulary below is inherited by every protocol built on Verity Core. Normative definitions remain in RFCs and [GLOSSARY.md](docs/00-overview/GLOSSARY.md); this table orients readers.
+
+| Term | Meaning |
+|------|---------|
+| **Evaluation** | One execution of the protocol against a claim, evidence, and context |
+| **Claim** | Structured statement under evaluation; envelope carrying identity and assertions |
+| **Assertion** | Structured statement inside a claim — the verification target |
+| **Evidence** | Supporting material presented for evaluation |
+| **Evidence Set** | Unordered collection of evidence associated with one claim during evaluation |
+| **Verification Context** | Immutable evaluation environment shared by all assertions and evidence in one evaluation |
+| **Verification Result** | Protocol outcome (`satisfied`, `not_satisfied`, or `indeterminate`) |
+
+## 5. Design Principles
 
 *Placeholder.* This section will consolidate protocol design principles referenced across Verity Core RFCs and the constitutional layer — notably [PRINCIPLES.md](docs/00-overview/PRINCIPLES.md). It will not introduce principles beyond those established in accepted specification documents.
 
-## 3. Protocol Architecture
+## 6. The Verity Philosophy
+
+Verity is designed around one principle:
+
+**Verification should depend on evidence, not implementation.**
+
+Claims describe what is asserted.
+
+Evidence supports or refutes those assertions.
+
+Evaluation follows publicly documented rules.
+
+Independent implementations should converge on identical outcomes.
+
+Protocol evolution must preserve interoperability through explicit governance.
+
+Verity separates **protocol meaning** from **implementation architecture**.
+
+This separation allows multiple independent implementations to remain compatible over time.
+
+## 7. Verity Core Execution Model
+
+The diagram below is the **canonical execution model** for the Verity Core Protocol. It appears throughout this specification, sibling documentation, and conformance scenarios. Stages marked *(draft)* reference draft RFCs; accepted stages are normative via their defining RFCs.
+
+```mermaid
+flowchart TD
+    VC[Verification Context] --> VP[Verification Profile]
+    VP --> C[Claim]
+    C --> A[Assertion]
+    A --> AT[Assertion Type]
+    AT --> AE[Assertion Evaluator]
+    AE --> ES[Evidence Set]
+    ES --> EP[Evaluation Policy]
+    EP --> VR[Verification Result]
+```
+
+| Stage | RFC basis |
+|-------|-----------|
+| Verification Context | [VP-RFC-0007](rfcs/0007-verification-context.md) *(draft)* |
+| Verification Profile | [VP-RFC-0008](rfcs/0008-verification-profiles.md) *(draft)* |
+| Claim | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) *(accepted)* |
+| Assertion | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) *(accepted)* |
+| Assertion Type | [VP-RFC-0005](rfcs/0005-assertion-types.md) *(draft)* |
+| Assertion Evaluator | [VP-RFC-0006](rfcs/0006-assertion-evaluation-dispatch.md) *(draft)* |
+| Evidence Set | [VP-RFC-0003](rfcs/0003-multiple-evidence.md) *(accepted)* |
+| Evaluation Policy | [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) *(accepted)* |
+| Verification Result | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) *(accepted)* |
+
+Optional **Context Extensions** *(draft — [VP-RFC-0009](rfcs/0009-verification-context-extensions.md))* augment **Verification Context** when future RFCs define them. No standardized extensions exist in the current platform.
+
+## 8. Protocol Invariants
+
+These invariants summarize constraints established across Verity Core RFCs. They are the fixed laws independent implementations share. Where an invariant depends on a draft RFC, acceptance of that RFC makes the invariant binding.
+
+1. Every **evaluation** has exactly one **Verification Context** *(draft — [VP-RFC-0007](rfcs/0007-verification-context.md))*.
+2. Every **Claim** contains one or more **Assertions** ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md); minimal profile requires at least one).
+3. Every **Assertion** has exactly one **Assertion Type** *(draft — [VP-RFC-0005](rfcs/0005-assertion-types.md))*.
+4. Every **Evidence** envelope references at most one **Claim** via `claim_id` ([VP-RFC-0002](rfcs/0002-claim-identity-binding.md)).
+5. **Verification Context** remains immutable during evaluation *(draft — [VP-RFC-0007](rfcs/0007-verification-context.md))*.
+6. **Verification Results** are deterministic for identical protocol inputs — same claim, evidence set, context, and applicable rules yield the same outcome ([CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md)).
+7. Unknown **Context Extensions** and unknown **Protocol Capabilities** never redefine accepted semantics; they are ignored unless explicitly required *(draft — [VP-RFC-0009](rfcs/0009-verification-context-extensions.md), [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md))*.
+8. Protocol evolution is **additive** unless a Platform major release or accepted RFC explicitly declares otherwise ([PLATFORM_RELEASES.md](PLATFORM_RELEASES.md), [VP-RFC-0000](rfcs/0000-rfc-process.md)).
+
+## 9. Protocol Architecture
 
 *Placeholder.* This section will describe the structural architecture of the verification protocol — entities, relationships, and evaluation flow — as defined in [DATA_MODEL.md](docs/01-architecture/DATA_MODEL.md) and accepted RFCs **VP-RFC-0001** through **VP-RFC-0004**.
 
-## 4. Verification Model
+## 10. Protocol Execution Model
 
-Verification is the process of evaluating whether a **Claim**'s **Assertion** is supported by **Evidence** under a fixed set of protocol rules. Verity Core describes that process in **implementation order** — the sequence an evaluator follows from environment setup through outcome — not RFC publication order.
+Protocol **execution** is the ordered process an evaluator follows from environment setup through verification outcome. This section describes each stage of the [Verity Core Execution Model](#7-verity-core-execution-model) in implementation order — not RFC publication order.
 
-The model below synthesizes accepted [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), [VP-RFC-0002](rfcs/0002-claim-identity-binding.md), [VP-RFC-0003](rfcs/0003-multiple-evidence.md), and [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md). Stages marked *(draft)* reference draft RFCs **VP-RFC-0005** through **VP-RFC-0009**; behavior described there is informative until those RFCs are accepted.
-
-### Lifecycle (implementation order)
-
-```text
-Verification Context          (VP-RFC-0007, draft)
-        ↓
-Verification Profile          (VP-RFC-0008, draft)
-        ↓
-Claim                         (VP-RFC-0001, accepted)
-        ↓
-Assertion                     (VP-RFC-0001, accepted)
-        ↓
-Assertion Type                (VP-RFC-0005, draft)
-        ↓
-Assertion Evaluator           (VP-RFC-0006, draft)
-        ↓
-Evidence Set                  (VP-RFC-0003, accepted)
-        ↓
-Evaluation Policy             (VP-RFC-0004, accepted)
-        ↓
-Verification Result           (VP-RFC-0001, VP-RFC-0004, accepted)
-```
+The execution model synthesizes accepted [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), [VP-RFC-0002](rfcs/0002-claim-identity-binding.md), [VP-RFC-0003](rfcs/0003-multiple-evidence.md), and [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md). Stages marked *(draft)* reference draft RFCs **VP-RFC-0005** through **VP-RFC-0009**; behavior described there is informative until those RFCs are accepted.
 
 ### Stages
 
-**Verification Context** *(draft — [VP-RFC-0007](rfcs/0007-verification-context.md))* defines the **immutable evaluation environment** shared by every assertion and evidence envelope in one verification. Core fields include `edition`, `protocol_version`, and `evaluation_policy`. Context belongs to the evaluation — it is not embedded in claims or evidence.
+**Verification Context** *(draft — [VP-RFC-0007](rfcs/0007-verification-context.md))* defines the **immutable evaluation environment** shared by every assertion and evidence envelope in one evaluation. Core fields include `edition`, `protocol_version`, and `evaluation_policy`. Context belongs to the evaluation — it is not embedded in claims or evidence.
 
 **Verification Profile** *(draft — [VP-RFC-0008](rfcs/0008-verification-profiles.md))* is a named, reusable configuration of context fields. Selecting a profile (for example **`minimal_all_required`**) resolves evaluation-wide parameters such as **`ALL_REQUIRED`** policy without repeating individual context values. Profiles do not alter claim or evidence semantics.
 
@@ -88,9 +160,7 @@ Verification Result           (VP-RFC-0001, VP-RFC-0004, accepted)
 | **Evaluation Policy** | Aggregates multiple evidence results into one outcome |
 | **Verification Result** | Communicates the protocol outcome |
 
-Optional **Context Extensions** *(draft — [VP-RFC-0009](rfcs/0009-verification-context-extensions.md))* may augment context in future evaluations. No standardized extensions exist today; they do not appear in the lifecycle until defined by future RFCs.
-
-## 5. Verification Context
+## 11. Verification Context
 
 **Verification Context** is the immutable protocol object that supplies evaluation-wide information shared by all **Assertions** and **Evidence** during one verification. It frames *how* evaluation proceeds — not *what* is asserted. Draft [VP-RFC-0007](rfcs/0007-verification-context.md) defines the context object; accepted [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) already defines **`evaluation_policy`** semantics that context carries.
 
@@ -104,9 +174,9 @@ Verification Context **belongs to the evaluation**. It is **not** part of a **Cl
 | **`protocol_version`** | Declared protocol version for the evaluation |
 | **`evaluation_policy`** | **Evaluation Policy** identifier — for example **`ALL_REQUIRED`** per [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) |
 
-Context **must** remain immutable during evaluation and **must** apply to every assertion in that evaluation. Context **must not** modify claim or evidence semantics.
+Context **MUST** remain immutable during evaluation and **MUST** apply to every assertion in that evaluation. Context **MUST NOT** modify claim or evidence semantics.
 
-Implementations may derive these values from specification metadata until explicit context objects are adopted. Wire encodings are deferred.
+Implementations **MAY** derive these values from specification metadata until explicit context objects are adopted. Wire encodings are deferred.
 
 ### Verification Profiles
 
@@ -114,9 +184,9 @@ Draft [VP-RFC-0008](rfcs/0008-verification-profiles.md) introduces **Verificatio
 
 ### Context Extensions
 
-Draft [VP-RFC-0009](rfcs/0009-verification-context-extensions.md) defines **Context Extension** — optional objects that augment context without replacing core fields. Informative future categories include time, trust, issuer, localization, audit, and regulatory context. **No standardized extensions exist** in the current platform. Unknown extensions must be ignored unless the active profile explicitly requires them.
+Draft [VP-RFC-0009](rfcs/0009-verification-context-extensions.md) defines **Context Extension** — optional objects that augment context without replacing core fields. Informative future categories include time, trust, issuer, localization, audit, and regulatory context. **No standardized extensions exist** in the current platform. Unknown extensions **MUST** be ignored unless the active profile explicitly requires them.
 
-## 6. Claims
+## 12. Claims
 
 A **Claim** is the central protocol envelope for a structured statement under verification. Accepted [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) defines the minimal claim envelope; accepted [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) defines how claim identity binds evidence.
 
@@ -124,15 +194,15 @@ Claims **contain Assertions**. The claim envelope binds identity, subject, and s
 
 ### Identity
 
-`claim_id` is the **stable identity** of a claim envelope within an evaluation context. It must be non-empty and is compared using exact string equality per [VP-RFC-0002](rfcs/0002-claim-identity-binding.md). Identity enables **evidence binding**: evidence is applicable only when `evidence.claim_id` equals `claim.claim_id`. Binding checks linkage only — it does not inspect assertion or evidence bodies.
+`claim_id` is the **stable identity** of a claim envelope within an evaluation context. It **MUST** be non-empty and is compared using exact string equality per [VP-RFC-0002](rfcs/0002-claim-identity-binding.md). Identity enables **evidence binding**: evidence is applicable only when `evidence.claim_id` equals `claim.claim_id`. Binding checks linkage only — it does not inspect assertion or evidence bodies.
 
 Claim identity is a precondition for correct evaluation; it does **not** determine verification outcomes by itself. Mismatched or empty binding yields `indeterminate` via **VP-RULE-0002** without proceeding to content rules. Matching identity allows subsequent rules (such as **VP-RULE-0001**) to evaluate assertion content.
 
 ### Evaluation target
 
-The claim's role in verification is to present **what is asserted** — identity plus nested **Assertion** — as the evaluation target. Outcomes are recorded separately in **Verification Result**; claims must not embed verification outcomes.
+The claim's role in verification is to present **what is asserted** — identity plus nested **Assertion** — as the evaluation target. Outcomes are recorded separately in **Verification Result**; claims **MUST NOT** embed verification outcomes.
 
-## 7. Assertions
+## 13. Assertions
 
 An **Assertion** is the structured content within a claim that verification rules evaluate. Accepted [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) requires every minimal claim to carry a nested assertion with `assertion_type` and `body`. Draft [VP-RFC-0005](rfcs/0005-assertion-types.md) names **Assertion Type** as the protocol vocabulary for interpreting assertion data.
 
@@ -147,65 +217,69 @@ Assertions express **what is being evaluated**. The interpreter evaluates the as
 
 **Assertion Type** defines *interpretation* — what the body means in protocol terms. It does not define *evaluation procedure*; rule execution and evaluator dispatch are specified elsewhere ([VP-RFC-0006](rfcs/0006-assertion-evaluation-dispatch.md), draft). The **`body`** carries the data consumed by those rules — for **`body_equality`**, the comparable payload evaluated against evidence content when linkage and type preconditions hold.
 
-Every assertion must declare exactly one type via `assertion_type`. Type identifiers must be stable protocol strings — not implementation class names or vendor-specific labels.
+Every assertion **MUST** declare exactly one type via `assertion_type`. Type identifiers **MUST** be stable protocol strings — not implementation class names or vendor-specific labels.
 
-## 8. Assertion Types
+## 14. Assertion Types
 
 *Placeholder.* This section will describe **Assertion Type** taxonomy per draft [VP-RFC-0005](rfcs/0005-assertion-types.md), including the initial **`body_equality`** type. Evaluation dispatch is deferred to the Assertion Evaluators section.
 
-## 9. Assertion Evaluators
+## 15. Assertion Evaluators
 
 *Placeholder.* This section will describe **Evaluation Dispatch** and **Assertion Evaluator** selection per draft [VP-RFC-0006](rfcs/0006-assertion-evaluation-dispatch.md). Dispatch depends solely on `assertion_type` and does not inspect claim or evidence bodies.
 
-## 10. Evidence
+## 16. Evidence
 
 *Placeholder.* This section will describe evidence envelopes and **EvidenceContent** per accepted [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md). Claim identity binding per [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) will be referenced where linkage rules apply.
 
-## 11. Evidence Sets
+## 17. Evidence Sets
 
 *Placeholder.* This section will describe **Evidence Set** composition — unordered collections of evidence per claim — per accepted [VP-RFC-0003](rfcs/0003-multiple-evidence.md). Ordering independence and per-envelope binding will be summarized from that RFC.
 
-## 12. Evaluation Policies
+## 18. Evaluation Policies
 
 *Placeholder.* This section will describe **Evaluation Policy** aggregation over evidence sets per accepted [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md), including the initial **`ALL_REQUIRED`** policy and verification outcome vocabulary.
 
-## 13. Verification Profiles
+## 19. Verification Profiles
 
 *Placeholder.* This section will describe **Verification Profile** — named **Verification Context** configurations — per draft [VP-RFC-0008](rfcs/0008-verification-profiles.md), including the initial **`minimal_all_required`** profile.
 
-## 14. Context Extensions
+## 20. Context Extensions
 
 *Placeholder.* This section will describe the **Context Extension** model per draft [VP-RFC-0009](rfcs/0009-verification-context-extensions.md). No standardized extensions are defined; future RFCs will populate extension semantics.
 
-## 15. Verification Results
+## 21. Verification Results
 
 *Placeholder.* This section will describe verification outcomes (`satisfied`, `not_satisfied`, `indeterminate`) and result composition per [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) and aggregated results per [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md).
 
-## 16. Protocol Capabilities
+## 22. Protocol Capabilities
 
 *Placeholder.* This section will describe **Protocol Capability** identifiers and conformance eligibility per draft [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md). Capabilities are an implementation concept — not part of claims or context.
 
-## 17. Conformance
+## 23. Conformance
 
 *Placeholder.* This section will summarize the conformance model and VP-CS scenario execution per [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) and executable scenarios authored under accepted RFCs. Harness verdict vocabulary will be distinguished from verification outcomes.
 
-## 18. Versioning
+## 24. Versioning
 
 *Placeholder.* This section will describe Edition, Protocol Version, and Platform Release relationships per [SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md) and [PLATFORM_RELEASES.md](PLATFORM_RELEASES.md). Version 1.2 of this document aligns with **Platform 1.2** engineering baseline.
 
-## 19. Relationship to Reference Implementation
+## 25. Relationship to Reference Implementation
 
 *Placeholder.* This section will describe how `veritypay-reference` implements Verity Core semantics as an educational oracle — without making the reference architecture normative. See [ECOSYSTEM.md](ECOSYSTEM.md) and the reference interpreter ADRs in `veritypay-reference`.
 
-## 20. Relationship to Conformance Suite
+## 26. Relationship to Conformance Suite
 
 *Placeholder.* This section will describe how `veritypay-conformance` executes VP-CS scenarios against the reference oracle per [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md). Scenario meaning remains authored in this repository.
 
-## 21. Future Evolution
+## 27. Governance
 
-*Placeholder.* This section will describe how Verity Core evolves through the RFC process ([VP-RFC-0000](rfcs/0000-rfc-process.md)) and how this document stays synchronized when RFCs are accepted or amended. Draft RFCs may appear in placeholders until acceptance.
+*Placeholder.* This section will describe how Verity Core changes are proposed, reviewed, and accepted through [VP-RFC-0000](rfcs/0000-rfc-process.md) and [GOVERNANCE.md](docs/05-governance/GOVERNANCE.md). RFCs remain the normative change mechanism; this document aggregates accepted content but does not replace governance process.
 
-## 22. References
+## 28. Evolution
+
+*Placeholder.* This section will describe how Verity Core evolves across Platform releases and Editions, how draft RFCs graduate into accepted protocol semantics, and how this document stays synchronized when RFC status changes. Protocol evolution is additive unless a major Platform release or accepted RFC declares otherwise.
+
+## 29. References
 
 *Placeholder.* This section will maintain a canonical bibliography of Verity Core RFCs and architecture documents. Initial scope:
 
