@@ -8,6 +8,7 @@ Machine-readable **VP-CS (VerityPay Conformance Scenario)** inputs for the confo
 | [`../../docs/03-development/CONFORMANCE_MODEL.md`](../../docs/03-development/CONFORMANCE_MODEL.md) | Human-readable scenario narratives and conformance philosophy |
 | [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) | Normative minimal rule and **VP-CS-0001** profile ([VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md), accepted) |
 | [`../../rfcs/0002-claim-identity-binding.md`](../../rfcs/0002-claim-identity-binding.md) | Normative binding rule and **VP-CS-0002** profile ([VP-RFC-0002](../../rfcs/0002-claim-identity-binding.md), accepted) |
+| [`../../rfcs/0011-normalized-text-assertion.md`](../../rfcs/0011-normalized-text-assertion.md) | Normative normalized text rule and **VP-CS-0011**–**0013** profiles ([VP-RFC-0011](../../rfcs/0011-normalized-text-assertion.md), draft) |
 
 ## What these files are
 
@@ -31,5 +32,8 @@ Tooling in [`veritypay-tooling`](https://github.com/VerityPay-Inc/veritypay-tool
 |----|---------|------|-----|--------|
 | **VP-CS-0001** | [`scenarios/VP-CS-0001.toml`](scenarios/VP-CS-0001.toml) | VP-RULE-0001 | VP-RFC-0001 (accepted) | draft |
 | **VP-CS-0002** | [`scenarios/VP-CS-0002.toml`](scenarios/VP-CS-0002.toml) | VP-RULE-0002 | VP-RFC-0002 (accepted) | draft |
+| **VP-CS-0011** | [`scenarios/VP-CS-0011.toml`](scenarios/VP-CS-0011.toml) | VP-RULE-0011 | VP-RFC-0011 (draft) | draft |
+| **VP-CS-0012** | [`scenarios/VP-CS-0012.toml`](scenarios/VP-CS-0012.toml) | VP-RULE-0011 | VP-RFC-0011 (draft) | draft |
+| **VP-CS-0013** | [`scenarios/VP-CS-0013.toml`](scenarios/VP-CS-0013.toml) | VP-RULE-0011 | VP-RFC-0011 (draft) | draft |
 
 New scenarios are added through RFC or governed amendment—never only in a private test repository.

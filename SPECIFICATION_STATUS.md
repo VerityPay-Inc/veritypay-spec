@@ -153,7 +153,7 @@ Document `status` values reflect front matter at last update. **Draft** means va
 | [VP-RFC-0008](rfcs/0008-verification-profiles.md) | Draft | 0.1.0 | Protocol | **Verification Profile**, **`minimal_all_required`** |
 | [VP-RFC-0009](rfcs/0009-verification-context-extensions.md) | Draft | 0.1.0 | Protocol | **Context Extension** model — no standardized extensions |
 | [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md) | Draft | 0.1.0 | Protocol | **Protocol Capability** — feature identifiers and conformance eligibility |
-| [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) | Draft | 0.1.0 | Protocol | **Content Equality** — **`normalized_text`**, **VP-RULE-0011**; future Platform 1.3 candidate |
+| [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) | Draft | 0.1.0 | Protocol | **Content Equality** — **`normalized_text`**, **VP-RULE-0011**; **VP-CS-0011**–**0013** fixtures; future Platform 1.3 candidate |
 
 ---
 
@@ -173,7 +173,7 @@ Protocol RFCs that define executable verification inputs and rules. Status refle
 | [VP-RFC-0008](rfcs/0008-verification-profiles.md) | **Draft** | **Verification Profile** — **`minimal_all_required`**; implementation deferred |
 | [VP-RFC-0009](rfcs/0009-verification-context-extensions.md) | **Draft** | **Context Extension** model — extension identifiers and ignore-unless-required rules; no standardized extensions |
 | [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md) | **Draft** | **Protocol Capability** — stable feature identifiers; conformance **skip** when capability absent |
-| [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) | **Draft** | **Content Equality** — **`normalized_text`**, **VP-RULE-0011** (NFC, trim, whitespace collapse); future **Platform 1.3** candidate |
+| [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) | **Draft** | **Content Equality** — **`normalized_text`**, **VP-RULE-0011** (NFC, trim, whitespace collapse); **VP-CS-0011**–**0013** fixtures published; future **Platform 1.3** candidate |
 
 Platform release is **[Platform 1.2](PLATFORM_RELEASES.md)**. **[VP-RFC-0011](rfcs/0011-normalized-text-assertion.md)** is a draft **Platform 1.3** protocol expansion candidate — not part of the current platform release. Executable **VP-CS-0003** and **VP-CS-0004** fixtures remain deferred until reference and conformance support multi-evidence evaluation.
 
@@ -185,7 +185,7 @@ Platform release is **[Platform 1.2](PLATFORM_RELEASES.md)**. **[VP-RFC-0011](rf
 |----------|---------|--------|------------------|----------------|
 | **VP-TERM** | Canonical terminology | Active | [`spec/terminology/registry.yaml`](spec/terminology/registry.yaml) | [GLOSSARY.md](docs/00-overview/GLOSSARY.md) |
 | **VP-RFC** | Accepted RFC index | Active | [`spec/rfcs/registry.yaml`](spec/rfcs/registry.yaml) | [`rfcs/`](rfcs/) |
-| **VP-CS** | Conformance scenarios | Draft in spec | [`spec/conformance/scenarios/`](spec/conformance/scenarios/) — **VP-CS-0001**, **VP-CS-0002** fixtures; dedicated registry *future* | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) |
+| **VP-CS** | Conformance scenarios | Draft in spec | [`spec/conformance/scenarios/`](spec/conformance/scenarios/) — **VP-CS-0001**, **VP-CS-0002**, **VP-CS-0011**–**0013** fixtures; dedicated registry *future* | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) |
 | **VP-ADR** | Engineering decisions | Planned | *Future* | [ADR_GUIDE.md](docs/05-governance/ADR_GUIDE.md) |
 | **VP-EDITION** | Published Edition manifests | Planned | *Future* | [SPECIFICATION_RELEASE_PROCESS.md](docs/05-governance/SPECIFICATION_RELEASE_PROCESS.md) |
 
@@ -257,7 +257,7 @@ Institutional priorities—not a issue tracker.
 
 ### High priority
 
-- **Platform 1.3 protocol expansion** — [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) (**`normalized_text`**, **VP-RULE-0011**) acceptance path; reference evaluator and VP-CS fixtures when ready
+- **Platform 1.3 protocol expansion** — [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) (**`normalized_text`**, **VP-RULE-0011**) acceptance path; **VP-CS-0011**–**0013** fixtures published; reference evaluator and conformance execution when ready
 - **Genesis Edition readiness** — Run release checklist; prepare Edition Manifest draft
 - **Registry synchronization** — Keep glossary and `registry.yaml` aligned on each terminology change
 - **Conformance scenario hardening** — VP-CS-0001–0005 ready for Edition baseline

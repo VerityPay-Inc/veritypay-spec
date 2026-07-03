@@ -33,7 +33,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [PRINCIPLES.md](../00-overview/PRINCIPLES.md), [GLOSSARY.md](../00-overview/GLOSSARY.md)
 
-**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft), [VP-RFC-0007](../../rfcs/0007-verification-context.md) (draft), [VP-RFC-0008](../../rfcs/0008-verification-profiles.md) (draft), [VP-RFC-0009](../../rfcs/0009-verification-context-extensions.md) (draft), [VP-RFC-0010](../../rfcs/0010-protocol-capability-negotiation.md) (draft), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft), [VP-RFC-0007](../../rfcs/0007-verification-context.md) (draft), [VP-RFC-0008](../../rfcs/0008-verification-profiles.md) (draft), [VP-RFC-0009](../../rfcs/0009-verification-context-extensions.md) (draft), [VP-RFC-0010](../../rfcs/0010-protocol-capability-negotiation.md) (draft), [VP-RFC-0011](../../rfcs/0011-normalized-text-assertion.md) (draft), [`../../rfcs/`](../../rfcs/)
 
 ---
 
@@ -206,6 +206,32 @@ Implementations **MAY** advertise supported capabilities. Current **VP-CS-0001**
 **Initial capability identifiers:** `minimal_claims`, `claim_binding`, `multiple_evidence`, `evaluation_policy`, `assertion_types`, `assertion_dispatch`, `verification_context`, `verification_profiles`, `context_extensions`.
 
 No VP-CS fixture changes are required for **VP-RFC-0010** at draft stage.
+
+### Normalized text assertion (VP-RFC-0011)
+
+[VP-RFC-0011](../../rfcs/0011-normalized-text-assertion.md) (draft) standardizes **`normalized_text`** — a **Content Equality** assertion type evaluated by **VP-RULE-0011** after Unicode NFC, trim, and internal whitespace collapse.
+
+Published machine-readable fixtures:
+
+| VP-CS ID | Fixture | Expected outcome | Profile |
+|----------|---------|------------------|---------|
+| **VP-CS-0011** | [`VP-CS-0011.toml`](../../spec/conformance/scenarios/VP-CS-0011.toml) | `satisfied` | Trim and whitespace collapse yield matching normalized bodies |
+| **VP-CS-0012** | [`VP-CS-0012.toml`](../../spec/conformance/scenarios/VP-CS-0012.toml) | `not_satisfied` | Case-sensitive comparison — `Hello` vs `hello` |
+| **VP-CS-0013** | [`VP-CS-0013.toml`](../../spec/conformance/scenarios/VP-CS-0013.toml) | `indeterminate` | Empty or whitespace-only evidence body before normalization |
+
+Fixtures declare `assertion_type = normalized_text` on claim inputs. Reference and conformance execution for these scenarios remain **deferred** until Platform 1.3 baselines wire the **Normalized Text Evaluator** into the harness.
+
+Dispatch (informative):
+
+```text
+normalized_text
+      ↓
+Normalized Text Evaluator
+      ↓
+VP-RULE-0011
+```
+
+**VP-RFC-0011** remains **draft** — fixtures pin oracle expectations; acceptance is a separate governance step.
 
 ---
 
@@ -567,6 +593,9 @@ Each scenario defines:
 | VP-CS-0003 | Representation independence | L2+ encoding |
 | VP-CS-0004 | Identity immutability | Representation guarantees |
 | VP-CS-0005 | State invalid transitions | State invariants |
+| VP-CS-0011 | Normalized text — trim and collapse | L3 **`normalized_text`** / **VP-RULE-0011** |
+| VP-CS-0012 | Normalized text — case sensitivity | L3 **`normalized_text`** / **VP-RULE-0011** |
+| VP-CS-0013 | Normalized text — empty or whitespace-only evidence | L3 **`normalized_text`** / **VP-RULE-0011** |
 | VP-CS-0006+ | *(forthcoming via RFC)* | Payment domain claim types, indeterminate edge cases |
 
 Future scenarios are added through RFC or governed amendment to this document—never only in a private test repo.

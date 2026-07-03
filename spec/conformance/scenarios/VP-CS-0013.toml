@@ -1,0 +1,28 @@
+scenario_id = "VP-CS-0013"
+name = "Normalized text with empty or whitespace-only evidence is indeterminate"
+rule_id = "VP-RULE-0011"
+rfc = "VP-RFC-0011"
+protocol_version = "vp-protocol-draft"
+
+[claim]
+claim_id = "claim-001"
+claim_type = "minimal"
+subject = "subject-alpha"
+assertion_type = "normalized_text"
+assertion_body = "Hello"
+specification_version = "vp-protocol-draft"
+
+[evidence]
+evidence_id = "evidence-001"
+claim_id = "claim-001"
+evidence_type = "document"
+content_type = "document"
+content_body = "     "
+
+[expected]
+outcome = "indeterminate"
+
+[metadata]
+status = "draft"
+source_rfc = "VP-RFC-0011"
+description = "Empty or whitespace-only evidence content is indeterminate under VP-RULE-0011 before normalized comparison proceeds."

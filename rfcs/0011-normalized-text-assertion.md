@@ -34,7 +34,10 @@ related_architecture:
   - ../docs/03-development/CONFORMANCE_MODEL.md
   - ../CONTENT_EQUALITY_FAMILY.md
 
-related_conformance: []
+related_conformance:
+  - VP-CS-0011
+  - VP-CS-0012
+  - VP-CS-0013
 
 constitutional_refs:
   - ../docs/00-overview/MANIFESTO.md
@@ -74,7 +77,7 @@ This RFC standardizes the **Content Equality** assertion type **`normalized_text
 
 This RFC is **additive**. It does **not** amend **`body_equality`**, **VP-RULE-0001**, **VP-RULE-0002**, or accepted [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md) rule text.
 
-**VP-CS** fixture publication is **deferred**. Reference and conformance implementation are **deferred**.
+**VP-CS** fixtures **VP-CS-0011**, **VP-CS-0012**, and **VP-CS-0013** are published in [`spec/conformance/scenarios/`](../spec/conformance/scenarios/). Reference and conformance execution remain **deferred**.
 
 ---
 
@@ -176,7 +179,7 @@ Evaluators **MUST** use the **normalized strings** produced by steps 1–3 for *
 1. If no **Evidence** envelope is supplied → outcome **MUST** be `indeterminate`.
 2. If `evidence.claim_id` does not equal `claim.claim_id` → outcome **MUST** be `indeterminate`.
 3. If either `claim.assertion.body` or `evidence.content.body` is not valid UTF-8 → outcome **MUST** be `indeterminate`.
-4. If `evidence.content.body` is empty (zero-length string before normalization) → outcome **MUST** be `indeterminate`.
+4. If `evidence.content.body` is empty (zero-length string) or contains only whitespace characters before normalization → outcome **MUST** be `indeterminate`.
 5. Apply the normalization pipeline (§2) to both bodies. Let `N_assertion` and `N_evidence` be the normalized results.
 6. If `N_evidence` equals `N_assertion` (exact Unicode string equality) → outcome **MUST** be `satisfied`.
 7. Otherwise → outcome **MUST** be `not_satisfied`.
@@ -188,7 +191,7 @@ Evaluators **MUST** use the **normalized strings** produced by steps 1–3 for *
 | Step 1 | `indeterminate` |
 | Step 2 | `indeterminate` |
 | Step 3 (invalid UTF-8 / unknown encoding) | `indeterminate` |
-| Step 4 (empty evidence body) | `indeterminate` |
+| Step 4 (empty or whitespace-only evidence body) | `indeterminate` |
 | Step 6 (normalized strings equal) | `satisfied` |
 | Step 7 (normalized strings differ) | `not_satisfied` |
 
@@ -197,7 +200,7 @@ No other outcome labels are defined by this RFC.
 **Notes:**
 
 - Step 2 duplicates the binding check in **VP-RULE-0002** when both rules run; evaluators **MAY** rely on **VP-RULE-0002** having run first per dispatch architecture in [VP-RFC-0006](0006-assertion-evaluation-dispatch.md).
-- An empty assertion body after normalization is valid input; only an empty **evidence** body before normalization yields `indeterminate` in step 4 (consistent with **VP-RULE-0001** empty-evidence handling).
+- An empty assertion body after normalization is valid input; only an empty or whitespace-only **evidence** body before normalization yields `indeterminate` in step 4 (consistent with **VP-RULE-0001** empty-evidence handling).
 - This rule does **not** inspect `subject`, `specification_version`, or envelope identifiers beyond `claim_id` linkage.
 
 ### 4. Informative examples
@@ -212,6 +215,7 @@ Examples are **non-normative** illustrations. Only §2 and §3 are binding.
 | `"café"` (NFC) | `"café"` (NFD precomposed) | Equal after NFC step 1 | `satisfied` |
 | `"alpha"` | `"beta"` | `"alpha"` / `"beta"` | `not_satisfied` |
 | `"alpha"` | `` (empty) | — | `indeterminate` |
+| `"alpha"` | `"     "` (whitespace only) | — | `indeterminate` |
 | Invalid UTF-8 byte sequence | `"alpha"` | — | `indeterminate` |
 
 ### 5. Evaluator dispatch (informative)
@@ -232,7 +236,7 @@ This RFC does **not** amend **VP-RFC-0006** text. Dispatch registration **MAY** 
 |-------|--------|
 | [DATA_MODEL.md](../docs/01-architecture/DATA_MODEL.md) | **Extension on acceptance** — **`normalized_text`** under Content Equality / Assertion Type |
 | [CONTENT_EQUALITY_FAMILY.md](../CONTENT_EQUALITY_FAMILY.md) | **Documentation alignment** — **`normalized_text`** status Research → Draft |
-| [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) | **Future** — VP-CS scenarios when fixtures are published |
+| [CONFORMANCE_MODEL.md](../docs/03-development/CONFORMANCE_MODEL.md) | **VP-CS-0011**–**0013** scenarios published (draft fixtures) |
 
 ---
 
@@ -252,7 +256,9 @@ This RFC does **not** amend **VP-RFC-0006** text. Dispatch registration **MAY** 
 |----------|--------|
 | **VP-CS-0001** | **None** — continues to exercise **VP-RULE-0001** / **`body_equality`** |
 | **VP-CS-0002** | **None** |
-| *Future* | **VP-CS** scenarios for **VP-RULE-0011** **deferred** until a follow-on RFC or fixture publication |
+| **VP-CS-0011** | **Published** — trim and whitespace collapse → `satisfied` |
+| **VP-CS-0012** | **Published** — case-sensitive mismatch → `not_satisfied` |
+| **VP-CS-0013** | **Published** — empty or whitespace-only evidence → `indeterminate` |
 
 Implementations **MAY** advertise support for **`normalized_text`** via future capability identifiers. This RFC does **not** amend [VP-RFC-0010](0010-protocol-capability-negotiation.md).
 
@@ -285,7 +291,7 @@ Normalization can collapse visually distinct strings into identical normalized f
 3. Amend [VP-RFC-0005](0005-assertion-types.md) to list **`normalized_text`** (non-breaking taxonomy extension).
 4. Amend [VP-RFC-0006](0006-assertion-evaluation-dispatch.md) with **`normalized_text`** dispatch entry.
 5. Implement **Normalized Text Evaluator** in `veritypay-reference`.
-6. Publish **VP-CS** fixtures exercising **VP-RULE-0011** edge cases.
+6. Publish **VP-CS** fixtures exercising **VP-RULE-0011** edge cases — **complete** (**VP-CS-0011**–**0013** in [`spec/conformance/scenarios/`](../spec/conformance/scenarios/)).
 7. Declare **Platform 1.3** when engineering baselines align.
 
 Existing **`body_equality`** claims and scenarios **MUST** continue to use **VP-RULE-0001** without normalization.
@@ -299,10 +305,10 @@ Existing **`body_equality`** claims and scenarios **MUST** continue to use **VP-
 | Deliverable | Status |
 |-------------|--------|
 | **`normalized_text`** / **VP-RULE-0011** normative definition | Complete (this draft) |
-| **VP-RFC-0011** registry entry | Complete when merged |
-| **Reference implementation** | Not started |
-| **VP-CS fixtures** | Not started |
-| **Conformance execution** | Not started |
+| **VP-RFC-0011** registry entry | Complete |
+| **VP-CS fixtures** (**VP-CS-0011**–**0013**) | Complete — published in [`spec/conformance/scenarios/`](../spec/conformance/scenarios/) |
+| **Reference implementation** | Not started (separate repository) |
+| **Conformance execution** | Not started (separate repository) |
 
 No code changes are part of this draft RFC.
 
@@ -326,8 +332,8 @@ No code changes are part of this draft RFC.
 
 ## Open Questions
 
-1. Should step 4 treat empty assertion body as `indeterminate` symmetrically, or only empty evidence body?
-2. Should **VP-CS** for **VP-RULE-0011** ship in the same RFC acceptance tranche or a separate fixture RFC?
+1. Should step 4 treat empty assertion body as `indeterminate` symmetrically, or only empty or whitespace-only evidence body?
+2. Should **VP-CS** for **VP-RULE-0011** ship in the same RFC acceptance tranche or a separate fixture RFC? *(Fixtures **VP-CS-0011**–**0013** published ahead of acceptance.)*
 3. Should **`normalized_text`** require explicit `evidence_type` / `content_type` preconditions like the minimal profile, or only `assertion_type`?
 
 ---

@@ -325,5 +325,8 @@ rfcs:
       - docs/01-architecture/DATA_MODEL.md
       - docs/03-development/CONFORMANCE_MODEL.md
       - CONTENT_EQUALITY_FAMILY.md
-    related_conformance: []
+    related_conformance:
+      - VP-CS-0011
+      - VP-CS-0012
+      - VP-CS-0013
     path: rfcs/0011-normalized-text-assertion.md
