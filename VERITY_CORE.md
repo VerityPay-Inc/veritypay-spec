@@ -1,6 +1,6 @@
 # Verity Core Protocol
 
-**Version 1.2** · **Status:** Living Specification
+**Version 1.2** · **Status:** Core Specification Draft
 
 ---
 
@@ -221,67 +221,269 @@ Every assertion **MUST** declare exactly one type via `assertion_type`. Type ide
 
 ## 14. Assertion Types
 
-*Placeholder.* This section will describe **Assertion Type** taxonomy per draft [VP-RFC-0005](rfcs/0005-assertion-types.md), including the initial **`body_equality`** type. Evaluation dispatch is deferred to the Assertion Evaluators section.
+An **Assertion Type** names the semantic interpretation of an assertion's body. It answers one question for the evaluator: *what does this assertion mean?*
+
+Every assertion **MUST** declare exactly one type via the `assertion_type` field. Type identifiers **MUST** be stable protocol strings — never implementation class names, library paths, or vendor labels. The type does not execute evaluation by itself; it selects the evaluator that does (see [§15](#15-assertion-evaluators)).
+
+### Initial type: `body_equality`
+
+The first standardized type is **`body_equality`**. An assertion of this type means: *the assertion body is a literal value that evidence content should match exactly*. When **`body_equality`** is in scope and preconditions hold, **VP-RULE-0001** compares `assertion.body` to `evidence.content.body` via exact string equality ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md)).
+
+### Future types
+
+Additional types (for example `hash_match`, `signature`, or domain-specific types) **MAY** be standardized by future RFCs. Each new type **MUST** define its own semantic interpretation and the evaluator or rules that apply. Existing type semantics **MUST NOT** change when new types are added. *(Taxonomy: draft [VP-RFC-0005](rfcs/0005-assertion-types.md).)*
 
 ## 15. Assertion Evaluators
 
-*Placeholder.* This section will describe **Evaluation Dispatch** and **Assertion Evaluator** selection per draft [VP-RFC-0006](rfcs/0006-assertion-evaluation-dispatch.md). Dispatch depends solely on `assertion_type` and does not inspect claim or evidence bodies.
+An **Assertion Evaluator** performs the semantic evaluation for one **Assertion Type**. **Evaluation Dispatch** is the deterministic process that selects an evaluator from `assertion_type` alone — before any type-specific rules execute.
+
+### Dispatch rules
+
+1. The evaluator **MUST** be selected based solely on `assertion_type`. Dispatch **MUST NOT** inspect assertion body, evidence content, or claim envelope fields to infer which evaluator applies.
+2. Each standardized `assertion_type` maps to exactly one evaluator. The initial mapping is **`body_equality`** → **Body Equality Evaluator** → **VP-RULE-0001**.
+3. Unknown `assertion_type` values **MUST** yield `indeterminate` without executing type-specific rules.
+
+Evaluator dispatch is a protocol behavior, not an implementation architecture requirement. Implementations may organize internal modules however they choose, provided the protocol mapping holds. *(Dispatch: draft [VP-RFC-0006](rfcs/0006-assertion-evaluation-dispatch.md).)*
 
 ## 16. Evidence
 
-*Placeholder.* This section will describe evidence envelopes and **EvidenceContent** per accepted [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md). Claim identity binding per [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) will be referenced where linkage rules apply.
+**Evidence** is an independent envelope containing material that evaluation rules consume. It is always separate from the claim it supports — evidence **MUST NOT** be embedded inside claims, and claims **MUST NOT** embed verification outcomes.
+
+### Structure
+
+A conforming **Evidence** envelope carries:
+
+| Field | Requirement |
+|-------|-------------|
+| `evidence_id` | **MUST** be non-empty; uniquely identifies this envelope within the evaluation |
+| `claim_id` | **MUST** match the `claim_id` of the claim under verification for the evidence to be applicable |
+| `evidence_type` | **MUST** be non-empty; classifies the evidence for rule applicability |
+| `content` | **MUST** be present; contains **EvidenceContent** with `content_type` and `body` |
+
+### Binding
+
+Evidence is **applicable** to a claim when `evidence.claim_id` equals `claim.claim_id` (exact string equality). This identity linkage is checked by **VP-RULE-0002** ([VP-RFC-0002](rfcs/0002-claim-identity-binding.md)) before content rules execute. Mismatched or empty `claim_id` yields `indeterminate` — the evaluator never reaches content comparison.
+
+Binding checks **linkage only**. They do not inspect assertion body, evidence content body, or subject fields.
+
+### EvidenceContent
+
+**EvidenceContent** carries the verifiable payload that rules consume. Under **VP-RULE-0001**, `content.body` is compared to `assertion.body` when all preconditions hold. An empty `content.body` yields `indeterminate`. ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md))
 
 ## 17. Evidence Sets
 
-*Placeholder.* This section will describe **Evidence Set** composition — unordered collections of evidence per claim — per accepted [VP-RFC-0003](rfcs/0003-multiple-evidence.md). Ordering independence and per-envelope binding will be summarized from that RFC.
+An **Evidence Set** is the **unordered** collection of **Evidence** envelopes associated with one claim during evaluation. It defines the input surface for multi-evidence verification.
+
+### Properties
+
+1. **Ordering independence** — evidence ordering **MUST NOT** affect protocol meaning. Two evidence sets containing the same envelopes (by `evidence_id` and content) are equivalent inputs regardless of list order.
+2. **Structural independence** — each evidence envelope **MUST** remain distinct, with its own `evidence_id`, `claim_id` binding, and content. Envelopes are never merged.
+3. **Cardinality** — an evidence set **MAY** be empty (zero envelopes), contain one envelope (equivalent to the single-evidence profile), or contain multiple envelopes.
+
+An empty evidence set yields `indeterminate` under **`ALL_REQUIRED`** policy. Single-evidence evaluation **MAY** treat the policy as implicit when one envelope is present, preserving backward compatibility with **VP-CS-0001**. ([VP-RFC-0003](rfcs/0003-multiple-evidence.md))
 
 ## 18. Evaluation Policies
 
-*Placeholder.* This section will describe **Evaluation Policy** aggregation over evidence sets per accepted [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md), including the initial **`ALL_REQUIRED`** policy and verification outcome vocabulary.
+An **Evaluation Policy** aggregates per-envelope rule results from an **Evidence Set** into one verification outcome. It answers: *given individual evidence results, what is the overall verdict?*
+
+### Initial policy: `ALL_REQUIRED`
+
+Under **`ALL_REQUIRED`**:
+
+| Condition | Aggregated outcome |
+|-----------|--------------------|
+| Every applicable envelope is `satisfied` | `satisfied` |
+| Any envelope is `not_satisfied` | `not_satisfied` (dominates) |
+| No `not_satisfied`, but any `indeterminate` | `indeterminate` |
+| Empty evidence set | `indeterminate` |
+
+Policies aggregate logical outcomes only — no trust, weighting, or signatures. Evidence ordering **MUST NOT** affect the aggregated outcome. ([VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md))
+
+### Future policies
+
+Additional policies **MAY** be standardized by future RFCs. Each new policy **MUST** define its own aggregation table and **MUST NOT** introduce outcome labels beyond `satisfied`, `not_satisfied`, and `indeterminate` unless a future RFC explicitly extends outcome vocabulary.
 
 ## 19. Verification Profiles
 
-*Placeholder.* This section will describe **Verification Profile** — named **Verification Context** configurations — per draft [VP-RFC-0008](rfcs/0008-verification-profiles.md), including the initial **`minimal_all_required`** profile.
+A **Verification Profile** is a named, reusable configuration of **Verification Context** fields. Profiles exist so that implementations and scenarios can declare an evaluation configuration by `profile_id` rather than repeating individual context values.
+
+### Requirements
+
+1. A profile **MUST** have a stable `profile_id`.
+2. A profile **MUST** define or imply an `evaluation_policy`.
+3. A profile **MUST NOT** alter claim or evidence semantics.
+4. A profile **MUST NOT** bypass assertion evaluator dispatch.
+5. Unknown `profile_id` values **MUST** produce `indeterminate` unless the scenario or implementation explicitly declares support.
+
+### Initial profile: `minimal_all_required`
+
+| Property | Value |
+|----------|-------|
+| `profile_id` | `minimal_all_required` |
+| `evaluation_policy` | `ALL_REQUIRED` |
+| Assertion dispatch | Per evaluator dispatch rules (§15) |
+| Evidence set | Per evidence set semantics (§17) |
+
+**VP-CS-0001** and **VP-CS-0002** implicitly execute under `minimal_all_required`. No additional profiles are standardized in this version. *(Profiles: draft [VP-RFC-0008](rfcs/0008-verification-profiles.md).)*
 
 ## 20. Context Extensions
 
-*Placeholder.* This section will describe the **Context Extension** model per draft [VP-RFC-0009](rfcs/0009-verification-context-extensions.md). No standardized extensions are defined; future RFCs will populate extension semantics.
+**Context Extensions** are protocol-defined objects that augment **Verification Context** with additional evaluation information. They provide a forward-compatible expansion point so future capabilities do not pressure changes to core context fields.
+
+### Rules
+
+1. Extensions **MUST** have stable extension identifiers.
+2. Extensions **MUST** remain immutable during evaluation.
+3. Extensions **MUST NOT** alter claim or evidence semantics.
+4. Extensions **MUST NOT** bypass evaluator dispatch.
+5. Unknown extensions **MUST** be ignored unless the active **Verification Profile** explicitly requires them.
+
+**No standardized extensions exist** in this version. Informative future categories include time, trust, issuer, localization, audit, and regulatory context — each to be defined by its own RFC. *(Extension model: draft [VP-RFC-0009](rfcs/0009-verification-context-extensions.md).)*
 
 ## 21. Verification Results
 
-*Placeholder.* This section will describe verification outcomes (`satisfied`, `not_satisfied`, `indeterminate`) and result composition per [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) and aggregated results per [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md).
+A **Verification Result** communicates the protocol outcome of one evaluation. It is the final output of the [execution model](#7-verity-core-execution-model).
+
+### Outcome vocabulary
+
+Every evaluation produces exactly one of three outcomes:
+
+| Outcome | Meaning |
+|---------|---------|
+| `satisfied` | The assertion is supported by evidence under the applicable rules and policy |
+| `not_satisfied` | The assertion is contradicted by evidence under the applicable rules |
+| `indeterminate` | The evaluation could not reach a definitive conclusion — preconditions unmet, binding failed, empty evidence, or unknown assertion type |
+
+Outcomes are **explicit protocol truth** — not transport status codes, HTTP responses, or worldly confirmation that a payment occurred. A `satisfied` result means the protocol rules were met; it does not certify legal or financial fact.
+
+### Determinism
+
+Identical protocol inputs — same claim, evidence set, verification context, and applicable rules — **MUST** yield the same outcome. This invariant is what makes conformance comparison possible across independent implementations. ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md))
+
+### Single vs. aggregated results
+
+For single-evidence evaluation, the per-envelope outcome is the verification result directly. For multi-evidence evaluation, the **Evaluation Policy** (§18) aggregates per-envelope outcomes into one result. The outcome vocabulary is the same in both cases.
 
 ## 22. Protocol Capabilities
 
-*Placeholder.* This section will describe **Protocol Capability** identifiers and conformance eligibility per draft [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md). Capabilities are an implementation concept — not part of claims or context.
+A **Protocol Capability** is a stable identifier representing one protocol feature an implementation intentionally supports. Capabilities are an **implementation concept** — not part of claims, evidence, or verification context.
+
+### Purpose
+
+Platform releases and independent implementations evolve at different rates. Capabilities let conformance harnesses distinguish *"feature not implemented"* from *"implemented incorrectly"* — enabling **skip** instead of **fail** when a scenario requires a capability the implementation has not adopted.
+
+### Rules
+
+1. Capability identifiers **MUST** be stable and additive.
+2. Unknown capabilities **MUST** be ignored.
+3. Capabilities **MUST NOT** redefine existing protocol semantics.
+
+### Initial capability catalog
+
+| Capability | Protocol feature |
+|------------|-----------------|
+| `minimal_claims` | Minimal claim and evidence envelopes, **VP-RULE-0001** |
+| `claim_binding` | Evidence claim identity binding, **VP-RULE-0002** |
+| `multiple_evidence` | Evidence Set input model |
+| `evaluation_policy` | Evaluation Policy aggregation |
+| `assertion_types` | Assertion Type taxonomy |
+| `assertion_dispatch` | Evaluation Dispatch |
+| `verification_context` | Verification Context |
+| `verification_profiles` | Verification Profiles |
+| `context_extensions` | Context Extension model |
+
+### Conformance eligibility
+
+When a scenario declares required capabilities and an implementation does not advertise them, the harness **SHOULD** yield **skip** — not **fail**. Skip means the scenario was inapplicable to the declared implementation surface. Fail means the scenario executed and the outcome was incorrect. *(Capabilities: draft [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md).)*
 
 ## 23. Conformance
 
-*Placeholder.* This section will summarize the conformance model and VP-CS scenario execution per [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) and executable scenarios authored under accepted RFCs. Harness verdict vocabulary will be distinguished from verification outcomes.
+Conformance determines whether an implementation **speaks Verity correctly** — whether it produces the same verification outcomes as another conforming implementation for the same protocol inputs.
+
+### How conformance works
+
+Conformance is tested through **VP-CS scenarios**. Each scenario specifies claim and evidence inputs, the rules under test, and the expected verification outcome. The expected outcome comes from the **reference interpreter** oracle — not from this document.
+
+```mermaid
+flowchart TD
+    S[VP-CS Scenario] --> O[Reference Oracle]
+    S --> A[Implementation Adapter]
+    O --> C[Comparison Engine]
+    A --> C
+    C --> R[Conformance Result]
+```
+
+A **pass** means the implementation's outcome matches the oracle for that scenario. A **fail** means they diverge. A **skip** means the scenario required a capability the implementation does not advertise. An **error** means the harness itself encountered a problem.
+
+### Verdicts vs. outcomes
+
+Harness verdicts (`pass`, `fail`, `skip`, `error`) are **distinct** from verification outcomes (`satisfied`, `not_satisfied`, `indeterminate`). A scenario may expect `not_satisfied` — and a conforming implementation that returns `not_satisfied` receives a **pass** verdict.
+
+### Scenario meaning is normative
+
+Scenario fixtures are authored in this repository. The fixture and its defining RFC establish **what** is under test. The harness and adapter are execution machinery — they do not invent protocol meaning. When harness behavior and normative text disagree, the specification wins. ([CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md))
 
 ## 24. Versioning
 
-*Placeholder.* This section will describe Edition, Protocol Version, and Platform Release relationships per [SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md) and [PLATFORM_RELEASES.md](PLATFORM_RELEASES.md). Version 1.2 of this document aligns with **Platform 1.2** engineering baseline.
+Verity Core uses three versioning concepts:
+
+| Concept | Scope | Example |
+|---------|-------|---------|
+| **Edition** | A published snapshot of the specification (constitutional layer, RFCs, registries) | Genesis Edition |
+| **Protocol Version** | Assigned at Edition publication; names a fixed rule interpretation set | `vp-protocol-1.0` |
+| **Platform Release** | A compatible engineering baseline across specification, tooling, reference, and conformance repositories | Platform 1.2 |
+
+This document tracks **Platform 1.2**, which includes accepted **VP-RFC-0001** through **VP-RFC-0004** and the current reference and conformance baselines. No Edition has been formally published yet; the Genesis Edition is in preparation.
+
+Implementations **MUST** declare the Edition and Protocol Version they target. Platform Release names the engineering compatibility surface — it is not a substitute for specification version. ([SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md), [PLATFORM_RELEASES.md](PLATFORM_RELEASES.md))
+
+### Core specification maturity
+
+This document follows its own maturity lifecycle:
+
+| Stage | Meaning |
+|-------|---------|
+| **Core Specification Draft** | Sections populating from accepted and draft RFCs *(current)* |
+| **Core Specification Candidate** | All sections populated; under review for completeness |
+| **Core Specification 1.0** | Stable, edition-pinned, citeable as the authoritative Core |
 
 ## 25. Relationship to Reference Implementation
 
-*Placeholder.* This section will describe how `veritypay-reference` implements Verity Core semantics as an educational oracle — without making the reference architecture normative. See [ECOSYSTEM.md](ECOSYSTEM.md) and the reference interpreter ADRs in `veritypay-reference`.
+The `veritypay-reference` repository implements Verity Core semantics as an educational and oracle reference. It executes **VP-RULE-0001**, **VP-RULE-0002**, and the evaluation policy and dispatch model described in this specification.
+
+The reference interpreter is **not normative**. It demonstrates one correct implementation path. When the reference interpreter and this specification disagree, the specification wins. The interpreter's value is as an oracle for conformance comparison — not as a source of protocol truth.
+
+Implementers may study reference code for clarity but **MUST** target this specification and its accepted RFCs, not internal reference architecture decisions such as module names, trait boundaries, or dispatch tables. ([ECOSYSTEM.md](ECOSYSTEM.md))
 
 ## 26. Relationship to Conformance Suite
 
-*Placeholder.* This section will describe how `veritypay-conformance` executes VP-CS scenarios against the reference oracle per [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md). Scenario meaning remains authored in this repository.
+The `veritypay-conformance` repository executes VP-CS scenarios against the reference oracle and compares implementation adapter results. Scenario **meaning** — what is under test and why — is authored in this repository. The conformance suite is execution machinery.
+
+A conformance pass against the oracle demonstrates that an implementation produces the same outcomes for tested scenarios. It does not certify legal compliance, financial accuracy, or exhaustive correctness. Conformance scope grows as VP-CS scenarios are published.
+
+Implementations targeting Verity Core **SHOULD** run the conformance suite as part of their CI pipeline to detect outcome divergence early. ([CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md))
 
 ## 27. Governance
 
-*Placeholder.* This section will describe how Verity Core changes are proposed, reviewed, and accepted through [VP-RFC-0000](rfcs/0000-rfc-process.md) and [GOVERNANCE.md](docs/05-governance/GOVERNANCE.md). RFCs remain the normative change mechanism; this document aggregates accepted content but does not replace governance process.
+Protocol changes enter Verity Core through the **RFC process** ([VP-RFC-0000](rfcs/0000-rfc-process.md)). An RFC proposes a normative change, undergoes review, and is accepted or rejected through governance. Accepted RFCs become binding protocol semantics; this document is updated to reflect them.
+
+No protocol behavior originates in this document. It aggregates and presents accepted RFC content. If a section here introduces apparent behavior not traceable to an accepted RFC, treat the RFC as authoritative and report the discrepancy.
+
+Governance roles, review process, and authority model are documented in [GOVERNANCE.md](docs/05-governance/GOVERNANCE.md). Engineering decisions within implementation repositories are recorded as ADRs per [ADR_GUIDE.md](docs/05-governance/ADR_GUIDE.md); ADRs do not carry normative protocol weight.
 
 ## 28. Evolution
 
-*Placeholder.* This section will describe how Verity Core evolves across Platform releases and Editions, how draft RFCs graduate into accepted protocol semantics, and how this document stays synchronized when RFC status changes. Protocol evolution is additive unless a major Platform release or accepted RFC declares otherwise.
+Verity Core evolves through three mechanisms:
+
+1. **New RFCs** introduce new capabilities (assertion types, evaluators, policies, context extensions, capabilities). All new RFCs are additive by default.
+2. **RFC acceptance** promotes draft sections of this document to normative status. Draft markers are removed and MUST/SHOULD language becomes binding.
+3. **Platform releases** declare compatible engineering baselines. A new Platform release **MAY** incorporate newly accepted RFCs without breaking existing semantics.
+
+**Breaking changes** — removal of an existing capability or redefinition of accepted semantics — require explicit governance action through the RFC process and a Platform major version increment.
+
+This document is updated when RFC status changes materially. Maintainers synchronize section content with accepted RFCs; they do not introduce behavior outside the RFC process.
 
 ## 29. References
-
-*Placeholder.* This section will maintain a canonical bibliography of Verity Core RFCs and architecture documents. Initial scope:
 
 | RFC | Title | Status |
 |-----|-------|--------|
@@ -299,4 +501,18 @@ Every assertion **MUST** declare exactly one type via `assertion_type`. Type ide
 
 ---
 
-*Living specification — sections populate from accepted protocol RFCs. Maintainers update this document when RFC status or Platform releases change materially.*
+### Architecture documents
+
+| Document | Purpose |
+|----------|---------|
+| [DATA_MODEL.md](docs/01-architecture/DATA_MODEL.md) | Protocol entities and relationships |
+| [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) | Conformance framework and harness architecture |
+| [SPECIFICATION_VERSIONING.md](docs/05-governance/SPECIFICATION_VERSIONING.md) | Edition, protocol version, and platform release rules |
+| [PLATFORM_RELEASES.md](PLATFORM_RELEASES.md) | Compatible engineering baselines |
+| [ECOSYSTEM.md](ECOSYSTEM.md) | Repository structure and Verity Core relationship |
+| [GOVERNANCE.md](docs/05-governance/GOVERNANCE.md) | Governance roles and change authority |
+| [GLOSSARY.md](docs/00-overview/GLOSSARY.md) | Canonical terminology definitions |
+
+---
+
+*Core Specification Draft — sections populated from accepted and draft protocol RFCs. Maintainers update this document when RFC status or Platform releases change materially.*

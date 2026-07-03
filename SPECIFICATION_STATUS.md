@@ -48,7 +48,7 @@ For normative rules, follow accepted RFCs and published Editions. For process, s
 | Field | Value |
 |-------|--------|
 | **Document** | [VERITY_CORE.md](VERITY_CORE.md) |
-| **Status** | In Progress |
+| **Status** | Core Specification Draft |
 | **Purpose** | Consolidate protocol RFCs into a single implementation-oriented specification |
 | **Current scope** | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) through [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md) |
 
