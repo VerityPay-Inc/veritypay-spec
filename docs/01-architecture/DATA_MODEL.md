@@ -31,7 +31,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md)
 
-**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, accepted), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, accepted), [`../../rfcs/0005-assertion-types.md`](../../rfcs/0005-assertion-types.md) (**VP-RFC-0005**, draft), [`../../rfcs/0006-assertion-evaluation-dispatch.md`](../../rfcs/0006-assertion-evaluation-dispatch.md) (**VP-RFC-0006**, draft), [`../../rfcs/0007-verification-context.md`](../../rfcs/0007-verification-context.md) (**VP-RFC-0007**, draft), [`../../rfcs/0008-verification-profiles.md`](../../rfcs/0008-verification-profiles.md) (**VP-RFC-0008**, draft), [`../../rfcs/0009-verification-context-extensions.md`](../../rfcs/0009-verification-context-extensions.md) (**VP-RFC-0009**, draft)
+**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, accepted), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, accepted), [`../../rfcs/0005-assertion-types.md`](../../rfcs/0005-assertion-types.md) (**VP-RFC-0005**, draft), [`../../rfcs/0006-assertion-evaluation-dispatch.md`](../../rfcs/0006-assertion-evaluation-dispatch.md) (**VP-RFC-0006**, draft), [`../../rfcs/0007-verification-context.md`](../../rfcs/0007-verification-context.md) (**VP-RFC-0007**, draft), [`../../rfcs/0008-verification-profiles.md`](../../rfcs/0008-verification-profiles.md) (**VP-RFC-0008**, draft), [`../../rfcs/0009-verification-context-extensions.md`](../../rfcs/0009-verification-context-extensions.md) (**VP-RFC-0009**, draft), [`../../rfcs/0010-protocol-capability-negotiation.md`](../../rfcs/0010-protocol-capability-negotiation.md) (**VP-RFC-0010**, draft)
 
 ---
 
@@ -335,6 +335,23 @@ Claim → Assertion → Evidence Set → Verification Result
 | **Immutability** | Extensions **MUST** remain immutable during evaluation |
 
 **Initial state:** no standardized extensions exist. Informative future categories (Time, Trust, Issuer, Localization, Audit, Regulatory) are defined only by future RFCs.
+
+### Protocol Capability (VP-RFC-0010)
+
+[VP-RFC-0010](../../rfcs/0010-protocol-capability-negotiation.md) (draft) introduces **Protocol Capability** — a stable protocol identifier representing one protocol feature an implementation intentionally supports.
+
+**Protocol Capability** is an **implementation concept**. It is **not** part of **Claim**, **Evidence**, or **Verification Context**.
+
+| Property | Statement |
+|----------|-----------|
+| **Identifiers** | Capabilities **MUST** have stable identifiers; new capabilities **MUST** be additive |
+| **Semantics** | Capabilities **MUST NOT** redefine existing protocol semantics |
+| **Unknown** | Unknown capability identifiers **MUST** be ignored |
+| **Declaration** | Implementations **MAY** advertise supported capabilities |
+
+**Initial standardized identifiers:** `minimal_claims`, `claim_binding`, `multiple_evidence`, `evaluation_policy`, `assertion_types`, `assertion_dispatch`, `verification_context`, `verification_profiles`, `context_extensions` — each maps to features defined in **VP-RFC-0001** through **VP-RFC-0009**.
+
+Capability advertisement encoding and transport are deferred. This subsection names the concept only.
 
 ---
 

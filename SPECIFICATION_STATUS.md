@@ -139,6 +139,7 @@ Document `status` values reflect front matter at last update. **Draft** means va
 | [VP-RFC-0007](rfcs/0007-verification-context.md) | Draft | 0.1.0 | Protocol | **Verification Context** — immutable evaluation environment |
 | [VP-RFC-0008](rfcs/0008-verification-profiles.md) | Draft | 0.1.0 | Protocol | **Verification Profile**, **`minimal_all_required`** |
 | [VP-RFC-0009](rfcs/0009-verification-context-extensions.md) | Draft | 0.1.0 | Protocol | **Context Extension** model — no standardized extensions |
+| [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md) | Draft | 0.1.0 | Protocol | **Protocol Capability** — feature identifiers and conformance eligibility |
 
 ---
 
@@ -157,6 +158,7 @@ Protocol RFCs that define executable verification inputs and rules. Status refle
 | [VP-RFC-0007](rfcs/0007-verification-context.md) | **Draft** | **Verification Context** — `edition`, `protocol_version`, `evaluation_policy`; implementation deferred |
 | [VP-RFC-0008](rfcs/0008-verification-profiles.md) | **Draft** | **Verification Profile** — **`minimal_all_required`**; implementation deferred |
 | [VP-RFC-0009](rfcs/0009-verification-context-extensions.md) | **Draft** | **Context Extension** model — extension identifiers and ignore-unless-required rules; no standardized extensions |
+| [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md) | **Draft** | **Protocol Capability** — stable feature identifiers; conformance **skip** when capability absent |
 
 Platform release is **[Platform 1.2](PLATFORM_RELEASES.md)**. Executable **VP-CS-0003** and **VP-CS-0004** fixtures remain deferred until reference and conformance support multi-evidence evaluation.
 

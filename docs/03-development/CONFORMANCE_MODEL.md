@@ -33,7 +33,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [PRINCIPLES.md](../00-overview/PRINCIPLES.md), [GLOSSARY.md](../00-overview/GLOSSARY.md)
 
-**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft), [VP-RFC-0007](../../rfcs/0007-verification-context.md) (draft), [VP-RFC-0008](../../rfcs/0008-verification-profiles.md) (draft), [VP-RFC-0009](../../rfcs/0009-verification-context-extensions.md) (draft), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft), [VP-RFC-0007](../../rfcs/0007-verification-context.md) (draft), [VP-RFC-0008](../../rfcs/0008-verification-profiles.md) (draft), [VP-RFC-0009](../../rfcs/0009-verification-context-extensions.md) (draft), [VP-RFC-0010](../../rfcs/0010-protocol-capability-negotiation.md) (draft), [`../../rfcs/`](../../rfcs/)
 
 ---
 
@@ -173,6 +173,39 @@ No VP-CS fixture changes are required for **VP-RFC-0008** at draft stage.
 Future **VP-CS** scenarios **MAY** reference **Verification Context Extensions** in later editions. The current platform defines **no standardized extensions**. Implementations **MUST** ignore unknown extensions unless the active **Verification Profile** explicitly requires them.
 
 Extensions **MUST NOT** alter **Claim** or **Evidence** semantics or bypass **Assertion Evaluator** dispatch. No VP-CS fixture changes are required for **VP-RFC-0009** at draft stage.
+
+### Protocol Capability Negotiation (VP-RFC-0010)
+
+[VP-RFC-0010](../../rfcs/0010-protocol-capability-negotiation.md) (draft) defines **Protocol Capability** — stable identifiers for protocol features an implementation intentionally supports.
+
+Conformance **MAY** use capabilities to decide whether a scenario is eligible before execution:
+
+```text
+VP-CS scenario
+      ↓
+Required Capabilities (declared by scenario — future)
+      ↓
+Implementation Capabilities (declared by adapter — optional)
+      ↓
+Scenario eligible?
+      ├── yes → execute → pass / fail (oracle comparison)
+      └── no  → skip — capability not implemented
+```
+
+| Stage | Meaning |
+|-------|---------|
+| **Required Capabilities** | Capabilities a VP-CS scenario **MAY** declare as prerequisites (future fixture field) |
+| **Implementation Capabilities** | Capabilities an adapter **MAY** advertise as supported |
+| **Eligible** | Every required capability is present in the implementation set → harness executes the scenario |
+| **Not eligible** | One or more required capabilities absent → harness **SHOULD** **`skip`**, not **`fail`** |
+
+**Why this matters:** partial implementations grow the ecosystem without every new VP-CS scenario reading as a failure. **`skip`** means *not applicable to declared support*; **`fail`** means *executed and incorrect*. Harness verdict vocabulary (`pass` / `fail` / `skip` / `error`) remains distinct from verification outcomes (`satisfied` / `not_satisfied` / `indeterminate`).
+
+Implementations **MAY** advertise supported capabilities. Current **VP-CS-0001** and **VP-CS-0002** fixtures do not declare required capabilities; eligibility rules apply when future fixtures adopt **VP-RFC-0010**.
+
+**Initial capability identifiers:** `minimal_claims`, `claim_binding`, `multiple_evidence`, `evaluation_policy`, `assertion_types`, `assertion_dispatch`, `verification_context`, `verification_profiles`, `context_extensions`.
+
+No VP-CS fixture changes are required for **VP-RFC-0010** at draft stage.
 
 ---
 
