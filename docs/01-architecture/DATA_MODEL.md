@@ -31,7 +31,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md)
 
-**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, accepted), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, accepted), [`../../rfcs/0005-assertion-types.md`](../../rfcs/0005-assertion-types.md) (**VP-RFC-0005**, draft), [`../../rfcs/0006-assertion-evaluation-dispatch.md`](../../rfcs/0006-assertion-evaluation-dispatch.md) (**VP-RFC-0006**, draft), [`../../rfcs/0007-verification-context.md`](../../rfcs/0007-verification-context.md) (**VP-RFC-0007**, draft), [`../../rfcs/0008-verification-profiles.md`](../../rfcs/0008-verification-profiles.md) (**VP-RFC-0008**, draft)
+**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, accepted), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, accepted), [`../../rfcs/0005-assertion-types.md`](../../rfcs/0005-assertion-types.md) (**VP-RFC-0005**, draft), [`../../rfcs/0006-assertion-evaluation-dispatch.md`](../../rfcs/0006-assertion-evaluation-dispatch.md) (**VP-RFC-0006**, draft), [`../../rfcs/0007-verification-context.md`](../../rfcs/0007-verification-context.md) (**VP-RFC-0007**, draft), [`../../rfcs/0008-verification-profiles.md`](../../rfcs/0008-verification-profiles.md) (**VP-RFC-0008**, draft), [`../../rfcs/0009-verification-context-extensions.md`](../../rfcs/0009-verification-context-extensions.md) (**VP-RFC-0009**, draft)
 
 ---
 
@@ -306,6 +306,35 @@ Claim → Assertion → Evidence Set → Verification Result
 | **Evidence Set** | Per **VP-RFC-0003** and **VP-RFC-0004** |
 
 No additional profiles are standardized in this draft. Profile selection resolves **Verification Context** only; it is not part of **Claim** or **Evidence**.
+
+### Context Extensions (VP-RFC-0009)
+
+[VP-RFC-0009](../../rfcs/0009-verification-context-extensions.md) (draft) introduces **Context Extension** — a protocol-defined object associated with **Verification Context** that supplies additional evaluation information without changing existing protocol semantics.
+
+**Context Extensions** augment **Verification Context**. They **MUST NOT** replace core context fields.
+
+```text
+Verification Context
+ ├── profile
+ ├── edition
+ ├── evaluation_policy
+ └── context_extensions[]
+       ↓
+     Evaluation
+       ↓
+Claim → Assertion → Evidence Set → Verification Result
+```
+
+| Property | Statement |
+|----------|-----------|
+| **Extension identifiers** | Each extension **MUST** have a stable identifier |
+| **Augmentation** | Extensions augment context; they never replace core fields |
+| **Claim / Evidence** | Extensions **MUST NOT** alter **Claim** or **Evidence** semantics |
+| **Dispatch** | Extensions **MUST NOT** bypass **Assertion Evaluator** dispatch per **VP-RFC-0006** |
+| **Unknown extensions** | Unknown extensions **MUST** be ignored unless required by the active **Verification Profile** |
+| **Immutability** | Extensions **MUST** remain immutable during evaluation |
+
+**Initial state:** no standardized extensions exist. Informative future categories (Time, Trust, Issuer, Localization, Audit, Regulatory) are defined only by future RFCs.
 
 ---
 

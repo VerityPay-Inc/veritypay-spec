@@ -33,7 +33,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [PRINCIPLES.md](../00-overview/PRINCIPLES.md), [GLOSSARY.md](../00-overview/GLOSSARY.md)
 
-**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft), [VP-RFC-0007](../../rfcs/0007-verification-context.md) (draft), [VP-RFC-0008](../../rfcs/0008-verification-profiles.md) (draft), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft), [VP-RFC-0007](../../rfcs/0007-verification-context.md) (draft), [VP-RFC-0008](../../rfcs/0008-verification-profiles.md) (draft), [VP-RFC-0009](../../rfcs/0009-verification-context-extensions.md) (draft), [`../../rfcs/`](../../rfcs/)
 
 ---
 
@@ -165,6 +165,14 @@ VP-CS scenarios **MAY** declare **`profile_id`**. Current **VP-CS-0001** and **V
 Unknown **`profile_id`** values **MUST** yield `indeterminate` unless the scenario or implementation explicitly declares support. Profiles **MUST NOT** alter **Claim** or **Evidence** semantics or bypass evaluator dispatch.
 
 No VP-CS fixture changes are required for **VP-RFC-0008** at draft stage.
+
+### Context Extensions (VP-RFC-0009)
+
+[VP-RFC-0009](../../rfcs/0009-verification-context-extensions.md) (draft) defines how **Verification Context** is extended without changing existing protocol semantics.
+
+Future **VP-CS** scenarios **MAY** reference **Verification Context Extensions** in later editions. The current platform defines **no standardized extensions**. Implementations **MUST** ignore unknown extensions unless the active **Verification Profile** explicitly requires them.
+
+Extensions **MUST NOT** alter **Claim** or **Evidence** semantics or bypass **Assertion Evaluator** dispatch. No VP-CS fixture changes are required for **VP-RFC-0009** at draft stage.
 
 ---
 
