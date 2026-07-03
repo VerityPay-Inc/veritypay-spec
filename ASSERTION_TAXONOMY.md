@@ -132,6 +132,10 @@ When you are ready to standardize a type, start an RFC. Cite this document only 
 |----------|------|
 | [ASSERTION_TAXONOMY.md](ASSERTION_TAXONOMY.md) | Parent taxonomy — assertion families |
 | [CONTENT_EQUALITY_FAMILY.md](CONTENT_EQUALITY_FAMILY.md) | Family specification — Content Equality candidates |
+| [STRUCTURAL_FAMILY.md](STRUCTURAL_FAMILY.md) | Family specification — Structural candidates |
+| [PATTERN_MATCHING_FAMILY.md](PATTERN_MATCHING_FAMILY.md) | Family specification — Pattern Matching candidates |
+| [NUMERIC_FAMILY.md](NUMERIC_FAMILY.md) | Family specification — Numeric candidates |
+| [TEMPORAL_FAMILY.md](TEMPORAL_FAMILY.md) | Family specification — Temporal candidates |
 | [VP-RFC-0005](rfcs/0005-assertion-types.md) | Draft — initial Assertion Type taxonomy |
 | [VP-RFC-0006](rfcs/0006-assertion-evaluation-dispatch.md) | Draft — evaluator dispatch |
 | [VERITY_CORE.md](VERITY_CORE.md) | Core Specification — §14 Assertion Types |
