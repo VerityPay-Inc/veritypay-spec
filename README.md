@@ -2,6 +2,10 @@
 
 **The canonical specification for the VerityPay protocol and ecosystem.**
 
+**Vision:** see **[WHY_VERITY.md](WHY_VERITY.md)** for why Verity exists — the problem, the principles, and the long-term vision.
+
+**Platform overview:** see **[PLATFORM_OVERVIEW.md](PLATFORM_OVERVIEW.md)** for a snapshot of the current Verity ecosystem — what has been built, what is in progress, and what remains planned.
+
 **Platform map:** see **[ECOSYSTEM.md](ECOSYSTEM.md)** for repository roles, reading order, and platform flow across sibling repositories.
 
 **Platform releases:** see **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** for official compatibility across specification and engineering repositories.
@@ -14,15 +18,17 @@ This repository defines *what* VerityPay is and *how* it must behave. It does no
 
 ## Start Here
 
-**Recommended reading order for protocol implementers:**
+**Recommended reading order:**
 
-1. **[VERITY_CORE.md](VERITY_CORE.md)** — primary protocol specification (consolidated, implementation-oriented)
-2. **[ECOSYSTEM.md](ECOSYSTEM.md)** — platform map across sibling repositories
-3. **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** — maturity, milestones, and ecosystem health
-4. **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** — compatible engineering baselines
-5. **[RFCs](rfcs/)** — normative change proposals (as needed for rationale and history)
+1. **[WHY_VERITY.md](WHY_VERITY.md)** — motivation behind the platform
+2. **[PLATFORM_OVERVIEW.md](PLATFORM_OVERVIEW.md)** — ecosystem snapshot for contributors, reviewers, and implementers
+3. **[VERITY_CORE.md](VERITY_CORE.md)** — primary protocol specification (consolidated, implementation-oriented)
+4. **[ECOSYSTEM.md](ECOSYSTEM.md)** — platform map across sibling repositories
+5. **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** — maturity, milestones, and ecosystem health
+6. **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** — compatible engineering baselines
+7. **[RFCs](rfcs/)** — normative change proposals (as needed for rationale and history)
 
-**[VERITY_CORE.md](VERITY_CORE.md)** is the primary entry point for understanding the protocol as one coherent specification. **[RFCs](rfcs/)** remain the normative change mechanism and document how the protocol evolved — read them when you need proposal rationale, acceptance history, or governance context.
+**[WHY_VERITY.md](WHY_VERITY.md)** introduces the motivation before you dive into protocol details. **[VERITY_CORE.md](VERITY_CORE.md)** is the primary entry point for understanding the protocol as one coherent specification. **[RFCs](rfcs/)** remain the normative change mechanism and document how the protocol evolved — read them when you need proposal rationale, acceptance history, or governance context.
 
 ---
 
@@ -86,7 +92,9 @@ If a behavior is not specified (or not yet accepted), it is **not part of the pr
 ```
 veritypay-spec/
 ├── README.md                      ← You are here
-├── VERITY_CORE.md                 ← Verity Core Protocol (living specification)
+├── WHY_VERITY.md                  ← Why Verity exists (vision and motivation)
+├── PLATFORM_OVERVIEW.md           ← Ecosystem snapshot and current platform state
+├── VERITY_CORE.md                 ← Verity Core Protocol (Core Specification Draft)
 ├── ECOSYSTEM.md                   ← Platform map across sibling repositories
 ├── PLATFORM_RELEASES.md           ← Official platform compatibility index
 ├── RELEASE_NOTES_PLATFORM_1_0.md ← Platform 1.0 release summary
@@ -119,7 +127,7 @@ See [`docs/README.md`](docs/README.md) for the full **Documentation Pyramid**.
 
 | Role | Start with |
 |------|------------|
-| **Protocol implementers** | **[VERITY_CORE.md](VERITY_CORE.md)** → **[ECOSYSTEM.md](ECOSYSTEM.md)** |
+| **Protocol implementers** | **[WHY_VERITY.md](WHY_VERITY.md)** → **[VERITY_CORE.md](VERITY_CORE.md)** → **[ECOSYSTEM.md](ECOSYSTEM.md)** |
 | **Anyone mapping the full platform** | **[ECOSYSTEM.md](ECOSYSTEM.md)** |
 | **Anyone pinning compatible repository baselines** | **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** · **[RELEASE_NOTES_PLATFORM_1_0.md](RELEASE_NOTES_PLATFORM_1_0.md)** |
 | **Anyone needing current maturity** | **[SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md)** |

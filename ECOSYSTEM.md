@@ -10,6 +10,20 @@ For specification maturity detail, see [SPECIFICATION_STATUS.md](SPECIFICATION_S
 
 ---
 
+## Why Verity
+
+Three documents orient readers at different levels:
+
+| Document | Question it answers |
+|----------|---------------------|
+| **[WHY_VERITY.md](WHY_VERITY.md)** | *Why* does Verity exist? |
+| **[ECOSYSTEM.md](ECOSYSTEM.md)** *(this document)* | *How* is the platform organized? |
+| **[VERITY_CORE.md](VERITY_CORE.md)** | *How* does the protocol operate? |
+
+Read [WHY_VERITY.md](WHY_VERITY.md) first for motivation and long-term vision. Return here for repository roles and platform flow. Proceed to [VERITY_CORE.md](VERITY_CORE.md) when you are ready for protocol detail.
+
+---
+
 ## The Verity Core
 
 The **Verity Core** is the shared protocol language used by all Verity protocols. It defines the verification model — claims, assertions, evidence, evaluation context, and conformance vocabulary — that independent implementations must share to interoperate.
