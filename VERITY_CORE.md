@@ -28,19 +28,126 @@ Normative behavior is defined by accepted RFCs and, where cited, draft RFCs in p
 
 ## 4. Verification Model
 
-*Placeholder.* This section will present the end-to-end verification model in implementation order: context, claim, assertion, evidence set, evaluation policy, and verification result. Content will reference [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), [VP-RFC-0003](rfcs/0003-multiple-evidence.md), [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md), and draft context RFCs **VP-RFC-0007** through **VP-RFC-0009** where applicable.
+Verification is the process of evaluating whether a **Claim**'s **Assertion** is supported by **Evidence** under a fixed set of protocol rules. Verity Core describes that process in **implementation order** — the sequence an evaluator follows from environment setup through outcome — not RFC publication order.
+
+The model below synthesizes accepted [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), [VP-RFC-0002](rfcs/0002-claim-identity-binding.md), [VP-RFC-0003](rfcs/0003-multiple-evidence.md), and [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md). Stages marked *(draft)* reference draft RFCs **VP-RFC-0005** through **VP-RFC-0009**; behavior described there is informative until those RFCs are accepted.
+
+### Lifecycle (implementation order)
+
+```text
+Verification Context          (VP-RFC-0007, draft)
+        ↓
+Verification Profile          (VP-RFC-0008, draft)
+        ↓
+Claim                         (VP-RFC-0001, accepted)
+        ↓
+Assertion                     (VP-RFC-0001, accepted)
+        ↓
+Assertion Type                (VP-RFC-0005, draft)
+        ↓
+Assertion Evaluator           (VP-RFC-0006, draft)
+        ↓
+Evidence Set                  (VP-RFC-0003, accepted)
+        ↓
+Evaluation Policy             (VP-RFC-0004, accepted)
+        ↓
+Verification Result           (VP-RFC-0001, VP-RFC-0004, accepted)
+```
+
+### Stages
+
+**Verification Context** *(draft — [VP-RFC-0007](rfcs/0007-verification-context.md))* defines the **immutable evaluation environment** shared by every assertion and evidence envelope in one verification. Core fields include `edition`, `protocol_version`, and `evaluation_policy`. Context belongs to the evaluation — it is not embedded in claims or evidence.
+
+**Verification Profile** *(draft — [VP-RFC-0008](rfcs/0008-verification-profiles.md))* is a named, reusable configuration of context fields. Selecting a profile (for example **`minimal_all_required`**) resolves evaluation-wide parameters such as **`ALL_REQUIRED`** policy without repeating individual context values. Profiles do not alter claim or evidence semantics.
+
+**Claim** ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), accepted) is the protocol envelope that carries what is being asserted. It supplies stable **identity** (`claim_id`), subject linkage, and the nested **Assertion** under evaluation. The claim frames the evaluation target; it does not embed verification outcomes.
+
+**Assertion** ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), accepted) is the structured content within a claim that verification rules evaluate. The interpreter evaluates the **assertion** — not the claim envelope alone. Under minimal semantics, comparison operates on assertion and evidence content when preconditions hold.
+
+**Assertion Type** *(draft — [VP-RFC-0005](rfcs/0005-assertion-types.md))* is the protocol identifier (`assertion_type`) that names how an assertion body is **interpreted**. Every assertion declares exactly one type. The initial standardized type is **`body_equality`**. Types describe meaning; they do not execute evaluation by themselves.
+
+**Assertion Evaluator** *(draft — [VP-RFC-0006](rfcs/0006-assertion-evaluation-dispatch.md))* is selected by **Evaluation Dispatch** from `assertion_type` alone. The evaluator performs semantic evaluation for that type — for example, routing **`body_equality`** to **VP-RULE-0001**. Dispatch must not inspect arbitrary claim or evidence bodies to infer semantics. Unknown types yield `indeterminate`.
+
+**Evidence Set** ([VP-RFC-0003](rfcs/0003-multiple-evidence.md), accepted) is the **unordered** collection of **Evidence** envelopes associated with one claim during evaluation. Each envelope retains its own identity and content. Evidence ordering must not affect protocol meaning. Per-envelope binding to the claim is governed by [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) (**VP-RULE-0002**) when binding rules are in scope.
+
+**Evaluation Policy** ([VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md), accepted) aggregates per-envelope rule results from an evidence set into one verification outcome. The initial policy is **`ALL_REQUIRED`**: every applicable envelope must be `satisfied` for aggregate `satisfied`; any `not_satisfied` dominates; otherwise indeterminate conditions apply. Policies aggregate logical outcomes only — no trust or weighting.
+
+**Verification Result** ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md), accepted) communicates the protocol outcome: `satisfied`, `not_satisfied`, or `indeterminate`. The result is explicit protocol truth — not transport status or worldly confirmation. Single-evidence evaluation may treat **`ALL_REQUIRED`** as implicit when one envelope is present.
+
+### Responsibilities
+
+| Stage | Responsibility |
+|-------|----------------|
+| **Verification Context** | Defines the evaluation environment |
+| **Verification Profile** | Names a reusable context configuration *(draft)* |
+| **Claim** | Defines what is asserted; supplies identity and assertion envelope |
+| **Assertion** | Defines the verification target evaluated by rules |
+| **Assertion Type** | Determines semantic interpretation of assertion data *(draft)* |
+| **Assertion Evaluator** | Performs type-specific semantic evaluation *(draft)* |
+| **Evidence Set** | Supplies supporting evidence for evaluation |
+| **Evaluation Policy** | Aggregates multiple evidence results into one outcome |
+| **Verification Result** | Communicates the protocol outcome |
+
+Optional **Context Extensions** *(draft — [VP-RFC-0009](rfcs/0009-verification-context-extensions.md))* may augment context in future evaluations. No standardized extensions exist today; they do not appear in the lifecycle until defined by future RFCs.
 
 ## 5. Verification Context
 
-*Placeholder.* This section will describe **Verification Context** — the immutable evaluation environment — per draft [VP-RFC-0007](rfcs/0007-verification-context.md). Core fields (`edition`, `protocol_version`, `evaluation_policy`) will be summarized without duplicating RFC rationale.
+**Verification Context** is the immutable protocol object that supplies evaluation-wide information shared by all **Assertions** and **Evidence** during one verification. It frames *how* evaluation proceeds — not *what* is asserted. Draft [VP-RFC-0007](rfcs/0007-verification-context.md) defines the context object; accepted [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) already defines **`evaluation_policy`** semantics that context carries.
+
+Verification Context **belongs to the evaluation**. It is **not** part of a **Claim**. It is **not** part of **Evidence**. It does not define trust, issuers, or authorization.
+
+### Core fields
+
+| Field | Role |
+|-------|------|
+| **`edition`** | Specification edition under which evaluation interprets rules |
+| **`protocol_version`** | Declared protocol version for the evaluation |
+| **`evaluation_policy`** | **Evaluation Policy** identifier — for example **`ALL_REQUIRED`** per [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) |
+
+Context **must** remain immutable during evaluation and **must** apply to every assertion in that evaluation. Context **must not** modify claim or evidence semantics.
+
+Implementations may derive these values from specification metadata until explicit context objects are adopted. Wire encodings are deferred.
+
+### Verification Profiles
+
+Draft [VP-RFC-0008](rfcs/0008-verification-profiles.md) introduces **Verification Profile** — a named, reusable configuration of context fields identified by stable `profile_id`. The initial standardized profile is **`minimal_all_required`**, which implies **`ALL_REQUIRED`** evaluation policy and Platform 1.2 dispatch and evidence-set behavior. Profile selection resolves context; it does not replace core context fields.
+
+### Context Extensions
+
+Draft [VP-RFC-0009](rfcs/0009-verification-context-extensions.md) defines **Context Extension** — optional objects that augment context without replacing core fields. Informative future categories include time, trust, issuer, localization, audit, and regulatory context. **No standardized extensions exist** in the current platform. Unknown extensions must be ignored unless the active profile explicitly requires them.
 
 ## 6. Claims
 
-*Placeholder.* This section will describe claim envelopes and their role in verification per accepted [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) and [VP-RFC-0002](rfcs/0002-claim-identity-binding.md). Claim semantics will not extend beyond those RFCs.
+A **Claim** is the central protocol envelope for a structured statement under verification. Accepted [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) defines the minimal claim envelope; accepted [VP-RFC-0002](rfcs/0002-claim-identity-binding.md) defines how claim identity binds evidence.
+
+Claims **contain Assertions**. The claim envelope binds identity, subject, and specification context around assertion content — the claim is not itself the assertion. Verification evaluates the nested assertion using evidence; the claim supplies the stable frame within which that evaluation occurs.
+
+### Identity
+
+`claim_id` is the **stable identity** of a claim envelope within an evaluation context. It must be non-empty and is compared using exact string equality per [VP-RFC-0002](rfcs/0002-claim-identity-binding.md). Identity enables **evidence binding**: evidence is applicable only when `evidence.claim_id` equals `claim.claim_id`. Binding checks linkage only — it does not inspect assertion or evidence bodies.
+
+Claim identity is a precondition for correct evaluation; it does **not** determine verification outcomes by itself. Mismatched or empty binding yields `indeterminate` via **VP-RULE-0002** without proceeding to content rules. Matching identity allows subsequent rules (such as **VP-RULE-0001**) to evaluate assertion content.
+
+### Evaluation target
+
+The claim's role in verification is to present **what is asserted** — identity plus nested **Assertion** — as the evaluation target. Outcomes are recorded separately in **Verification Result**; claims must not embed verification outcomes.
 
 ## 7. Assertions
 
-*Placeholder.* This section will describe **Assertion** structure within claims — `assertion_type` and `body` — per [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md). Verification evaluates assertions, not envelopes alone.
+An **Assertion** is the structured content within a claim that verification rules evaluate. Accepted [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) requires every minimal claim to carry a nested assertion with `assertion_type` and `body`. Draft [VP-RFC-0005](rfcs/0005-assertion-types.md) names **Assertion Type** as the protocol vocabulary for interpreting assertion data.
+
+Assertions express **what is being evaluated**. The interpreter evaluates the assertion — not the claim envelope alone. Under **VP-RULE-0001**, when preconditions hold, evaluation compares assertion body to evidence content body; missing or mismatched content under rule preconditions yields `indeterminate` or `not_satisfied` per the rule tables in [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md).
+
+### Fields
+
+| Field | Role |
+|-------|------|
+| **`assertion_type`** | Declares exactly one **Assertion Type** — the protocol identifier describing semantic interpretation *(taxonomy in draft [VP-RFC-0005](rfcs/0005-assertion-types.md))* |
+| **`body`** | Opaque protocol data whose meaning is defined by the declared type and applicable rules |
+
+**Assertion Type** defines *interpretation* — what the body means in protocol terms. It does not define *evaluation procedure*; rule execution and evaluator dispatch are specified elsewhere ([VP-RFC-0006](rfcs/0006-assertion-evaluation-dispatch.md), draft). The **`body`** carries the data consumed by those rules — for **`body_equality`**, the comparable payload evaluated against evidence content when linkage and type preconditions hold.
+
+Every assertion must declare exactly one type via `assertion_type`. Type identifiers must be stable protocol strings — not implementation class names or vendor-specific labels.
 
 ## 8. Assertion Types
 
