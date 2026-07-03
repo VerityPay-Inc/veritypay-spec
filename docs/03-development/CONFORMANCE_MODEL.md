@@ -33,7 +33,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [PRINCIPLES.md](../00-overview/PRINCIPLES.md), [GLOSSARY.md](../00-overview/GLOSSARY.md)
 
-**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft), [`../../rfcs/`](../../rfcs/)
 
 ---
 
@@ -124,7 +124,25 @@ VP-CS scenario fixtures **MAY** specify `assertion_type` on claim inputs. The in
 
 **VP-CS-0001** and **VP-CS-0002** exercise **`body_equality`** semantics through the existing **VP-RULE-0001** / **VP-RULE-0002** pipeline. Published fixtures retain `assertion_type = minimal` per accepted **VP-RFC-0001** until a future fixture-alignment change.
 
-**Assertion Types** describe protocol semantics. Conformance compares independent implementations of those semantics against the reference oracle — not ad hoc string handling in harnesses alone. This RFC does **not** define evaluator dispatch from `assertion_type` to rules; oracle comparison remains rule- and scenario-bound per accepted RFCs.
+**Assertion Types** describe protocol semantics. Conformance compares independent implementations of those semantics against the reference oracle — not ad hoc string handling in harnesses alone. Evaluator dispatch is defined in [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft).
+
+### Assertion evaluation dispatch (VP-RFC-0006)
+
+[VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft) defines **Evaluation Dispatch** — implementations **MUST** select evaluation semantics based solely on **Assertion Type** (`assertion_type`).
+
+Current standardized dispatch:
+
+```text
+body_equality
+      ↓
+Body Equality Evaluator
+      ↓
+VP-RULE-0001
+```
+
+VP-CS scenarios **inherit** evaluator selection from `assertion_type`. No new VP-CS fixture is defined in this draft.
+
+Conformance compares **evaluator behavior** and verification outcomes — not internal implementation architecture (modules, class names, or dispatch tables). Unknown **Assertion Types** **MUST** yield `indeterminate` per **VP-RFC-0006**.
 
 Harness verdict vocabulary (`pass` / `fail` / `skip` / `error`) remains distinct from verification outcomes (`satisfied` / `not_satisfied` / `indeterminate`) defined in this model and in the RFC.
 

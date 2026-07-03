@@ -31,7 +31,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md)
 
-**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, accepted), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, accepted), [`../../rfcs/0005-assertion-types.md`](../../rfcs/0005-assertion-types.md) (**VP-RFC-0005**, draft)
+**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, accepted), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, accepted), [`../../rfcs/0005-assertion-types.md`](../../rfcs/0005-assertion-types.md) (**VP-RFC-0005**, draft), [`../../rfcs/0006-assertion-evaluation-dispatch.md`](../../rfcs/0006-assertion-evaluation-dispatch.md) (**VP-RFC-0006**, draft)
 
 ---
 
@@ -153,7 +153,35 @@ Claim
 | **Initial type** | **`body_equality`** — body comparison via **VP-RULE-0001** when preconditions hold |
 | **Evaluation** | Out of scope here — defined by rule RFCs (for example **VP-RFC-0001**, **VP-RFC-0002**) and **Evaluation Policy** in **VP-RFC-0004** |
 
-Every **Assertion** **MUST** declare exactly one **Assertion Type** via `assertion_type`. This subsection defines taxonomy only; it does **not** specify evaluator dispatch from type to rule.
+Every **Assertion** **MUST** declare exactly one **Assertion Type** via `assertion_type`. This subsection defines taxonomy only; evaluator selection is defined in [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft).
+
+### Assertion Evaluator and Evaluation Dispatch (VP-RFC-0006)
+
+[VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft) introduces **Assertion Evaluator** and **Evaluation Dispatch** — the deterministic protocol process that selects exactly one evaluator from **Assertion Type** before type-specific protocol rules execute.
+
+```text
+Assertion
+      ↓
+Assertion Type
+      ↓
+Assertion Evaluator
+      ↓
+Evidence Set
+      ↓
+Evaluation Policy
+      ↓
+Verification Result
+```
+
+| Property | Detail |
+|----------|--------|
+| **Evaluation Dispatch** | Deterministic, protocol-defined selection based solely on `assertion_type` |
+| **Assertion Evaluator** | Names semantic evaluation for one **Assertion Type** — not an implementation class |
+| **Initial mapping** | **`body_equality`** → **Body Equality Evaluator** → **VP-RULE-0001** |
+| **Unknown types** | `indeterminate` without executing type-specific rules |
+| **Scope** | Dispatch is protocol behavior; reference interpreter wiring is out of scope here |
+
+Dispatch **MUST NOT** inspect **Evidence** content or assertion `body`. **Evaluation Policy** aggregation remains defined in **VP-RFC-0004**.
 
 RFC fixture field names (`claim_id`, `evidence_id`, `specification_version`) map to the reference model identifiers above when loaded by `veritypay-conformance`.
 
