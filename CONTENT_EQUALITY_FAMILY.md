@@ -53,7 +53,7 @@ The table below lists **candidate** Content Equality types for research and RFC 
 | Type | Description | Potential RFC | Initial status |
 |------|-------------|---------------|----------------|
 | **`body_equality`** | Literal comparison of assertion `body` to evidence `content.body` via exact Unicode string equality; no normalization or hashing | [VP-RFC-0005](rfcs/0005-assertion-types.md) | **Draft** — type identifier proposed; evaluation via accepted **VP-RULE-0001** |
-| **`normalized_text`** | Text comparison after a defined normalization pipeline (for example Unicode normalization form, line-ending normalization, trimming policy) | VP-RFC-0011 *(informative placeholder)* | **Research** |
+| **`normalized_text`** | Compare assertion and evidence text after the Platform 1.3 normalization pipeline defined in [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md): Unicode NFC, trim leading/trailing whitespace, collapse internal whitespace to one ASCII space, then case-sensitive equality — no locale rules, no case folding, no compatibility normalization | [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) | **Draft** — type and **VP-RULE-0011** proposed; future Platform 1.3 candidate |
 | **`canonical_json`** | JSON value comparison after canonical serialization (stable key ordering, number formatting, whitespace policy) | VP-RFC-0012 *(informative placeholder)* | **Research** |
 | **`canonical_xml`** | XML infoset or canonical XML comparison under a defined canonicalization algorithm | VP-RFC-0013 *(informative placeholder)* | **Research** |
 | **`binary_equality`** | Exact comparison of opaque binary payloads (encoding and representation rules to be defined by RFC) | VP-RFC-0014 *(informative placeholder)* | **Research** |

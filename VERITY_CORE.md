@@ -225,13 +225,20 @@ An **Assertion Type** names the semantic interpretation of an assertion's body. 
 
 Every assertion **MUST** declare exactly one type via the `assertion_type` field. Type identifiers **MUST** be stable protocol strings — never implementation class names, library paths, or vendor labels. The type does not execute evaluation by itself; it selects the evaluator that does (see [§15](#15-assertion-evaluators)).
 
-### Initial type: `body_equality`
+### Content Equality family
 
-The first standardized type is **`body_equality`**. An assertion of this type means: *the assertion body is a literal value that evidence content should match exactly*. When **`body_equality`** is in scope and preconditions hold, **VP-RULE-0001** compares `assertion.body` to `evidence.content.body` via exact string equality ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md)).
+The **Content Equality** family compares assertion and evidence content under defined equality models. See [CONTENT_EQUALITY_FAMILY.md](CONTENT_EQUALITY_FAMILY.md) for the family roadmap.
 
-### Future types
+| Type | Status | Rule |
+|------|--------|------|
+| **`body_equality`** | Implemented via accepted [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md); type identifier in draft [VP-RFC-0005](rfcs/0005-assertion-types.md) | **VP-RULE-0001** — exact Unicode string equality |
+| **`normalized_text`** | Draft [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) — first proposed Content Equality extension | **VP-RULE-0011** — normalized text equality after NFC, trim, and whitespace collapse |
 
-Additional types (for example `hash_match`, `signature`, or domain-specific types) **MAY** be standardized by future RFCs. Each new type **MUST** define its own semantic interpretation and the evaluator or rules that apply. Existing type semantics **MUST NOT** change when new types are added. *(Taxonomy: draft [VP-RFC-0005](rfcs/0005-assertion-types.md).)*
+Content Equality currently contains **one implemented type** (`body_equality`) and **one proposed extension** (`normalized_text`). Additional family members remain research-only until their RFCs are accepted. *(Taxonomy: draft [VP-RFC-0005](rfcs/0005-assertion-types.md).)*
+
+### Other families
+
+Additional types (for example `hash_match`, `signature`, or domain-specific types) **MAY** be standardized by future RFCs in other assertion families per [ASSERTION_TAXONOMY.md](ASSERTION_TAXONOMY.md). Each new type **MUST** define its own semantic interpretation and the evaluator or rules that apply. Existing type semantics **MUST NOT** change when new types are added.
 
 ## 15. Assertion Evaluators
 
@@ -498,6 +505,7 @@ This document is updated when RFC status changes materially. Maintainers synchro
 | [VP-RFC-0008](rfcs/0008-verification-profiles.md) | Verification Profiles | Draft |
 | [VP-RFC-0009](rfcs/0009-verification-context-extensions.md) | Verification Context Extensions | Draft |
 | [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md) | Protocol Capability Negotiation | Draft |
+| [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) | Normalized Text Assertion | Draft |
 
 ---
 

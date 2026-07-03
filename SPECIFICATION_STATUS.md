@@ -50,7 +50,7 @@ For normative rules, follow accepted RFCs and published Editions. For process, s
 | **Document** | [VERITY_CORE.md](VERITY_CORE.md) |
 | **Status** | Core Specification Draft |
 | **Purpose** | Consolidate protocol RFCs into a single implementation-oriented specification |
-| **Current scope** | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) through [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md) |
+| **Current scope** | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) through [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) |
 
 [VERITY_CORE.md](VERITY_CORE.md) is the primary entry point for protocol implementers. RFCs remain the normative change mechanism; the Core document presents accepted and in-progress RFC content as one coherent specification without introducing new semantics.
 
@@ -153,6 +153,7 @@ Document `status` values reflect front matter at last update. **Draft** means va
 | [VP-RFC-0008](rfcs/0008-verification-profiles.md) | Draft | 0.1.0 | Protocol | **Verification Profile**, **`minimal_all_required`** |
 | [VP-RFC-0009](rfcs/0009-verification-context-extensions.md) | Draft | 0.1.0 | Protocol | **Context Extension** model — no standardized extensions |
 | [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md) | Draft | 0.1.0 | Protocol | **Protocol Capability** — feature identifiers and conformance eligibility |
+| [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) | Draft | 0.1.0 | Protocol | **Content Equality** — **`normalized_text`**, **VP-RULE-0011**; future Platform 1.3 candidate |
 
 ---
 
@@ -172,8 +173,9 @@ Protocol RFCs that define executable verification inputs and rules. Status refle
 | [VP-RFC-0008](rfcs/0008-verification-profiles.md) | **Draft** | **Verification Profile** — **`minimal_all_required`**; implementation deferred |
 | [VP-RFC-0009](rfcs/0009-verification-context-extensions.md) | **Draft** | **Context Extension** model — extension identifiers and ignore-unless-required rules; no standardized extensions |
 | [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md) | **Draft** | **Protocol Capability** — stable feature identifiers; conformance **skip** when capability absent |
+| [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) | **Draft** | **Content Equality** — **`normalized_text`**, **VP-RULE-0011** (NFC, trim, whitespace collapse); future **Platform 1.3** candidate |
 
-Platform release is **[Platform 1.2](PLATFORM_RELEASES.md)**. Executable **VP-CS-0003** and **VP-CS-0004** fixtures remain deferred until reference and conformance support multi-evidence evaluation.
+Platform release is **[Platform 1.2](PLATFORM_RELEASES.md)**. **[VP-RFC-0011](rfcs/0011-normalized-text-assertion.md)** is a draft **Platform 1.3** protocol expansion candidate — not part of the current platform release. Executable **VP-CS-0003** and **VP-CS-0004** fixtures remain deferred until reference and conformance support multi-evidence evaluation.
 
 ---
 
@@ -235,6 +237,7 @@ Capability-based progress—not a calendar roadmap. Check when the capability ex
 - [x] **VP-RFC-0002** accepted (claim identity binding)
 - [x] **VP-RFC-0003** accepted (multiple evidence, **Evidence Set**)
 - [x] **VP-RFC-0004** accepted (**Evaluation Policy**, **`ALL_REQUIRED`**)
+- [ ] **VP-RFC-0011** accepted (**`normalized_text`**, **VP-RULE-0011** — Platform 1.3 candidate)
 - [x] Reference interpreter executes **VP-RULE-0001** and **VP-RULE-0002**
 - [x] Conformance suite runs spec-published **VP-CS-0001** and **VP-CS-0002**
 - [ ] **Genesis Edition published** (Edition Manifest + Protocol Version)
@@ -254,6 +257,7 @@ Institutional priorities—not a issue tracker.
 
 ### High priority
 
+- **Platform 1.3 protocol expansion** — [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) (**`normalized_text`**, **VP-RULE-0011**) acceptance path; reference evaluator and VP-CS fixtures when ready
 - **Genesis Edition readiness** — Run release checklist; prepare Edition Manifest draft
 - **Registry synchronization** — Keep glossary and `registry.yaml` aligned on each terminology change
 - **Conformance scenario hardening** — VP-CS-0001–0005 ready for Edition baseline
