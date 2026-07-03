@@ -33,7 +33,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [PRINCIPLES.md](../00-overview/PRINCIPLES.md), [GLOSSARY.md](../00-overview/GLOSSARY.md)
 
-**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft), [VP-RFC-0007](../../rfcs/0007-verification-context.md) (draft), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft), [VP-RFC-0007](../../rfcs/0007-verification-context.md) (draft), [VP-RFC-0008](../../rfcs/0008-verification-profiles.md) (draft), [`../../rfcs/`](../../rfcs/)
 
 ---
 
@@ -155,6 +155,16 @@ Every **VP-CS** scenario executes within exactly one **Verification Context**. C
 **Verification Context** is evaluation-wide. It is **not** part of **Claim** or **Evidence** inputs under test. Conformance compares verification outcomes for claim and evidence fixtures within the scenario's context; it does **not** introduce new outcomes in this draft.
 
 No VP-CS fixture changes are required for **VP-RFC-0007** at draft stage.
+
+### Verification Profiles (VP-RFC-0008)
+
+[VP-RFC-0008](../../rfcs/0008-verification-profiles.md) (draft) introduces **Verification Profile** — a named, reusable configuration of **Verification Context** fields.
+
+VP-CS scenarios **MAY** declare **`profile_id`**. Current **VP-CS-0001** and **VP-CS-0002** fixtures implicitly use **`minimal_all_required`** — **`ALL_REQUIRED`** evaluation policy with assertion dispatch per **VP-RFC-0006** and **Evidence Set** behavior per **VP-RFC-0003** and **VP-RFC-0004**. Future fixtures **MAY** make `profile_id` explicit.
+
+Unknown **`profile_id`** values **MUST** yield `indeterminate` unless the scenario or implementation explicitly declares support. Profiles **MUST NOT** alter **Claim** or **Evidence** semantics or bypass evaluator dispatch.
+
+No VP-CS fixture changes are required for **VP-RFC-0008** at draft stage.
 
 ---
 

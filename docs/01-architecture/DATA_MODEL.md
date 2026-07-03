@@ -31,7 +31,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md)
 
-**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, accepted), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, accepted), [`../../rfcs/0005-assertion-types.md`](../../rfcs/0005-assertion-types.md) (**VP-RFC-0005**, draft), [`../../rfcs/0006-assertion-evaluation-dispatch.md`](../../rfcs/0006-assertion-evaluation-dispatch.md) (**VP-RFC-0006**, draft), [`../../rfcs/0007-verification-context.md`](../../rfcs/0007-verification-context.md) (**VP-RFC-0007**, draft)
+**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, accepted), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, accepted), [`../../rfcs/0005-assertion-types.md`](../../rfcs/0005-assertion-types.md) (**VP-RFC-0005**, draft), [`../../rfcs/0006-assertion-evaluation-dispatch.md`](../../rfcs/0006-assertion-evaluation-dispatch.md) (**VP-RFC-0006**, draft), [`../../rfcs/0007-verification-context.md`](../../rfcs/0007-verification-context.md) (**VP-RFC-0007**, draft), [`../../rfcs/0008-verification-profiles.md`](../../rfcs/0008-verification-profiles.md) (**VP-RFC-0008**, draft)
 
 ---
 
@@ -274,6 +274,38 @@ Verification Result
 | **Future fields** | Informative placeholders (`evaluation_time`, `locale`, `extensions`, `profile`, `issuer_context`, `trust_policy`) — no semantics in this draft |
 
 Implementations **MAY** derive context values from specification metadata until explicit context objects are adopted. This subsection names composition only; wire encodings and interpreter wiring are deferred.
+
+### Verification Profiles (VP-RFC-0008)
+
+[VP-RFC-0008](../../rfcs/0008-verification-profiles.md) (draft) introduces **Verification Profile** — a named, reusable configuration of **Verification Context** fields for a class of evaluations.
+
+```text
+profile_id
+      ↓
+Verification Profile
+      ↓
+Verification Context
+      ↓
+Claim → Assertion → Evidence Set → Verification Result
+```
+
+| Property | Statement |
+|----------|-----------|
+| **`profile_id`** | Stable profile identifier; every profile **MUST** define or imply **`evaluation_policy`** |
+| **Claim / Evidence** | Profiles **MUST NOT** alter **Claim** or **Evidence** semantics |
+| **Dispatch** | Profiles **MUST NOT** bypass **Assertion Evaluator** dispatch per **VP-RFC-0006** |
+| **Unknown profiles** | Unknown **`profile_id`** **MUST** yield `indeterminate` unless explicitly supported |
+
+**Initial standardized profile:** **`minimal_all_required`**
+
+| Field | Value |
+|-------|-------|
+| **`profile_id`** | **`minimal_all_required`** |
+| **`evaluation_policy`** | **`ALL_REQUIRED`** per **VP-RFC-0004** |
+| **Assertion dispatch** | Per **VP-RFC-0006** |
+| **Evidence Set** | Per **VP-RFC-0003** and **VP-RFC-0004** |
+
+No additional profiles are standardized in this draft. Profile selection resolves **Verification Context** only; it is not part of **Claim** or **Evidence**.
 
 ---
 
