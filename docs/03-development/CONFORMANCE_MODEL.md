@@ -33,7 +33,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [PRINCIPLES.md](../00-overview/PRINCIPLES.md), [GLOSSARY.md](../00-overview/GLOSSARY.md)
 
-**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft), [`../../rfcs/`](../../rfcs/)
+**Related documents:** [GOVERNANCE.md](../05-governance/GOVERNANCE.md), [VP-RFC-0001](../../rfcs/0001-minimal-claim-evidence-semantics.md) (accepted), [VP-RFC-0003](../../rfcs/0003-multiple-evidence.md) (accepted), [VP-RFC-0004](../../rfcs/0004-evidence-evaluation-policies.md) (accepted), [VP-RFC-0005](../../rfcs/0005-assertion-types.md) (draft), [VP-RFC-0006](../../rfcs/0006-assertion-evaluation-dispatch.md) (draft), [VP-RFC-0007](../../rfcs/0007-verification-context.md) (draft), [`../../rfcs/`](../../rfcs/)
 
 ---
 
@@ -145,6 +145,16 @@ VP-CS scenarios **inherit** evaluator selection from `assertion_type`. No new VP
 Conformance compares **evaluator behavior** and verification outcomes — not internal implementation architecture (modules, class names, or dispatch tables). Unknown **Assertion Types** **MUST** yield `indeterminate` per **VP-RFC-0006**.
 
 Harness verdict vocabulary (`pass` / `fail` / `skip` / `error`) remains distinct from verification outcomes (`satisfied` / `not_satisfied` / `indeterminate`) defined in this model and in the RFC.
+
+### Verification Context (VP-RFC-0007)
+
+[VP-RFC-0007](../../rfcs/0007-verification-context.md) (draft) introduces **Verification Context** — the immutable protocol object describing the evaluation environment.
+
+Every **VP-CS** scenario executes within exactly one **Verification Context**. Current fixtures derive that context implicitly from specification metadata (edition, protocol version, and applicable **Evaluation Policy**). Future fixtures **MAY** declare additional context fields explicitly — for example `evaluation_policy` — without changing verification outcome vocabulary.
+
+**Verification Context** is evaluation-wide. It is **not** part of **Claim** or **Evidence** inputs under test. Conformance compares verification outcomes for claim and evidence fixtures within the scenario's context; it does **not** introduce new outcomes in this draft.
+
+No VP-CS fixture changes are required for **VP-RFC-0007** at draft stage.
 
 ---
 

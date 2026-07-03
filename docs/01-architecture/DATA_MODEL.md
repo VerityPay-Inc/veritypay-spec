@@ -31,7 +31,7 @@ last_updated: 2026-06-29
 
 **Constitutional basis:** [DOMAIN_MODEL.md](DOMAIN_MODEL.md), [IDENTITY_MODEL.md](IDENTITY_MODEL.md), [BEHAVIOR_MODEL.md](BEHAVIOR_MODEL.md)
 
-**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, accepted), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, accepted), [`../../rfcs/0005-assertion-types.md`](../../rfcs/0005-assertion-types.md) (**VP-RFC-0005**, draft), [`../../rfcs/0006-assertion-evaluation-dispatch.md`](../../rfcs/0006-assertion-evaluation-dispatch.md) (**VP-RFC-0006**, draft)
+**Related documents:** [CONFORMANCE_MODEL.md](../03-development/CONFORMANCE_MODEL.md), state models (forthcoming), [`../../rfcs/0001-minimal-claim-evidence-semantics.md`](../../rfcs/0001-minimal-claim-evidence-semantics.md) (**VP-RFC-0001**, accepted), [`../../rfcs/0003-multiple-evidence.md`](../../rfcs/0003-multiple-evidence.md) (**VP-RFC-0003**, accepted), [`../../rfcs/0004-evidence-evaluation-policies.md`](../../rfcs/0004-evidence-evaluation-policies.md) (**VP-RFC-0004**, accepted), [`../../rfcs/0005-assertion-types.md`](../../rfcs/0005-assertion-types.md) (**VP-RFC-0005**, draft), [`../../rfcs/0006-assertion-evaluation-dispatch.md`](../../rfcs/0006-assertion-evaluation-dispatch.md) (**VP-RFC-0006**, draft), [`../../rfcs/0007-verification-context.md`](../../rfcs/0007-verification-context.md) (**VP-RFC-0007**, draft)
 
 ---
 
@@ -238,6 +238,42 @@ Claim
 | **Scope** | Policies aggregate logical rule outcomes only — no trust, weighting, or signatures |
 
 Single-evidence evaluation **MAY** treat **`ALL_REQUIRED`** as the implicit default when one envelope is present, preserving **VP-CS-0001** semantics.
+
+### Verification Context (VP-RFC-0007)
+
+[VP-RFC-0007](../../rfcs/0007-verification-context.md) (draft) introduces **Verification Context** — the immutable protocol object that supplies evaluation-wide information shared by all **Assertions** and **Evidence** during one verification.
+
+**Verification Context** belongs to the **evaluation**. It is **not** part of a **Claim**. It is **not** part of **Evidence**. It does **not** define trust, issuers, or authorization.
+
+```text
+Verification Context
+ ├── edition
+ ├── protocol_version
+ └── evaluation_policy
+       ↓
+     Claim
+       ↓
+   Assertion
+       ↓
+ Evidence Set
+       ↓
+Verification Result
+```
+
+| Field | Role |
+|-------|------|
+| **`edition`** | Specification edition under which evaluation interprets rules |
+| **`protocol_version`** | Declared protocol version for the evaluation |
+| **`evaluation_policy`** | **Evaluation Policy** identifier per **VP-RFC-0004** (for example **`ALL_REQUIRED`**) |
+
+| Property | Statement |
+|----------|-----------|
+| **Immutability** | Context **MUST** remain immutable during evaluation |
+| **Scope** | Context **MUST** apply to every **Assertion** in the evaluation |
+| **Claim / Evidence** | Context **MUST NOT** modify **Claim** or **Evidence** semantics |
+| **Future fields** | Informative placeholders (`evaluation_time`, `locale`, `extensions`, `profile`, `issuer_context`, `trust_policy`) — no semantics in this draft |
+
+Implementations **MAY** derive context values from specification metadata until explicit context objects are adopted. This subsection names composition only; wire encodings and interpreter wiring are deferred.
 
 ---
 
