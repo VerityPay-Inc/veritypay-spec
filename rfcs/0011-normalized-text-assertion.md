@@ -53,7 +53,7 @@ related_docs:
   - 0005-assertion-types.md
   - 0006-assertion-evaluation-dispatch.md
 
-implementation_status: not_started
+implementation_status: implemented_in_reference
 last_updated: 2026-07-03
 ---
 
@@ -77,7 +77,7 @@ This RFC standardizes the **Content Equality** assertion type **`normalized_text
 
 This RFC is **additive**. It does **not** amend **`body_equality`**, **VP-RULE-0001**, **VP-RULE-0002**, or accepted [VP-RFC-0001](0001-minimal-claim-evidence-semantics.md) rule text.
 
-**VP-CS** fixtures **VP-CS-0011**, **VP-CS-0012**, and **VP-CS-0013** are published in [`spec/conformance/scenarios/`](../spec/conformance/scenarios/). Reference and conformance execution remain **deferred**.
+**VP-CS** fixtures **VP-CS-0011**, **VP-CS-0012**, and **VP-CS-0013** are published in [`spec/conformance/scenarios/`](../spec/conformance/scenarios/). `veritypay-reference` and `veritypay-conformance` execute them as a **draft Platform 1.3 engineering baseline**. Normative acceptance of this RFC remains **draft**.
 
 ---
 
@@ -119,9 +119,9 @@ The specification needs one **fully specified normalization pipeline** with expl
 - Locale-sensitive collation, case folding, or language-specific rules.
 - Punctuation removal, accent stripping, or compatibility normalization (NFKC/NFKD).
 - Implementation-defined or configurable normalization profiles.
-- **VP-CS** fixture publication in this draft.
-- Reference or conformance code changes.
 - Additional Content Equality types beyond **`normalized_text`**.
+
+**Out of scope for normative acceptance in this draft:** reference and conformance code (owned by engineering repositories). Informative engineering baselines may implement this RFC before acceptance.
 
 ---
 
@@ -344,8 +344,8 @@ No code changes are part of this draft RFC.
 - [ ] Normalization pipeline is fully specified with explicit exclusions
 - [ ] **VP-RULE-0011** defines preconditions and outcome table
 - [ ] Invalid UTF-8 / unknown encoding yields `indeterminate`
-- [ ] **`body_equality`** and **VP-RULE-0001** are not amended
-- [ ] No **VP-CS** fixture required in this draft
+- [x] **`body_equality`** and **VP-RULE-0001** are not amended
+- [x] **VP-CS-0011**–**0013** fixtures published in [`spec/conformance/scenarios/`](../spec/conformance/scenarios/)
 - [ ] Compatibility with Platform 1.2 documented
 - [ ] [RFC invariants](0000-rfc-process.md#11-rfc-invariants) satisfied
 

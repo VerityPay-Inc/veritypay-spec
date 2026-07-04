@@ -138,6 +138,7 @@ Future rows (informative placeholders):
 | Platform Release | Trigger | Status |
 |------------------|---------|--------|
 | **Platform 1.2** | Accepted **VP-RFC-0003** and **VP-RFC-0004** under Genesis Edition | **Current** |
+| **Platform 1.3** | Acceptance of draft **VP-RFC-0011** (`normalized_text`, **VP-RULE-0011**) and engineering baselines for **VP-CS-0011**–**0013** | Draft candidate *(not a current platform release)* |
 | **Platform 2.0** | New published Edition with breaking protocol baseline | Planned |
 
 Maintainers update this document when a Platform Release is declared or extended. [SPECIFICATION_STATUS.md](SPECIFICATION_STATUS.md) summarizes living maturity; this document is the **compatibility contract**.

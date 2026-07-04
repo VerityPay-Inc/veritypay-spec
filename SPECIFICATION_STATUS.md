@@ -2,12 +2,12 @@
 document: Specification Status
 version: 1.0.0
 status: canonical
-last_updated: 2026-06-29
+last_updated: 2026-07-03
 ---
 
 **Document:** Specification Status · **Version:** 1.0.0 · **Status:** canonical (living document)
 
-**Last updated:** 2026-06-29 · **Maintainers:** update this file when milestone or registry state changes materially
+**Last updated:** 2026-07-03 · **Maintainers:** update this file when milestone or registry state changes materially
 
 ---
 
@@ -32,11 +32,11 @@ For normative rules, follow accepted RFCs and published Editions. For process, s
 | **Specification phase** | Pre-Genesis · Architecture Alpha complete |
 | **Architecture status** | Architecture Alpha frozen (structural); draft documents informative until Edition |
 | **Governance status** | Canonical process docs; [GOVERNANCE.md](docs/05-governance/GOVERNANCE.md) draft |
-| **Conformance status** | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) draft; **VP-CS-0001** and **VP-CS-0002** executable via `veritypay-conformance`; [`VP-CS-0001`](spec/conformance/scenarios/VP-CS-0001.toml) and [`VP-CS-0002`](spec/conformance/scenarios/VP-CS-0002.toml) fixtures published |
-| **Reference interpreter** | **Active** — `veritypay-reference` implements **VP-RULE-0001** and **VP-RULE-0002** ([VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md), [VP-RFC-0002](rfcs/0002-claim-identity-binding.md), accepted) |
+| **Conformance status** | [CONFORMANCE_MODEL.md](docs/03-development/CONFORMANCE_MODEL.md) draft; **VP-CS-0001**, **VP-CS-0002**, **VP-CS-0011**–**0013** executable via `veritypay-conformance`; five fixtures published in [`spec/conformance/scenarios/`](spec/conformance/scenarios/) |
+| **Reference interpreter** | **Active** — `veritypay-reference` implements **VP-RULE-0001**, **VP-RULE-0002**, and **VP-RULE-0011** (draft [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md)); developer CLI (`verify`, `serve`) and library APIs documented in [DEVELOPER_API.md](https://github.com/VerityPay-Inc/veritypay-reference/blob/main/DEVELOPER_API.md) |
 | **Platform release** | **[Platform 1.2](PLATFORM_RELEASES.md)** — extends Platform 1.1 with accepted **VP-RFC-0003**, **VP-RFC-0004**; **VP-CS-0003** and **VP-CS-0004** fixtures deferred |
 | **Independent implementations** | 0 publicly declared conforming implementations |
-| **Latest specification update** | 2026-06-29 |
+| **Latest specification update** | 2026-07-03 |
 | **Next milestone** | Genesis Edition publication candidate |
 
 *Values reflect repository state at last update. Published Edition and Protocol Version supersede this table when an Edition Manifest exists.*
@@ -66,14 +66,14 @@ Legend: 🟢 Complete · 🟡 In progress · ⚪ Not started · 🔴 Blocked
 | **Architecture** | 🟢 | Five models complete (Architecture Alpha); informative until Genesis |
 | **Governance** | 🟡 | GOVERNANCE, versioning, release process, ADR guide, RFC-0000 in place |
 | **Terminology** | 🟢 | Glossary v0.4.0; [`spec/terminology/registry.yaml`](spec/terminology/registry.yaml) (40 VP-TERM) |
-| **Conformance** | 🟡 | Conformance model draft; **VP-CS-0001** and **VP-CS-0002** executed by `veritypay-conformance` against reference oracle |
-| **Reference interpreter** | 🟢 | `veritypay-reference` implements **VP-RULE-0001** and **VP-RULE-0002** per accepted **VP-RFC-0001** and **VP-RFC-0002** |
+| **Conformance** | 🟡 | Conformance model draft; **VP-CS-0001**, **VP-CS-0002**, **VP-CS-0011**–**0013** executed by `veritypay-conformance` against reference oracle |
+| **Reference interpreter** | 🟢 | `veritypay-reference` implements **VP-RULE-0001**, **VP-RULE-0002**, and **VP-RULE-0011** (draft); CLI `verify`/`serve` and `--explain` available |
 | **SDKs** | ⚪ | Future; after Protocol Version declaration |
-| **Tooling** | 🟡 | Terminology + RFC registries; Edition manifest automation planned |
+| **Tooling** | 🟢 | `vp validate`, registry/cross-reference/Edition validation via `veritypay-tooling`; `vp-spec-model` stable v1 surface |
 | **Independent implementations** | ⚪ | None declared |
 | **Community** | 🟡 | CONTRIBUTING handbook; public review via RFC process |
 | **Documentation** | 🟡 | Pyramid complete; product/research layers scaffolded |
-| **Testing** | 🟡 | **VP-CS-0001** and **VP-CS-0002** end-to-end via `veritypay-conformance`; broader VP-CS catalog in prose |
+| **Testing** | 🟡 | **VP-CS-0001**, **VP-CS-0002**, **VP-CS-0011**–**0013** end-to-end via `veritypay-conformance`; broader VP-CS catalog in prose |
 
 ---
 
@@ -197,8 +197,8 @@ Platform release is **[Platform 1.2](PLATFORM_RELEASES.md)**. **[VP-RFC-0011](rf
 |------------|---------|--------|
 | **veritypay-spec** | Canonical specification, RFCs, registries | **Active** (this repository) |
 | **veritypay-core** | Reference / core implementation | *Separate repo; existence assumed by docs—not tracked here* |
-| **veritypay-reference** | Reference interpreter | 🟢 **Active** — implements **VP-RULE-0001**, **VP-RULE-0002** |
-| **veritypay-conformance** | Executable VP-CS suite | 🟢 **Active** — executes spec-published **VP-CS-0001**, **VP-CS-0002** |
+| **veritypay-reference** | Reference interpreter | 🟢 **Active** — implements **VP-RULE-0001**, **VP-RULE-0002**, **VP-RULE-0011** (draft); developer CLI and HTTP APIs |
+| **veritypay-conformance** | Executable VP-CS suite | 🟢 **Active** — executes spec-published **VP-CS-0001**, **VP-CS-0002**, **VP-CS-0011**–**0013** |
 | **veritypay-sdk-*** | Language SDKs | ⚪ Future |
 | **veritypay-website** | Public specification site | ⚪ Future |
 
@@ -216,8 +216,8 @@ Implementation repositories MUST declare target Edition and Protocol Version whe
 | **Governance canon** | 🟡 | Process docs canonical; GOVERNANCE draft |
 | **RFC process** | 🟢 | VP-RFC-0000 accepted; author guide published |
 | **Genesis Edition** | 🟡 | In preparation; manifest not issued |
-| **Reference interpreter** | 🟢 | **VP-RULE-0001**, **VP-RULE-0002** in `veritypay-reference` |
-| **Conformance suite** | 🟢 | **VP-CS-0001**, **VP-CS-0002** end-to-end; spec fixture path in harness |
+| **Reference interpreter** | 🟢 | **VP-RULE-0001**, **VP-RULE-0002**, **VP-RULE-0011** (draft) in `veritypay-reference` |
+| **Conformance suite** | 🟢 | **VP-CS-0001**, **VP-CS-0002**, **VP-CS-0011**–**0013** end-to-end; spec fixture path in harness |
 | **Developer preview** | ⚪ | Post-Genesis + interpreter |
 | **Protocol 1.0** | ⚪ | Declared at Genesis publication (target) |
 
@@ -238,8 +238,8 @@ Capability-based progress—not a calendar roadmap. Check when the capability ex
 - [x] **VP-RFC-0003** accepted (multiple evidence, **Evidence Set**)
 - [x] **VP-RFC-0004** accepted (**Evaluation Policy**, **`ALL_REQUIRED`**)
 - [ ] **VP-RFC-0011** accepted (**`normalized_text`**, **VP-RULE-0011** — Platform 1.3 candidate)
-- [x] Reference interpreter executes **VP-RULE-0001** and **VP-RULE-0002**
-- [x] Conformance suite runs spec-published **VP-CS-0001** and **VP-CS-0002**
+- [x] Reference interpreter executes **VP-RULE-0001**, **VP-RULE-0002**, and **VP-RULE-0011** (draft engineering path)
+- [x] Conformance suite runs spec-published **VP-CS-0001**, **VP-CS-0002**, and **VP-CS-0011**–**0013**
 - [ ] **Genesis Edition published** (Edition Manifest + Protocol Version)
 - [ ] Public SDK (at least one language)
 - [ ] Independent implementation #1 (declared conformance)

@@ -83,11 +83,11 @@ independent implementations
 | **Core protocol docs** | Architecture Alpha complete | Constitutional layer, five architecture models, development and governance canon |
 | **RFC process** | Accepted | [VP-RFC-0000](rfcs/0000-rfc-process.md) — governed change mechanism |
 | **Accepted RFCs** | 5 protocol RFCs | [VP-RFC-0001](rfcs/0001-minimal-claim-evidence-semantics.md) through [VP-RFC-0004](rfcs/0004-evidence-evaluation-policies.md) |
-| **Draft RFCs** | 6 protocol RFCs | [VP-RFC-0005](rfcs/0005-assertion-types.md) through [VP-RFC-0010](rfcs/0010-protocol-capability-negotiation.md) |
-| **[VERITY_CORE.md](VERITY_CORE.md)** | Core Specification Draft | Consolidated implementation-oriented protocol specification (VP-RFC-0001 through VP-RFC-0010) |
+| **Draft RFCs** | 7 protocol RFCs | [VP-RFC-0005](rfcs/0005-assertion-types.md) through [VP-RFC-0011](rfcs/0011-normalized-text-assertion.md) |
+| **[VERITY_CORE.md](VERITY_CORE.md)** | Core Specification Draft | Consolidated implementation-oriented protocol specification (VP-RFC-0001 through VP-RFC-0011) |
 | **[ECOSYSTEM.md](ECOSYSTEM.md)** | Complete | Platform map, repository responsibilities, reading order |
 | **[PLATFORM_RELEASES.md](PLATFORM_RELEASES.md)** | Canonical | Platform 1.0, 1.1, and 1.2 compatibility index |
-| **VP-CS fixtures** | 2 published | [VP-CS-0001](spec/conformance/scenarios/VP-CS-0001.toml), [VP-CS-0002](spec/conformance/scenarios/VP-CS-0002.toml) |
+| **VP-CS fixtures** | 5 published | [VP-CS-0001](spec/conformance/scenarios/VP-CS-0001.toml), [VP-CS-0002](spec/conformance/scenarios/VP-CS-0002.toml) (Platform 1.2 oracle); [VP-CS-0011](spec/conformance/scenarios/VP-CS-0011.toml)–[VP-CS-0013](spec/conformance/scenarios/VP-CS-0013.toml) (draft VP-RFC-0011 oracle path) |
 | **Registries** | Active | VP-TERM (40 terms), VP-RFC (11 RFCs), VP-CS scenarios (draft registry) |
 
 ### Tooling
@@ -116,11 +116,13 @@ Repository: [veritypay-tooling](https://github.com/VerityPay-Inc/veritypay-tooli
 | `EvidenceSet` | ✓ Unordered evidence collection per claim |
 | `EvaluationPolicy` | ✓ `ALL_REQUIRED` aggregation |
 | Interpreter | ✓ `Interpreter::evaluate` and `Interpreter::evaluate_input` |
-| Assertion evaluator dispatch | ✓ `BodyEqualityEvaluator` for `body_equality` / `minimal` (ADR-0009) |
+| Assertion evaluator dispatch | ✓ `BodyEqualityEvaluator` for `body_equality` / `minimal`; `NormalizedTextEvaluator` for `normalized_text` (ADR-0009) |
 | **VP-RULE-0001** | ✓ Assertion Body Evidence Match |
 | **VP-RULE-0002** | ✓ Evidence Claim Binding |
+| **VP-RULE-0011** | ✓ Normalized Text Equality (draft VP-RFC-0011; Platform 1.3 engineering) |
 | Multi-evidence execution | ✓ `ALL_REQUIRED` policy over evidence sets |
-| Readiness gate | ✓ `scripts/readiness-gate.sh` — fmt, clippy, test, CLI smoke |
+| Developer surfaces | ✓ `vp-reference verify`, `serve`, `--explain` ([DEVELOPER_API.md](https://github.com/VerityPay-Inc/veritypay-reference/blob/main/DEVELOPER_API.md)) |
+| Readiness gate | ✓ `scripts/readiness-gate.sh` — fmt, clippy, test, CLI boot |
 
 Repository: [veritypay-reference](https://github.com/VerityPay-Inc/veritypay-reference)
 
@@ -138,8 +140,9 @@ Repository: [veritypay-reference](https://github.com/VerityPay-Inc/veritypay-ref
 | `ConformanceReport` | ✓ Structured pass/fail/skip/error results |
 | Human and JSON renderers | ✓ Report output for CI and local review |
 | CLI `run` command | ✓ `vp-conformance run` |
-| Readiness gate | ✓ Smoke runs against VP-CS-0001 and VP-CS-0002 |
-| **VP-CS-0001 / VP-CS-0002 execution** | ✓ End-to-end against reference oracle |
+| Readiness gate | ✓ Smoke runs against all 5 spec-published VP-CS fixtures (0001, 0002, 0011–0013) |
+| **VP-CS-0001 / VP-CS-0002 execution** | ✓ End-to-end against reference oracle (Platform 1.2) |
+| **VP-CS-0011–0013 execution** | ✓ End-to-end against reference oracle (draft VP-RFC-0011 path) |
 
 Repository: [veritypay-conformance](https://github.com/VerityPay-Inc/veritypay-conformance)
 
@@ -258,7 +261,7 @@ The following platform capabilities are in place and operational:
 - **Conformance harness** — VP-CS loading, reference oracle comparison, adapter contract, human and JSON reports
 - **First protocol slices** — minimal claim/evidence semantics, claim identity binding, evidence sets, evaluation policies
 - **Platform releases** — Platform 1.0, 1.1, and 1.2 declared with compatibility index
-- **Core Specification Draft** — [VERITY_CORE.md](VERITY_CORE.md) populated from VP-RFC-0001 through VP-RFC-0010
+- **Core Specification Draft** — [VERITY_CORE.md](VERITY_CORE.md) populated from VP-RFC-0001 through VP-RFC-0011
 - **Organization profile** — public platform positioning at [VerityPay-Inc/.github](https://github.com/VerityPay-Inc/.github)
 
 ---
@@ -269,7 +272,7 @@ The following remain out of scope or deferred:
 
 | Area | Status |
 |------|--------|
-| Richer assertion types | Draft RFC only (`body_equality` is the sole standardized type) |
+| Richer assertion types | Draft RFCs; **`body_equality`** semantics implemented via VP-RULE-0001; **`normalized_text`** implemented in reference (draft VP-RFC-0011); type identifiers pending VP-RFC-0005 / VP-RFC-0011 acceptance |
 | Trust model | Not specified |
 | Issuer model | Not specified |
 | Credentials | Not specified |
@@ -305,13 +308,13 @@ Work should flow **spec → validate → implement → compare**, not the revers
 
 | What exists today | Detail |
 |-------------------|--------|
-| **Specification governance** | RFC process, Architecture Alpha, 5 accepted protocol RFCs, 6 draft RFCs |
+| **Specification governance** | RFC process, Architecture Alpha, 5 accepted protocol RFCs, 7 draft RFCs |
 | **Validation tooling** | `vp validate`, `vp-spec-model`, registry and cross-reference validation |
-| **Executable reference semantics** | **VP-RULE-0001**, **VP-RULE-0002**, multi-evidence `ALL_REQUIRED` |
-| **Conformance testing** | VP-CS harness; **VP-CS-0001** and **VP-CS-0002** end-to-end |
+| **Executable reference semantics** | **VP-RULE-0001**, **VP-RULE-0002**, **VP-RULE-0011** (draft), multi-evidence `ALL_REQUIRED`, developer CLI/HTTP |
+| **Conformance testing** | VP-CS harness; **VP-CS-0001**, **VP-CS-0002**, and draft-oracle **VP-CS-0011**–**0013** end-to-end |
 | **Platform release policy** | Platform 1.0, 1.1, 1.2 with compatibility index |
 | **First accepted protocol capabilities** | Minimal claims, claim binding, evidence sets, evaluation policies |
-| **Core Specification** | [VERITY_CORE.md](VERITY_CORE.md) at Core Specification Draft |
+| **Core Specification** | [VERITY_CORE.md](VERITY_CORE.md) at Core Specification Draft (VP-RFC-0001 through VP-RFC-0011) |
 
 **Current phase:** Protocol Expansion (Phase III) on a complete engineering platform (Phase II).
 

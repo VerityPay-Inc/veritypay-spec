@@ -219,7 +219,7 @@ Published machine-readable fixtures:
 | **VP-CS-0012** | [`VP-CS-0012.toml`](../../spec/conformance/scenarios/VP-CS-0012.toml) | `not_satisfied` | Case-sensitive comparison — `Hello` vs `hello` |
 | **VP-CS-0013** | [`VP-CS-0013.toml`](../../spec/conformance/scenarios/VP-CS-0013.toml) | `indeterminate` | Empty or whitespace-only evidence body before normalization |
 
-Fixtures declare `assertion_type = normalized_text` on claim inputs. Reference and conformance execution for these scenarios remain **deferred** until Platform 1.3 baselines wire the **Normalized Text Evaluator** into the harness.
+Fixtures declare `assertion_type = normalized_text` on claim inputs. `veritypay-reference` and `veritypay-conformance` execute these scenarios against the reference oracle as a **draft Platform 1.3 engineering baseline**. Normative acceptance of **VP-RFC-0011** remains pending.
 
 Dispatch (informative):
 

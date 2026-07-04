@@ -186,14 +186,14 @@ Violations to avoid:
 |-------|------|--------|
 | I | Specification Foundation | Complete |
 | II | Platform Foundation | Complete |
-| III | Protocol Engineering | Current |
+| III | Protocol Expansion | Current |
 | IV | Ecosystem & Adoption | Planned |
 
 ---
 
 ## What to build next
 
-**Protocol engineering (Phase III):**
+**Protocol expansion (Phase III):**
 
 - Real claim fixtures — beyond minimal placeholders; aligned with [DATA_MODEL.md](docs/01-architecture/DATA_MODEL.md)
 - Real evidence fixtures — typed content and claim linkage
